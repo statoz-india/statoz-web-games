@@ -1,0 +1,120 @@
+/* The 3D "4 [logo] 4" scene; Tailwind can't express these readably. Values
+   come from src/styles; angles, timings and perspective are part of the
+   motion and stay here. */
+
+.spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: var(--elevation-layer-behind);
+  background: var(--gradient-not-found-spotlight);
+  pointer-events: none;
+}
+
+/* Shadow the tile casts; shrinks as the tile rises. */
+.scene::after {
+  content: "";
+  position: absolute;
+  bottom: calc(var(--spacing) * -5);
+  left: 50%;
+  width: var(--space-not-found-shadow-width);
+  height: calc(var(--spacing) * 5);
+  border-radius: var(--shape-radius-round);
+  background: var(--gradient-not-found-shadow);
+  filter: blur(var(--elevation-blur-soft));
+  transform: translateX(-50%);
+  animation: shadow-breathe 5s ease-in-out infinite;
+}
+
+/* Turned toward the tile like the covers of an open book. */
+.digit {
+  text-shadow: var(--elevation-text-shadow-deep);
+}
+
+.digitLeft {
+  transform: rotateY(28deg);
+}
+
+.digitRight {
+  transform: rotateY(-28deg);
+}
+
+/* Base transform matches frame 0, so reduced motion freezes the same pose. */
+.tile {
+  transform-style: preserve-3d;
+  transform: translateY(0) rotateX(12deg) rotateY(-24deg);
+  animation: tile-float 5s ease-in-out infinite;
+}
+
+/* Stacked copies behind the face: real thickness that shows as it turns. */
+.edge {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--shape-radius-app-icon);
+  background: color-mix(in srgb, var(--color-cyan) 45%, var(--color-deep));
+  filter: brightness(calc(1 - var(--layer) * 0.07));
+  transform: translateZ(
+    calc(var(--layer) * var(--space-not-found-edge-depth) * -1)
+  );
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--shape-radius-app-icon);
+  box-shadow: var(--elevation-shadow-tile);
+}
+
+/* A light sweep across the glossy face. */
+.face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-not-found-shine);
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  mix-blend-mode: screen;
+  animation: shine 5s ease-in-out infinite;
+}
+
+@keyframes tile-float {
+  0%,
+  100% {
+    transform: translateY(0) rotateX(12deg) rotateY(-24deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateX(6deg) rotateY(24deg);
+  }
+}
+
+@keyframes shadow-breathe {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(0.8);
+  }
+}
+
+/* Sweeps once per float, then rests off the face. */
+@keyframes shine {
+  0%,
+  40% {
+    background-position: 150% 0;
+  }
+  70%,
+  100% {
+    background-position: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene::after,
+  .tile,
+  .face::after {
+    animation: none;
+  }
+}

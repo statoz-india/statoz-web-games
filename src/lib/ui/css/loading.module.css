@@ -1,0 +1,206 @@
+/* The 3D scene and its animations; Tailwind can't express these readably.
+   No images and no JavaScript, so the loader paints instantly. Values come
+   from src/styles; angles, timings and perspective are part of the motion
+   and stay here. */
+
+.horizon {
+  position: absolute;
+  inset: auto 0 var(--space-loader-horizon-bottom) 0;
+  z-index: var(--elevation-layer-behind);
+  height: var(--space-loader-horizon-height);
+  background: var(--gradient-loader-horizon);
+  pointer-events: none;
+}
+
+.floor {
+  position: absolute;
+  bottom: 0;
+  /* Centred under the scene however wide the floor is. */
+  left: calc((100% - var(--space-loader-floor-width)) / 2);
+  z-index: var(--elevation-layer-behind);
+  width: var(--space-loader-floor-width);
+  height: var(--space-loader-floor-height);
+  background-image: var(--gradient-loader-grid);
+  background-size: var(--space-loader-grid-cell) var(--space-loader-grid-cell);
+  background-position: center 0;
+  transform: rotateX(74deg);
+  transform-origin: 50% 100%;
+  mask-image: var(--gradient-loader-fade);
+  animation: floor-scroll 0.9s linear infinite;
+}
+
+/* Shadow the rig casts on the floor. */
+.scene::after {
+  content: "";
+  position: absolute;
+  bottom: calc(var(--spacing) * -7);
+  left: 50%;
+  width: var(--space-loader-shadow-width);
+  height: calc(var(--spacing) * 4);
+  border-radius: var(--shape-radius-round);
+  background: var(--gradient-loader-shadow);
+  filter: blur(var(--elevation-blur-soft));
+  transform: translateX(-50%);
+}
+
+.gyro {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(-16deg) rotateY(30deg);
+  animation: gyro-turn 9s linear infinite;
+}
+
+.ring {
+  position: absolute;
+  border: var(--shape-stroke-regular) solid
+    color-mix(in srgb, var(--color-cyan) 85%, var(--color-highlight));
+  border-radius: var(--shape-radius-round);
+  box-shadow: var(--elevation-shadow-ring);
+  transform-style: preserve-3d;
+}
+
+/* A ring spinning on itself looks static; the ball makes the orbit visible. */
+.ring::after {
+  content: "";
+  position: absolute;
+  top: var(--space-loader-ball-offset);
+  left: 50%;
+  width: var(--space-loader-ball-size);
+  height: var(--space-loader-ball-size);
+  margin-left: calc(var(--space-loader-ball-size) / -2);
+  border-radius: var(--shape-radius-round);
+  background: var(--color-highlight);
+  box-shadow: var(--elevation-shadow-spark);
+}
+
+/* Base transforms match frame 0, so reduced motion freezes the same pose. */
+.ringA {
+  inset: 0;
+  transform: rotateX(72deg);
+  animation: ring-a 2.6s linear infinite;
+}
+
+.ringB {
+  inset: var(--space-loader-ring-inset-b);
+  opacity: 0.85;
+  transform: rotateY(72deg);
+  animation: ring-b 2s linear infinite reverse;
+}
+
+.ringC {
+  inset: var(--space-loader-ring-inset-c);
+  opacity: 0.7;
+  transform: rotateX(55deg) rotateY(-55deg);
+  animation: ring-c 3.4s linear infinite;
+}
+
+.core {
+  position: absolute;
+  inset: var(--space-loader-core-inset);
+  border-radius: var(--shape-radius-round);
+  background: var(--gradient-loader-core);
+  box-shadow: var(--elevation-shadow-core);
+  animation: core-pulse 1.4s ease-in-out infinite alternate;
+}
+
+.wordmark {
+  text-shadow: var(--elevation-text-shadow-extruded);
+  transform: perspective(500px) rotateX(18deg);
+  animation: wordmark-float 3s ease-in-out infinite;
+}
+
+.bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--space-loader-bar-width);
+  border-radius: inherit;
+  background: var(--color-cyan);
+  box-shadow: var(--elevation-shadow-bar);
+  animation: scan 1.2s ease-in-out infinite;
+}
+
+@keyframes floor-scroll {
+  to {
+    background-position: center var(--space-loader-grid-cell);
+  }
+}
+
+@keyframes gyro-turn {
+  from {
+    transform: rotateX(-16deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-16deg) rotateY(360deg);
+  }
+}
+
+@keyframes ring-a {
+  from {
+    transform: rotateX(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(72deg) rotateZ(360deg);
+  }
+}
+
+@keyframes ring-b {
+  from {
+    transform: rotateY(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateY(72deg) rotateZ(360deg);
+  }
+}
+
+@keyframes ring-c {
+  from {
+    transform: rotateX(55deg) rotateY(-55deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(55deg) rotateY(-55deg) rotateZ(360deg);
+  }
+}
+
+@keyframes core-pulse {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes wordmark-float {
+  0%,
+  100% {
+    transform: perspective(500px) rotateX(18deg) translateY(0);
+  }
+  50% {
+    transform: perspective(500px) rotateX(14deg) translateY(-4px);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(290%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floor,
+  .gyro,
+  .ring,
+  .core,
+  .wordmark,
+  .bar {
+    animation: none;
+  }
+
+  .bar {
+    left: var(--space-loader-bar-parked);
+  }
+}

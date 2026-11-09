@@ -1,0 +1,95 @@
+/* Values live in src/styles/*.ts. The root layout writes them onto <html> as
+   raw variables (--palette-*, --type-*, --space-*, --shape-*, --elevation-*,
+   --gradient-*); this file gives them Tailwind theme names so classes work.
+   Where @statoz/design-system has a token (--ds-*), it is read first, so
+   importing that package's tokens.css later restyles the app with no code
+   changes. CSS modules may read raw variables that no class needs. */
+
+/* static: CSS modules read these variables too, so emit them even when no
+   utility uses them. */
+@theme static {
+  /* colors.ts */
+  --color-fg: var(--ds-color-text-default, var(--palette-text-default));
+  --color-muted: var(--ds-color-text-muted, var(--palette-text-muted));
+  --color-page: var(
+    --ds-color-background-primary,
+    var(--palette-background-primary)
+  );
+  --color-surface: var(
+    --ds-color-background-elevated,
+    var(--palette-background-elevated)
+  );
+  --color-line: var(--ds-color-border-subtle, var(--palette-border-subtle));
+  --color-line-strong: var(
+    --ds-color-border-default,
+    var(--palette-border-default)
+  );
+  --color-cyan: var(--ds-color-accent-cyan, var(--palette-accent-cyan));
+  --color-violet: var(--ds-color-accent-violet, var(--palette-accent-violet));
+  --color-gold: var(--ds-color-accent-gold, var(--palette-accent-gold));
+  --color-flame: var(--ds-color-accent-orange, var(--palette-accent-orange));
+  --color-glow: var(--palette-background-glow);
+  --color-deep: var(--palette-background-deep);
+  --color-highlight: var(--palette-effect-highlight);
+  --color-shadow: var(--palette-effect-shadow);
+
+  /* typography.ts */
+  --font-sans: var(--ds-font-body, var(--type-family-sans));
+  --font-display: var(--ds-font-display, var(--type-family-display));
+  --text-micro: var(--type-size-micro);
+  --text-xs: var(--type-size-xs);
+  --text-sm: var(--type-size-sm);
+  --text-base: var(--type-size-base);
+  --text-brand-md: var(--type-size-brand-md);
+  --text-xl: var(--type-size-xl);
+  --text-2xl: var(--type-size-2xl);
+  --text-hero: var(--type-size-hero);
+  --text-giant: var(--type-size-giant);
+  --font-weight-semibold: var(--type-weight-semibold);
+  --font-weight-bold: var(--type-weight-bold);
+  --font-weight-extrabold: var(--type-weight-extrabold);
+  --font-weight-black: var(--type-weight-black);
+  --tracking-brand: var(--type-tracking-brand);
+  --tracking-title: var(--type-tracking-title);
+  --tracking-button: var(--type-tracking-button);
+  --tracking-ultra: var(--ds-tracking-ultra, var(--type-tracking-ultra));
+  --tracking-sub: var(--type-tracking-sub);
+  --leading-none: var(--type-leading-none);
+  --leading-relaxed: var(--type-leading-relaxed);
+
+  /* spacing.ts */
+  --spacing: var(--space-unit);
+  --spacing-touch: var(--space-touch);
+  --spacing-header: var(
+    --ds-dashboard-header-height,
+    var(--space-layout-header)
+  );
+  --spacing-header-compact: var(
+    --ds-dashboard-compact-header-height,
+    var(--space-layout-header-compact)
+  );
+  --spacing-gutter: var(--ds-dashboard-gutter, var(--space-layout-gutter));
+
+  /* shape.ts */
+  --radius-sm: var(--shape-radius-sm);
+  --radius-md: var(--shape-radius-md);
+  --radius-lg: var(--shape-radius-lg);
+  --radius-full: var(--shape-radius-full);
+
+  /* elevations.ts */
+  --shadow-halo: var(--elevation-shadow-halo);
+  --shadow-button: var(--elevation-shadow-button);
+  --shadow-button-hover: var(--elevation-shadow-button-hover);
+  --blur-glass: var(--elevation-blur-glass);
+  --z-index-nav: var(--elevation-layer-nav);
+  --z-index-skip-link: var(--elevation-layer-skip-link);
+}
+
+/* No Tailwind theme group exists for these; they only add the --ds-* layer. */
+:root {
+  --gradient-app: var(
+    --ds-gradient-app-background,
+    var(--gradient-background-app)
+  );
+  --clip-field: var(--ds-clip-field, var(--shape-clip-field));
+}

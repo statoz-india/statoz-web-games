@@ -1,0 +1,180 @@
+/* Only the chamfered tab plates and properties that change with orientation
+   or screen height live here; Tailwind covers the rest. Never set a property
+   both here and in a Tailwind class: which wins depends on CSS load order.
+   Spacing on the unit grid is written as calc(var(--spacing) * n), matching
+   Tailwind's numeric classes. Media queries can't read variables, so the
+   breakpoints stay literal. */
+
+.bar {
+  display: grid;
+  /* Equal side columns keep the tabs exactly centred. */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  column-gap: calc(var(--spacing) * 6);
+  height: var(--spacing-header);
+  padding: 0 var(--spacing-gutter);
+}
+
+.wordmark {
+  font-size: var(--text-xl);
+}
+
+/* Chamfered plate in three layers: clip-path would cut off a real border, so
+   the link's own background shows as a hairline edge around ::before. ::after
+   is the underline. aria-current is the active hook, so state and a11y match. */
+.command {
+  padding: 0 calc(var(--spacing) * 4);
+  clip-path: var(--clip-field);
+  color: var(--color-muted);
+  transition:
+    color 160ms,
+    background 160ms;
+}
+
+.command::before {
+  content: "";
+  position: absolute;
+  inset: var(--shape-stroke-hairline);
+  z-index: var(--elevation-layer-behind);
+  clip-path: var(--clip-field);
+  background: var(--color-page);
+}
+
+.command::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--spacing) * 4);
+  bottom: var(--space-nav-underline-offset);
+  left: calc(var(--spacing) * 4);
+  height: var(--shape-stroke-regular);
+  border-radius: var(--shape-radius-hairline);
+}
+
+.command:hover {
+  color: var(--color-fg);
+  background: var(--color-line-strong);
+}
+
+.command[aria-current] {
+  color: var(--color-fg);
+  background: var(--gradient-nav-active);
+}
+
+.command[aria-current]::before {
+  background: color-mix(in srgb, var(--color-violet) 9%, var(--color-page));
+}
+
+.command[aria-current]::after {
+  background: var(--color-violet);
+}
+
+.command[aria-current] svg {
+  color: var(--color-violet);
+}
+
+.command:focus-visible {
+  outline: none;
+  color: var(--color-fg);
+  background: var(--color-cyan);
+}
+
+.stat {
+  gap: calc(var(--spacing) * 1.5);
+  padding: 0 calc(var(--spacing) * 3);
+}
+
+.add {
+  display: inline-grid;
+}
+
+@media (max-width: 1199px) {
+  .bar {
+    grid-template-columns: auto 1fr auto;
+    column-gap: calc(var(--spacing) * 4);
+    padding: 0 calc(var(--spacing) * 4);
+  }
+
+  .nav {
+    justify-self: center;
+  }
+
+  .wordmark {
+    font-size: var(--text-brand-md);
+  }
+}
+
+/* Icons only; the links keep aria-label and title, so they stay named. */
+@media (max-width: 1023px), (orientation: landscape) and (max-height: 540px) {
+  .command {
+    width: var(--spacing-touch);
+    padding: 0;
+  }
+
+  .command::after {
+    right: calc(var(--spacing) * 3);
+    left: calc(var(--spacing) * 3);
+  }
+
+  .label {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .bar {
+    column-gap: calc(var(--spacing) * 2);
+    padding: 0 calc(var(--spacing) * 3);
+  }
+}
+
+/* Too narrow for one row: tabs move to their own row and spread out. */
+@media (max-width: 540px) and (orientation: portrait) {
+  .bar {
+    height: auto;
+    grid-template-columns: 1fr auto;
+    row-gap: var(--spacing);
+    padding: var(--spacing) calc(var(--spacing) * 3);
+  }
+
+  .nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+    justify-content: space-evenly;
+  }
+}
+
+/* Phone landscape has little height to spare. */
+@media (orientation: landscape) and (max-height: 540px) {
+  .bar {
+    height: var(--spacing-header-compact);
+  }
+
+  .wordmark {
+    font-size: var(--text-base);
+  }
+
+  .sub {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) and (orientation: landscape) {
+  .bar {
+    column-gap: calc(var(--spacing) * 1.5);
+  }
+
+  .stat {
+    gap: var(--spacing);
+    padding: 0 calc(var(--spacing) * 2);
+  }
+
+  .add {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .command {
+    transition: none;
+  }
+}
