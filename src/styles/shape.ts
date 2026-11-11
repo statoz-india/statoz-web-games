@@ -7,6 +7,8 @@ import { toCssVariables } from "./css-variables";
 export const SHAPE = {
   /** Corner cut on fields and the navbar's tabs. */
   fieldCut: 8,
+  /** Corner cut on the homescreen spotlight's buttons and cover cards. */
+  spotlightCut: 10,
   radius: {
     hairline: "1px",
     sm: "0.25rem",
@@ -44,5 +46,5 @@ export const SHAPE_VARIABLES = toCssVariables("shape", {
   radius: SHAPE.radius,
   stroke: SHAPE.stroke,
   focusOffset: SHAPE.focusOffset,
-  clip: { field: FIELD_CLIP_PATH },
+  clip: { field: FIELD_CLIP_PATH, spotlight: chamferPath(SHAPE.spotlightCut) },
 });

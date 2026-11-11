@@ -1,0 +1,134 @@
+/* Chamfers, layered gradients and the sizes that change with orientation or
+   screen height live here; Tailwind covers static layout. Never set a
+   property both here and in a Tailwind class. */
+
+/* The plate's own background is the 1px iridescent edge; .fill sits 1px
+   inside it. */
+.play-button {
+  height: 52px;
+  min-width: 184px;
+  padding: 0 calc(var(--spacing) * 5);
+  clip-path: var(--shape-clip-spotlight);
+  cursor: pointer;
+  color: var(--palette-spotlight-text);
+  font: 600 var(--text-base) / 1.2 var(--font-sans);
+  background: linear-gradient(
+    125deg,
+    color-mix(in srgb, var(--palette-spotlight-text) 78%, transparent),
+    color-mix(in srgb, var(--palette-spotlight-cyan) 28%, transparent) 30%,
+    color-mix(in srgb, var(--palette-spotlight-text) 12%, transparent) 55%,
+    color-mix(in srgb, var(--palette-spotlight-violet) 38%, transparent) 80%,
+    color-mix(in srgb, var(--palette-spotlight-text) 58%, transparent)
+  );
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  filter: drop-shadow(
+    0 4px 12px color-mix(in srgb, var(--palette-spotlight-page) 35%, transparent)
+  );
+  transition:
+    transform 150ms,
+    filter 150ms;
+}
+
+.fill {
+  inset: 1px;
+  clip-path: var(--shape-clip-spotlight);
+  background:
+    linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--palette-spotlight-text) 10%, transparent),
+      transparent 48%
+    ),
+    linear-gradient(
+      110deg,
+      color-mix(in srgb, var(--palette-spotlight-cyan) 9%, transparent),
+      color-mix(in srgb, var(--palette-spotlight-page) 72%, transparent) 65%
+    );
+}
+
+/* Inner highlight lines. */
+.play-button::after {
+  content: "";
+  position: absolute;
+  inset: 5px 12px;
+  pointer-events: none;
+  border-top: 1px solid
+    color-mix(in srgb, var(--palette-spotlight-text) 24%, transparent);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--palette-spotlight-text) 8%, transparent);
+}
+
+.icon {
+  color: var(--palette-spotlight-cyan);
+  margin-right: var(--spacing);
+}
+
+.label {
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+}
+
+.bars {
+  gap: 3px;
+  margin-left: calc(var(--spacing) * 4);
+  transform: skewX(-18deg);
+}
+
+.bars i {
+  width: 3px;
+  height: 15px;
+  background: var(--palette-spotlight-cyan);
+}
+
+.bars i:nth-child(2) {
+  opacity: 0.5;
+}
+
+.bars i:nth-child(3) {
+  opacity: 0.2;
+}
+
+.play-button:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(
+      0 4px 16px
+        color-mix(in srgb, var(--palette-spotlight-cyan) 16%, transparent)
+    )
+    brightness(1.12);
+}
+
+.play-button:active {
+  transform: none;
+}
+
+.play-button:focus-visible {
+  outline: 2px solid var(--palette-spotlight-cyan);
+  outline-offset: 4px;
+  background: linear-gradient(
+    125deg,
+    var(--palette-spotlight-text),
+    var(--palette-spotlight-cyan) 45%,
+    var(--palette-spotlight-text)
+  );
+}
+
+@media (max-width: 640px) {
+  .play-button {
+    min-width: 140px;
+  }
+}
+
+/* Phones / handhelds in landscape. */
+@media (orientation: landscape) and (max-height: 540px) {
+  .play-button {
+    height: 44px;
+    min-width: 162px;
+    font-size: var(--text-xs);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 340px) {
+  .bars {
+    margin-left: calc(var(--spacing) * 2);
+  }
+}

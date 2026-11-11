@@ -28,6 +28,19 @@ export const COLORS = {
     highlight: "#ffffff",
     shadow: "rgb(0 0 0 / 0.6)",
   },
+  // Homescreen spotlight only; its spec uses its own palette.
+  spotlight: {
+    page: "#0d111a",
+    artwork: "#070c1f",
+    cover: "#1d293d",
+    borderSubtle: "#20293e",
+    borderDefault: "#314158",
+    text: "#ffffff",
+    textSubtle: "#cad5e2",
+    textMuted: "#90a1b9",
+    cyan: "#5cdfff",
+    violet: "#c27aff",
+  },
 } as const;
 
 // --palette-* rather than --color-*: that prefix belongs to Tailwind's theme.
