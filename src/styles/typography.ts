@@ -11,11 +11,13 @@ export const TYPOGRAPHY = {
   size: {
     /** Navbar "GAMES" sub-label. */
     micro: "0.5625rem",
+    "2xs": "0.625rem",
     xs: "0.75rem",
     sm: "0.875rem",
     base: "1rem",
     /** Navbar wordmark between tablet and desktop. */
     brandMd: "1.0625rem",
+    lg: "1.125rem",
     xl: "1.25rem",
     "2xl": "1.5rem",
     /** Loading-screen wordmark; scales with the viewport. */

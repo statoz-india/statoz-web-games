@@ -1,0 +1,21 @@
+/* The chip's own look only; the parent places it and decides when it shows. */
+.image-play-button {
+  gap: var(--spacing);
+  height: 26px;
+  padding: 0 calc(var(--spacing) * 2);
+  border: 1px solid
+    color-mix(in srgb, var(--palette-spotlight-cyan) 70%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--palette-spotlight-page) 88%,
+    transparent
+  );
+  backdrop-filter: blur(6px);
+  color: var(--palette-spotlight-text);
+  font: 700 var(--text-2xs) / 1 var(--font-sans);
+  letter-spacing: 0.05em;
+}
+
+.image-play-button svg {
+  color: var(--palette-spotlight-cyan);
+}

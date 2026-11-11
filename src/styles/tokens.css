@@ -37,10 +37,12 @@
   --font-sans: var(--ds-font-body, var(--type-family-sans));
   --font-display: var(--ds-font-display, var(--type-family-display));
   --text-micro: var(--type-size-micro);
+  --text-2xs: var(--type-size-2xs);
   --text-xs: var(--type-size-xs);
   --text-sm: var(--type-size-sm);
   --text-base: var(--type-size-base);
   --text-brand-md: var(--type-size-brand-md);
+  --text-lg: var(--type-size-lg);
   --text-xl: var(--type-size-xl);
   --text-2xl: var(--type-size-2xl);
   --text-hero: var(--type-size-hero);

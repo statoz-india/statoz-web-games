@@ -1,0 +1,597 @@
+/* Most of the spotlight lives here: chamfers, layered gradients, and nearly
+   every size changes with orientation or screen height. Tailwind only covers
+   static layout no media query touches. Never set a property both here and in
+   a Tailwind class. Spacing on the unit grid is calc(var(--spacing) * n). */
+
+/* ---------- Page + ambient ---------- */
+.dashboard {
+  /* Short local names for the spotlight palette (colors.ts → spotlight). */
+  --sp-page: var(--palette-spotlight-page);
+  --sp-artwork: var(--palette-spotlight-artwork);
+  --sp-cover: var(--palette-spotlight-cover);
+  --sp-line: var(--palette-spotlight-border-subtle);
+  --sp-line-strong: var(--palette-spotlight-border-default);
+  --sp-text: var(--palette-spotlight-text);
+  --sp-subtle: var(--palette-spotlight-text-subtle);
+  --sp-muted: var(--palette-spotlight-text-muted);
+  --sp-cyan: var(--palette-spotlight-cyan);
+  --sp-violet: var(--palette-spotlight-violet);
+  --sp-clip: var(--shape-clip-spotlight);
+  --sp-enter: 220ms;
+  /* Local so the landscape query can narrow them. */
+  --gutter: var(--spacing-gutter);
+  --cover-width: var(--space-spotlight-cover-width);
+
+  background: var(--sp-page);
+  color: var(--sp-text);
+}
+
+.ambient {
+  background: var(--sp-page);
+}
+
+.ambient-glow {
+  inset: -20%;
+  background:
+    radial-gradient(
+      ellipse at 72% 45%,
+      color-mix(in srgb, var(--sp-cyan) 7%, transparent),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 14% 75%,
+      color-mix(in srgb, var(--sp-violet) 8%, transparent),
+      transparent 45%
+    );
+  transform: translateY(calc(-1 * var(--ambient-scroll, 0px)));
+  animation: ambient-breathe 10s ease-in-out infinite alternate;
+}
+
+.ambient-grid {
+  inset: 25% -30% -70%;
+  opacity: 0.11;
+  background:
+    linear-gradient(var(--sp-cyan) 1px, transparent 1px) 0 0 / 100% 80px,
+    linear-gradient(90deg, var(--sp-violet) 1px, transparent 1px) 0 0 / 100px
+      100%;
+  transform: perspective(700px) rotateX(58deg)
+    translateY(calc(-1 * var(--ambient-scroll, 0px)));
+  -webkit-mask-image: linear-gradient(transparent, black 30%, transparent 80%);
+  mask-image: linear-gradient(transparent, black 30%, transparent 80%);
+}
+
+.ambient-sweep {
+  height: 25%;
+  opacity: 0.045;
+  background: linear-gradient(transparent, var(--sp-cyan), transparent);
+  animation: ambient-sweep 12s linear infinite;
+}
+
+.dashboard[data-motion-paused="true"] .ambient-glow,
+.dashboard[data-motion-paused="true"] .ambient-sweep {
+  animation-play-state: paused;
+}
+
+/* ---------- Opening (hero + strip share one background) ---------- */
+.opening {
+  border-bottom: 1px solid var(--sp-line);
+}
+
+.artwork {
+  background: var(--sp-artwork);
+}
+
+.art-enter {
+  animation: art-in var(--sp-enter) ease-out both;
+}
+
+/* The old image stays underneath until the new one has loaded. */
+.art-enter[data-pending] {
+  opacity: 0;
+  animation: none;
+}
+
+.gameplay-video {
+  opacity: 0;
+  filter: saturate(1.08) contrast(1.04);
+  transition: opacity 550ms ease-out;
+}
+
+.gameplay-video[data-playing] {
+  opacity: 1;
+}
+
+/* Left + bottom darkening so copy and cards stay legible. */
+.art-veil {
+  background:
+    linear-gradient(
+      90deg,
+      var(--sp-page) 0%,
+      color-mix(in srgb, var(--sp-page) 92%, transparent) 20%,
+      color-mix(in srgb, var(--sp-page) 35%, transparent) 56%,
+      transparent 85%
+    ),
+    linear-gradient(
+      0deg,
+      var(--sp-page) 0%,
+      color-mix(in srgb, var(--sp-page) 94%, transparent) 18%,
+      transparent 60%
+    );
+}
+
+/* Two faint diagonal cyan hairlines. */
+.art-grid {
+  opacity: 0.12;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    color-mix(in srgb, var(--sp-cyan) 25%, transparent) 30.05%,
+    transparent 30.1%,
+    transparent 65%,
+    color-mix(in srgb, var(--sp-cyan) 25%, transparent) 65.05%,
+    transparent 65.1%
+  );
+}
+
+/* ---------- Pause button ---------- */
+.motion-control {
+  top: calc(var(--spacing) * 4);
+  right: var(--gutter);
+  border: 1px solid color-mix(in srgb, var(--sp-text) 24%, transparent);
+  background: color-mix(in srgb, var(--sp-page) 70%, transparent);
+  color: var(--sp-subtle);
+  backdrop-filter: blur(8px);
+}
+
+.motion-control:hover {
+  color: var(--sp-cyan);
+  border-color: var(--sp-cyan);
+}
+
+/* ---------- Hero copy ---------- */
+.hero {
+  min-height: clamp(380px, 47vh, 520px);
+  max-width: var(--space-spotlight-max-width);
+  padding: calc(var(--spacing) * 12) var(--gutter) calc(var(--spacing) * 6);
+}
+
+.hero-copy {
+  width: 54%;
+  max-width: 650px;
+  animation: copy-in var(--sp-enter) ease-out both;
+}
+
+.eyebrow {
+  display: flex;
+  margin: 0 0 calc(var(--spacing) * 7);
+  color: var(--sp-cyan);
+  font: 700 var(--text-2xs) / 1.4 var(--font-sans);
+  letter-spacing: 0.12em;
+}
+
+.live-dot {
+  background: var(--sp-cyan);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--sp-cyan) 65%, transparent);
+}
+
+.title {
+  color: var(--sp-text);
+  font: 900 clamp(2.25rem, 4.1vw, 4.25rem) / 1.07 var(--font-display);
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 430px;
+  margin: calc(var(--spacing) * 5) 0 0;
+  color: var(--sp-subtle);
+  font: 500 var(--text-sm) / 1.7 var(--font-sans);
+  letter-spacing: 0.035em;
+}
+
+.hero-actions {
+  gap: calc(var(--spacing) * 5);
+  margin-top: calc(var(--spacing) * 7);
+}
+
+.hero-browse {
+  padding: 0 var(--spacing);
+  cursor: pointer;
+  color: var(--sp-subtle);
+  font: 600 var(--text-sm) / 1.4 var(--font-sans);
+}
+
+.hero-browse > span {
+  padding-left: calc(var(--spacing) * 1.5);
+  color: var(--sp-cyan);
+}
+
+.hero-browse:hover {
+  color: var(--sp-text);
+}
+
+/* ---------- Your games ---------- */
+.primary-strip {
+  max-width: var(--space-spotlight-max-width);
+  padding: calc(var(--spacing) * 4) var(--gutter) calc(var(--spacing) * 5);
+}
+
+.section-heading {
+  display: flex;
+  margin-bottom: calc(var(--spacing) * 4);
+}
+
+.section-title {
+  font: 700 var(--text-lg) / 1.4 var(--font-sans);
+  letter-spacing: -0.025em;
+}
+
+.text-action {
+  padding: 0 var(--spacing);
+  cursor: pointer;
+  color: var(--sp-subtle);
+  font: 600 var(--text-xs) / 1.4 var(--font-sans);
+}
+
+.text-action:hover {
+  color: var(--sp-cyan);
+}
+
+/* Full-bleed rail: bleeds into the gutter, snaps on scroll. */
+.cover-rail {
+  gap: calc(var(--spacing) * 5);
+  margin: 0 calc(-1 * var(--gutter));
+  padding: calc(var(--spacing) * 3) var(--gutter) calc(var(--spacing) * 4);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+  scrollbar-color: var(--sp-line-strong) transparent;
+  touch-action: pan-x pan-y;
+}
+
+.cover-rail > li {
+  flex: 0 0 var(--cover-width);
+  scroll-snap-align: start;
+}
+
+.cover-card {
+  cursor: pointer;
+  color: var(--sp-text);
+  text-align: left;
+  outline-offset: 3px;
+  transition: transform 160ms ease-out;
+}
+
+.cover-card:hover {
+  transform: translateY(-4px);
+}
+
+.cover-card[data-active] {
+  transform: translateY(-3px);
+}
+
+/* 1px chamfered border: a padded frame painted behind the image. */
+.cover-frame {
+  padding: 1px;
+  background: var(--sp-line-strong);
+  clip-path: var(--sp-clip);
+  transition:
+    background 160ms,
+    filter 160ms;
+}
+
+.cover-card:hover .cover-frame,
+.cover-card:focus-visible .cover-frame {
+  background: var(--sp-cyan);
+}
+
+.cover-card[data-active] .cover-frame {
+  background: linear-gradient(
+    135deg,
+    var(--sp-subtle),
+    var(--sp-cyan) 22%,
+    color-mix(in srgb, var(--sp-cyan) 28%, var(--sp-page)) 50%,
+    var(--sp-violet)
+  );
+  filter: drop-shadow(
+    0 4px 9px color-mix(in srgb, var(--sp-cyan) 13%, transparent)
+  );
+}
+
+.cover-image {
+  aspect-ratio: 3 / 2;
+  clip-path: var(--sp-clip);
+  background: var(--sp-cover);
+}
+
+/* 3px dark gap between the gradient edge and the image, active only. */
+.cover-card[data-active] .cover-image {
+  box-shadow: inset 0 0 0 3px var(--sp-page);
+}
+
+/* Corner accents: white 26×2 top-left (14px in), violet 24×2 bottom-right
+   (12px in). */
+.cover-corners {
+  clip-path: var(--sp-clip);
+  opacity: 0;
+  background:
+    linear-gradient(var(--sp-text), var(--sp-text)) 14px 0 / 26px 2px no-repeat,
+    linear-gradient(var(--sp-violet), var(--sp-violet)) calc(100% - 12px) 100% /
+      24px 2px no-repeat;
+  transition: opacity 180ms;
+}
+
+.cover-card[data-active] .cover-corners {
+  opacity: 0.85;
+}
+
+/* Placement and visibility of the ▶ PLAY chip (ImagePlayButton), bottom-right
+   inside the image. */
+.cover-play {
+  right: calc(var(--spacing) * 2);
+  bottom: calc(var(--spacing) * 2);
+  opacity: 0;
+  transition: opacity 160ms;
+}
+
+.cover-card:hover .cover-play,
+.cover-card:focus-visible .cover-play,
+.cover-card[data-active] .cover-play {
+  opacity: 1;
+}
+
+.cover-caption {
+  gap: calc(var(--spacing) * 1.5);
+  margin-top: calc(var(--spacing) * 2.5);
+}
+
+.cover-title {
+  font: 600 var(--text-sm) / 1.5 var(--font-sans);
+}
+
+.recent-mark {
+  color: var(--sp-cyan);
+}
+
+.cover-sport {
+  display: block;
+  color: var(--sp-muted);
+  font: 500 var(--text-xs) / 1.5 var(--font-sans);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes art-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes copy-in {
+  from {
+    opacity: 0.4;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ambient-breathe {
+  to {
+    opacity: 0.45;
+  }
+}
+
+@keyframes ambient-sweep {
+  from {
+    top: -30%;
+  }
+  to {
+    top: 110%;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 1600px) {
+  .art-veil {
+    background:
+      linear-gradient(
+        90deg,
+        var(--sp-page) 0%,
+        color-mix(in srgb, var(--sp-page) 90%, transparent) 22%,
+        transparent 70%
+      ),
+      linear-gradient(
+        0deg,
+        var(--sp-page) 0%,
+        color-mix(in srgb, var(--sp-page) 90%, transparent) 16%,
+        transparent 65%
+      );
+  }
+}
+
+@media (max-width: 1050px) {
+  .hero-copy {
+    width: 62%;
+  }
+
+  .title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 380px;
+  }
+
+  .hero-copy {
+    width: 88%;
+  }
+
+  .hero-actions {
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .hero-browse {
+    font-size: var(--text-xs);
+  }
+
+  .section-title {
+    font-size: var(--text-base);
+  }
+
+  .cover-rail {
+    gap: calc(var(--spacing) * 3);
+  }
+}
+
+/* Phones / handhelds in landscape. */
+@media (orientation: landscape) and (max-height: 540px) {
+  .dashboard {
+    --cover-width: var(--space-spotlight-cover-width-landscape);
+    --gutter: calc(var(--spacing) * 5);
+  }
+
+  .hero {
+    min-height: 0;
+    height: clamp(120px, 36dvh, 200px);
+    padding-block: calc(var(--spacing) * 3);
+  }
+
+  .hero-copy {
+    width: 62%;
+    max-width: 540px;
+  }
+
+  .eyebrow {
+    display: none;
+  }
+
+  .title {
+    font-size: clamp(1.4rem, 3.4vw, 2.25rem);
+  }
+
+  .description {
+    max-width: 400px;
+    margin-top: calc(var(--spacing) * 2);
+    font-size: var(--text-2xs);
+    line-height: 1.4;
+  }
+
+  .hero-actions {
+    margin-top: calc(var(--spacing) * 2);
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .hero-browse {
+    font-size: var(--text-xs);
+  }
+
+  .primary-strip {
+    padding-top: var(--spacing);
+    padding-bottom: calc(var(--spacing) * 3);
+  }
+
+  .cover-sport {
+    display: none;
+  }
+
+  .section-heading {
+    margin-bottom: var(--spacing);
+  }
+
+  .section-title {
+    font-size: var(--text-base);
+  }
+
+  .cover-title {
+    font-size: var(--text-xs);
+  }
+
+  .cover-caption {
+    margin-top: calc(var(--spacing) * 1.5);
+  }
+
+  .cover-rail {
+    gap: calc(var(--spacing) * 3);
+    padding-block: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+  }
+
+  .motion-control {
+    top: calc(var(--spacing) * 2);
+  }
+
+  .art-veil {
+    background:
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--sp-page) 98%, transparent) 0%,
+        color-mix(in srgb, var(--sp-page) 88%, transparent) 30%,
+        transparent 85%
+      ),
+      linear-gradient(
+        0deg,
+        var(--sp-page) 0%,
+        color-mix(in srgb, var(--sp-page) 90%, transparent) 28%,
+        transparent 85%
+      );
+  }
+}
+
+@media (orientation: landscape) and (max-height: 340px) {
+  .hero {
+    height: 96px;
+  }
+
+  .description,
+  .section-heading {
+    display: none;
+  }
+
+  .cover-rail > li {
+    flex-basis: 110px;
+  }
+
+  .cover-caption {
+    margin-top: var(--spacing);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 1ms rather than none so animationend still fires and the image swap
+     completes. */
+  .art-enter {
+    animation-duration: 1ms;
+  }
+
+  .hero-copy,
+  .ambient-glow,
+  .ambient-sweep {
+    animation: none;
+  }
+
+  .ambient-grid {
+    transform: perspective(700px) rotateX(58deg);
+  }
+
+  .cover-card {
+    transition: none;
+  }
+
+  .cover-card:hover,
+  .cover-card[data-active] {
+    transform: none;
+  }
+
+  .gameplay-video,
+  .motion-control {
+    display: none;
+  }
+}

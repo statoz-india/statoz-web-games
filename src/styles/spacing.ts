@@ -33,6 +33,11 @@ export const SPACING = {
     /** Where the bar rests when reduced motion stops the scan. */
     barParked: "32%",
   },
+  spotlight: {
+    maxWidth: "100rem",
+    coverWidth: "clamp(9rem, 14vw, 13rem)",
+    coverWidthLandscape: "clamp(8rem, 17vw, 11rem)",
+  },
   notFound: {
     tile: "clamp(4.5rem, 19vw, 7.5rem)",
     /** Thickness of each stacked layer behind the logo tile. */
