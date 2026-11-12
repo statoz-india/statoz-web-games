@@ -18,7 +18,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "65% 50%",
     video: gameplay("penalty-cup"),
     href: "/game/penalty-cup",
-    comingSoon: true,
   },
   {
     id: "hoop-legacy",
@@ -42,7 +41,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "65% 60%",
     video: gameplay("portfolio-formula"),
     href: "/game/formula",
-    comingSoon: true,
   },
   {
     id: "cricketer",

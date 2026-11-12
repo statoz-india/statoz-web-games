@@ -22,6 +22,14 @@ const nextConfig: NextConfig = {
         source: "/games/cricketer/game-runtime/:path*",
         headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
       },
+      {
+        source: "/games/formula/game-runtime/:path*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+      },
+      {
+        source: "/games/penalty-cup/game-runtime/:path*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+      },
     ];
   },
 };
