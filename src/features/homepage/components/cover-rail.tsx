@@ -1,24 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import type { KeyboardEvent, RefObject } from "react";
+import type { RefObject } from "react";
 
 import { ClockIcon } from "@/src/lib/icons/clock.icon";
 import { GridViewIcon } from "@/src/lib/icons/gridView.icon";
 import { ImagePlayButton } from "@/src/lib/components/buttons/image-play-button";
 
 import type { HomeGame } from "../data/home-game";
+import { moveCoverFocus } from "./cover-rail-keys";
 import styles from "./css/home-spotlight.module.css";
-
-export const COVER_SELECTOR = "[data-game-cover]";
-
-// Arrow keys step one card; Home and End jump to the ends.
-const KEY_TARGETS: Record<string, (current: number, last: number) => number> = {
-  ArrowLeft: (current) => current - 1,
-  ArrowRight: (current) => current + 1,
-  Home: () => 0,
-  End: (_, last) => last,
-};
 
 type CoverRailProps = {
   games: readonly HomeGame[];
@@ -33,21 +24,6 @@ export function CoverRail({
   onActivate,
   railRef,
 }: CoverRailProps) {
-  const onKeyDown = (event: KeyboardEvent<HTMLUListElement>) => {
-    const target = KEY_TARGETS[event.key];
-    if (!target) return;
-    const cards = Array.from(
-      event.currentTarget.querySelectorAll<HTMLElement>(COVER_SELECTOR),
-    );
-    const current = cards.findIndex((card) => card === event.target);
-    if (current < 0) return;
-    const next = cards[target(current, cards.length - 1)];
-    if (!next) return;
-    event.preventDefault();
-    next.focus({ preventScroll: true });
-    next.scrollIntoView({ inline: "nearest", block: "nearest" });
-  };
-
   return (
     <section
       aria-label="Your game lineup"
@@ -69,7 +45,7 @@ export function CoverRail({
 
       <ul
         ref={railRef}
-        onKeyDown={onKeyDown}
+        onKeyDown={moveCoverFocus}
         className={`flex list-none ${styles["cover-rail"]}`}
       >
         {games.map((game, index) => (

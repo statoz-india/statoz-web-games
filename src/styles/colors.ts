@@ -28,18 +28,24 @@ export const COLORS = {
     highlight: "#ffffff",
     shadow: "rgb(0 0 0 / 0.6)",
   },
-  // Homescreen spotlight only; its spec uses its own palette.
+
   spotlight: {
     page: "#0d111a",
+    surface: "#0f172b",
     artwork: "#070c1f",
     cover: "#1d293d",
     borderSubtle: "#20293e",
+    borderMuted: "#243654",
     borderDefault: "#314158",
+    borderStrong: "#45556c",
     text: "#ffffff",
     textSubtle: "#cad5e2",
     textMuted: "#90a1b9",
     cyan: "#5cdfff",
     violet: "#c27aff",
+    gold: "#fdc700",
+    lime: "#51ff94",
+    racing: "#f42d29",
   },
 } as const;
 
