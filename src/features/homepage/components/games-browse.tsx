@@ -1,6 +1,8 @@
 "use client";
 
-import { type KeyboardEvent, useState } from "react";
+import { useState } from "react";
+
+import { FilterChips } from "@/src/lib/components/filter-chips";
 
 import type { BrowseSport } from "../data/browse-sport";
 import type { HomeGame } from "../data/home-game";
@@ -74,63 +76,6 @@ export function GamesBrowse({ sports, games, onViewAll }: GamesBrowseProps) {
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-type FilterChipsProps = {
-  label: string;
-  options: readonly { id: string; label: string }[];
-  selected: string;
-  onSelect: (id: string) => void;
-};
-
-// Arrow keys wrap around; Home and End jump to the ends.
-const CHIP_TARGETS: Record<string, (index: number, count: number) => number> =
-  {
-    ArrowRight: (index, count) => (index + 1) % count,
-    ArrowLeft: (index, count) => (index - 1 + count) % count,
-    Home: () => 0,
-    End: (_, count) => count - 1,
-  };
-
-/** Tabs that select as focus moves, so only the active chip is tabbable. */
-function FilterChips({ label, options, selected, onSelect }: FilterChipsProps) {
-  const move = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    const target = CHIP_TARGETS[event.key];
-    if (!target) return;
-    const next = target(index, options.length);
-    event.preventDefault();
-    onSelect(options[next].id);
-    event.currentTarget.parentElement
-      ?.querySelectorAll<HTMLButtonElement>('[role="tab"]')
-      [next]?.focus();
-  };
-
-  return (
-    <div
-      role="tablist"
-      aria-label={label}
-      className={`flex shrink-0 gap-1 overflow-x-auto ${styles.chips}`}
-    >
-      {options.map((option, index) => {
-        const active = option.id === selected;
-        return (
-          <button
-            key={option.id}
-            type="button"
-            role="tab"
-            aria-selected={active}
-            tabIndex={active ? 0 : -1}
-            data-active={active || undefined}
-            onClick={() => onSelect(option.id)}
-            onKeyDown={(event) => move(event, index)}
-            className={`relative isolate min-h-touch flex-none whitespace-nowrap ${styles.chip}`}
-          >
-            <span>{option.label}</span>
-          </button>
-        );
-      })}
     </div>
   );
 }

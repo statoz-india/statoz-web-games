@@ -1,11 +1,10 @@
-import Image from "next/image";
 import type { CSSProperties } from "react";
 
-import { ImagePlayButton } from "@/src/lib/components/buttons/image-play-button";
+import { GameCoverCard } from "@/src/lib/components/game-cover-card";
+import { moveCoverFocus } from "@/src/utils/cover-focus";
 
 import type { BrowseSport } from "../data/browse-sport";
 import type { HomeGame } from "../data/home-game";
-import { moveCoverFocus } from "./cover-rail-keys";
 import styles from "./css/games-browse.module.css";
 
 type SportShelfProps = {
@@ -50,42 +49,13 @@ export function SportShelf({ sport, games, onViewAll }: SportShelfProps) {
       >
         {games.map((game) => (
           <li key={game.id} className="min-w-0">
-            {/* A button with no action until game routes exist. */}
-            <button
-              type="button"
-              data-game-cover={game.id}
-              aria-label={`Play ${game.title}`}
-              className={`block w-full min-w-0 text-left ${styles["cover-card"]}`}
-            >
-              <span className={`relative block ${styles["cover-frame"]}`}>
-                <span
-                  className={`relative block overflow-hidden ${styles["cover-image"]}`}
-                >
-                  <Image
-                    src={game.cover}
-                    alt=""
-                    fill
-                    sizes="13rem"
-                    className="object-cover"
-                  />
-                  <ImagePlayButton
-                    className={`absolute ${styles["cover-play"]}`}
-                  />
-                </span>
-              </span>
-              <span
-                className={`flex items-baseline gap-1.5 ${styles["cover-caption"]}`}
-              >
-                <span
-                  className={`min-w-0 flex-1 truncate ${styles["cover-title"]}`}
-                >
-                  {game.title}
-                </span>
-              </span>
-              <span className={`block ${styles["cover-sport"]}`}>
-                {sport.label}
-              </span>
-            </button>
+            <GameCoverCard
+              id={game.id}
+              title={game.title}
+              cover={game.cover}
+              sportLabel={sport.label}
+              href={game.href}
+            />
           </li>
         ))}
       </ul>

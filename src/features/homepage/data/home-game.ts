@@ -15,4 +15,6 @@ export type HomeGame = {
   video?: string;
   /** Shows the clock mark on the card. */
   recent?: boolean;
+  /** Launch URL; without one the game's cards and PLAY have no action yet. */
+  href?: string;
 };

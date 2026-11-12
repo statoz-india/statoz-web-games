@@ -47,6 +47,24 @@ export const COLORS = {
     lime: "#51ff94",
     racing: "#f42d29",
   },
+  // Open Golf lobby and game frame: the game's own arcade palette. The in-game
+  // shell keeps a copy, since it runs in a sandboxed iframe.
+  openGolf: {
+    night: "#04190f",
+    deep: "#0b3b22",
+    green: "#2f9e44",
+    greenDeep: "#1d6b2c",
+    grass: "#8fd14f",
+    cream: "#fff6dc",
+    creamDeep: "#d8c99e",
+    creamDark: "#f1e6c4",
+    ink: "#10301c",
+    gold: "#ffc83d",
+    goldDeep: "#c98a00",
+    locked: "#1a3a26",
+    lockedText: "#5f7d68",
+    lockedDeep: "#0f2617",
+  },
 } as const;
 
 // --palette-* rather than --color-*: that prefix belongs to Tailwind's theme.

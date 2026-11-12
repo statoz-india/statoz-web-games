@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Emscripten output, built by src/games/open-golf/scripts/rebuild-open-golf-mobile.py.
+    "src/games/open-golf/bundle/engine/**",
   ]),
 ]);
 

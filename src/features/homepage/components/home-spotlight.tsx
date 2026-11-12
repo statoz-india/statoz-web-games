@@ -5,11 +5,11 @@ import { type ReactNode, useRef, useState } from "react";
 import { PlayButton } from "@/src/lib/components/buttons/play-button";
 import { PauseIcon } from "@/src/lib/icons/pause.icon";
 import { PlayIcon } from "@/src/lib/icons/play.icon";
+import { COVER_SELECTOR } from "@/src/utils/cover-focus";
 
 import type { HomeGame } from "../data/home-game";
 import { AmbientBackdrop } from "./ambient-backdrop";
 import { CoverRail } from "./cover-rail";
-import { COVER_SELECTOR } from "./cover-rail-keys";
 import styles from "./css/home-spotlight.module.css";
 import { SpotlightArtwork } from "./spotlight-artwork";
 import { useIdleRotation } from "./use-idle-rotation";
@@ -94,8 +94,8 @@ export function HomeSpotlight({ games, children }: HomeSpotlightProps) {
             <h1 className={styles.title}>{game.title}</h1>
             <p className={styles.description}>{game.subtitle}</p>
             <div className={`flex items-center ${styles["hero-actions"]}`}>
-              {/* No action until game routes exist. */}
-              <PlayButton aria-label={`Play ${game.title}`} />
+              {/* Games without a route have no action yet. */}
+              <PlayButton href={game.href} aria-label={`Play ${game.title}`} />
               <button
                 type="button"
                 className={`min-h-touch ${styles["hero-browse"]}`}

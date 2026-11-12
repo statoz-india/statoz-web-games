@@ -1,0 +1,93 @@
+/* Colours, the open/closed width and anything a media query changes live
+   here; Tailwind covers static layout. Never set a property both here and in
+   a Tailwind class. */
+
+.root {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  border: 1px solid var(--palette-spotlight-border-subtle);
+  background: var(--palette-spotlight-surface);
+  transition:
+    width 180ms ease,
+    border-color 180ms ease;
+}
+
+.expanded {
+  width: 100%;
+}
+
+.root:hover {
+  border-color: var(--palette-spotlight-border-default);
+}
+
+.root:has(:focus-visible) {
+  outline: 2px solid var(--palette-spotlight-border-strong);
+  outline-offset: 0.125rem;
+}
+
+.trigger {
+  margin: -1px;
+  cursor: pointer;
+  color: var(--palette-spotlight-text-muted);
+}
+
+.trigger:hover {
+  color: var(--palette-spotlight-text-subtle);
+}
+
+.trigger:focus-visible {
+  outline: none;
+}
+
+.field {
+  height: 42px;
+  padding-inline: 0 var(--spacing);
+}
+
+.input {
+  appearance: none;
+  outline: none;
+  color: var(--palette-spotlight-text);
+  font: 500 0.8125rem / 1.5 var(--font-sans);
+}
+
+.input::placeholder {
+  color: var(--palette-spotlight-text-muted);
+  opacity: 1;
+}
+
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.clear {
+  cursor: pointer;
+  color: var(--palette-spotlight-text-muted);
+  transition: color 150ms;
+}
+
+.clear:hover {
+  color: var(--palette-spotlight-text);
+}
+
+.clear:focus-visible {
+  outline: 2px solid var(--palette-spotlight-border-strong);
+  outline-offset: -3px;
+}
+
+@media (max-width: 600px) {
+  .input {
+    font-size: 0.6875rem;
+  }
+
+  .trigger svg {
+    width: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    transition: none;
+  }
+}

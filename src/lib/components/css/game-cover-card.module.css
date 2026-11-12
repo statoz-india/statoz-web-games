@@ -1,0 +1,82 @@
+/* Colours, chamfers and anything a media query changes live here; Tailwind
+   covers static layout. Never set a property both here and in a Tailwind
+   class. */
+
+.card {
+  cursor: pointer;
+  color: var(--palette-spotlight-text);
+  outline-offset: 3px;
+  transition: transform 160ms ease-out;
+}
+
+/* 1px chamfered frame around the cover. */
+.frame {
+  padding: 1px;
+  background: var(--palette-spotlight-border-default);
+  clip-path: var(--shape-clip-spotlight);
+  transition:
+    background 160ms,
+    filter 160ms;
+}
+
+.image {
+  aspect-ratio: 3 / 2;
+  clip-path: var(--shape-clip-spotlight);
+  background: var(--palette-spotlight-cover);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card:hover .frame,
+.card:focus-visible .frame {
+  background: var(--palette-spotlight-cyan);
+}
+
+/* Placement and visibility of the ▶ PLAY chip (ImagePlayButton). */
+.play {
+  right: calc(var(--spacing) * 2);
+  bottom: calc(var(--spacing) * 2);
+  opacity: 0;
+  transition: opacity 160ms;
+}
+
+.card:hover .play,
+.card:focus-visible .play {
+  opacity: 1;
+}
+
+.caption {
+  margin-top: calc(var(--spacing) * 2.5);
+}
+
+.title {
+  font: 600 var(--text-sm) / 1.5 var(--font-sans);
+}
+
+.recent {
+  color: var(--palette-spotlight-cyan);
+}
+
+.sport {
+  color: var(--palette-spotlight-text-muted);
+  font: 500 var(--text-xs) / 1.5 var(--font-sans);
+}
+
+/* Phones held sideways. */
+@media (orientation: landscape) and (max-height: 540px) {
+  .caption {
+    margin-top: calc(var(--spacing) * 1.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}

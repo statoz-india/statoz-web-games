@@ -56,6 +56,7 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("open-golf"),
     position: "75% 55%",
     video: gameplay("open-golf"),
+    href: "/game/open-golf",
   },
   {
     id: "fot-duel",
@@ -187,4 +188,23 @@ export const BROWSE_SPORTS: readonly BrowseSport[] = [
     accent: "var(--palette-spotlight-gold)",
     gameIds: ["longbow", "holdover"],
   },
+];
+
+// Library "All Games" order: featured first, then every sport in turn.
+export const LIBRARY_ORDER: readonly string[] = [
+  "open-golf",
+  "fot-duel",
+  "football-chess",
+  "rally-dash",
+  "penalty-cup",
+  "pitch-rush",
+  "cricketer",
+  "yorker",
+  "hoop-legacy",
+  "rim-rush",
+  "vibe-basketball",
+  "racer",
+  "formula",
+  "longbow",
+  "holdover",
 ];
