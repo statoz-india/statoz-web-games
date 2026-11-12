@@ -1,14 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 
 import { PlayButton } from "@/src/lib/components/buttons/play-button";
 import { PauseIcon } from "@/src/lib/icons/pause.icon";
 import { PlayIcon } from "@/src/lib/icons/play.icon";
+import { COVER_SELECTOR } from "@/src/utils/cover-focus";
 
 import type { HomeGame } from "../data/home-game";
 import { AmbientBackdrop } from "./ambient-backdrop";
-import { COVER_SELECTOR, CoverRail } from "./cover-rail";
+import { CoverRail } from "./cover-rail";
 import styles from "./css/home-spotlight.module.css";
 import { SpotlightArtwork } from "./spotlight-artwork";
 import { useIdleRotation } from "./use-idle-rotation";
@@ -31,7 +32,12 @@ function revealCard(rail: HTMLElement | null, index: number) {
   });
 }
 
-export function HomeSpotlight({ games }: { games: readonly HomeGame[] }) {
+type HomeSpotlightProps = {
+  games: readonly HomeGame[];
+  children?: ReactNode;
+};
+
+export function HomeSpotlight({ games, children }: HomeSpotlightProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const openingRef = useRef<HTMLElement>(null);
@@ -78,9 +84,7 @@ export function HomeSpotlight({ games }: { games: readonly HomeGame[] }) {
           {paused ? <PlayIcon /> : <PauseIcon />}
         </button>
 
-        <div
-          className={`relative mx-auto flex items-center ${styles.hero}`}
-        >
+        <div className={`relative mx-auto flex items-center ${styles.hero}`}>
           {/* Keyed so copy-in replays for each game. */}
           <div key={game.id} className={styles["hero-copy"]}>
             <p className={`items-center gap-2 ${styles.eyebrow}`}>
@@ -90,8 +94,8 @@ export function HomeSpotlight({ games }: { games: readonly HomeGame[] }) {
             <h1 className={styles.title}>{game.title}</h1>
             <p className={styles.description}>{game.subtitle}</p>
             <div className={`flex items-center ${styles["hero-actions"]}`}>
-              {/* No action until game routes exist. */}
-              <PlayButton aria-label={`Play ${game.title}`} />
+              {/* Games without a route have no action yet. */}
+              <PlayButton href={game.href} aria-label={`Play ${game.title}`} />
               <button
                 type="button"
                 className={`min-h-touch ${styles["hero-browse"]}`}
@@ -109,6 +113,8 @@ export function HomeSpotlight({ games }: { games: readonly HomeGame[] }) {
           railRef={railRef}
         />
       </section>
+
+      {children}
     </div>
   );
 }

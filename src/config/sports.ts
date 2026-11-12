@@ -1,5 +1,6 @@
 import { GAME_ASSET_DIRS } from "@/src/config/image";
 
+import type { BrowseSport } from "@/src/features/homepage/data/browse-sport";
 import type { HomeGame } from "@/src/features/homepage/data/home-game";
 
 const cover = (file: string) => `${GAME_ASSET_DIRS.cover}/${file}.webp`;
@@ -55,6 +56,7 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("open-golf"),
     position: "75% 55%",
     video: gameplay("open-golf"),
+    href: "/game/open-golf",
   },
   {
     id: "fot-duel",
@@ -146,4 +148,63 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("holdover"),
   },
+];
+
+// Browse shelves, in display order. A sport with no games gets no chip or shelf.
+export const BROWSE_SPORTS: readonly BrowseSport[] = [
+  {
+    id: "football",
+    label: "Football",
+    accent: "var(--palette-spotlight-cyan)",
+    gameIds: ["penalty-cup", "pitch-rush", "fot-duel", "football-chess"],
+  },
+  {
+    id: "cricket",
+    label: "Cricket",
+    accent: "var(--palette-spotlight-text)",
+    gameIds: ["cricketer", "yorker"],
+  },
+  {
+    id: "basketball",
+    label: "Basket",
+    accent: "var(--palette-spotlight-gold)",
+    gameIds: ["hoop-legacy", "rim-rush", "vibe-basketball"],
+  },
+  {
+    id: "motorsport",
+    label: "Motorsport",
+    accent: "var(--palette-spotlight-racing)",
+    gameIds: ["racer", "formula", "rally-dash"],
+  },
+  {
+    id: "golf",
+    label: "Golf",
+    accent: "var(--palette-spotlight-lime)",
+    gameIds: ["open-golf"],
+  },
+  {
+    id: "archery",
+    label: "Archery",
+    accent: "var(--palette-spotlight-gold)",
+    gameIds: ["longbow", "holdover"],
+  },
+];
+
+// Library "All Games" order: featured first, then every sport in turn.
+export const LIBRARY_ORDER: readonly string[] = [
+  "open-golf",
+  "fot-duel",
+  "football-chess",
+  "rally-dash",
+  "penalty-cup",
+  "pitch-rush",
+  "cricketer",
+  "yorker",
+  "hoop-legacy",
+  "rim-rush",
+  "vibe-basketball",
+  "racer",
+  "formula",
+  "longbow",
+  "holdover",
 ];

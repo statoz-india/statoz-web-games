@@ -9,6 +9,8 @@ export const SHAPE = {
   fieldCut: 8,
   /** Corner cut on the homescreen spotlight's buttons and cover cards. */
   spotlightCut: 10,
+  /** Corner cut on the library's card tiles. */
+  panelCut: 12,
   radius: {
     hairline: "1px",
     sm: "0.25rem",
@@ -46,5 +48,9 @@ export const SHAPE_VARIABLES = toCssVariables("shape", {
   radius: SHAPE.radius,
   stroke: SHAPE.stroke,
   focusOffset: SHAPE.focusOffset,
-  clip: { field: FIELD_CLIP_PATH, spotlight: chamferPath(SHAPE.spotlightCut) },
+  clip: {
+    field: FIELD_CLIP_PATH,
+    spotlight: chamferPath(SHAPE.spotlightCut),
+    panel: chamferPath(SHAPE.panelCut),
+  },
 });

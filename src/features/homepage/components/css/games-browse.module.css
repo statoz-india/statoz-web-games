@@ -1,0 +1,99 @@
+/* Colours, cut-corner layers and anything a media query changes live here;
+   Tailwind covers static layout. Never set a property both here and in a
+   Tailwind class. The backdrop is shared with the spotlight, so there's no
+   page background here. */
+
+.games-browse {
+  /* Local so the landscape query can narrow them. */
+  --gutter: var(--spacing-gutter);
+  --cover-width: var(--space-spotlight-cover-width);
+}
+
+.content {
+  max-width: var(--space-spotlight-max-width);
+  padding: calc(var(--spacing) * 8) var(--gutter) 0;
+}
+
+/* ---------- Headings ---------- */
+.heading-title {
+  font: 700 var(--text-lg) / 1.4 var(--font-sans);
+  letter-spacing: -0.025em;
+  color: var(--palette-spotlight-text);
+}
+
+.kicker {
+  font: 700 var(--text-2xs) / 1.3 var(--font-sans);
+  letter-spacing: 0.12em;
+  color: var(--palette-spotlight-text-muted);
+}
+
+.count {
+  font: 500 var(--text-xs) / 1.4 var(--font-sans);
+  color: var(--palette-spotlight-text-muted);
+}
+
+/* ---------- Browse block (heading + chips + divider) ---------- */
+.browse {
+  padding-bottom: calc(var(--spacing) * 8);
+  border-bottom: 1px solid var(--palette-spotlight-border-subtle);
+}
+
+/* ---------- Sport shelves ---------- */
+.sport-bar {
+  background: var(--shelf-accent);
+}
+
+.text-action {
+  cursor: pointer;
+  color: var(--palette-spotlight-text-subtle);
+  font: 600 var(--text-xs) / 1.4 var(--font-sans);
+}
+
+.text-action:hover {
+  color: var(--palette-spotlight-cyan);
+}
+
+/* Bleeds to the page edge; content stays on the gutter. */
+.cover-rail {
+  gap: calc(var(--spacing) * 5);
+  margin: 0 calc(-1 * var(--gutter));
+  padding: calc(var(--spacing) * 3) var(--gutter) calc(var(--spacing) * 4);
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+  scrollbar-color: var(--palette-spotlight-border-default) transparent;
+  touch-action: pan-x pan-y;
+}
+
+.cover-rail > li {
+  flex: 0 0 var(--cover-width);
+  scroll-snap-align: start;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .catalog-count {
+    display: none;
+  }
+
+  .heading-title {
+    font-size: var(--text-base);
+  }
+
+  .cover-rail {
+    gap: calc(var(--spacing) * 3);
+  }
+}
+
+/* Phones held sideways. */
+@media (orientation: landscape) and (max-height: 540px) {
+  .games-browse {
+    --cover-width: var(--space-spotlight-cover-width-landscape);
+    --gutter: calc(var(--spacing) * 5);
+  }
+
+  .cover-rail {
+    padding-block: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+  }
+}
