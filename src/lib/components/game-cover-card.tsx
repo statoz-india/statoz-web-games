@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ImagePlayButton } from "@/src/lib/components/buttons/image-play-button";
+import { ComingSoonTag } from "@/src/lib/components/coming-soon-tag";
 import { ClockIcon } from "@/src/lib/icons/clock.icon";
 
 import styles from "./css/game-cover-card.module.css";
@@ -16,6 +17,8 @@ type GameCoverCardProps = {
   href?: string;
   /** Shows the clock mark next to the title. */
   recent?: boolean;
+  /** Not playable yet: a "Coming soon" tag replaces the PLAY chip. */
+  comingSoon?: boolean;
 };
 
 /**
@@ -29,10 +32,11 @@ export function GameCoverCard({
   sportLabel,
   href,
   recent = false,
+  comingSoon = false,
 }: GameCoverCardProps) {
   const shared = {
     "data-game-cover": id,
-    "aria-label": `Play ${title}`,
+    "aria-label": comingSoon ? `${title}, coming soon` : `Play ${title}`,
     className: `block w-full min-w-0 text-left ${styles.card}`,
   };
   const body = (
@@ -40,7 +44,11 @@ export function GameCoverCard({
       <span className={`relative block ${styles.frame}`}>
         <span className={`relative block overflow-hidden ${styles.image}`}>
           <Image src={cover} alt="" fill sizes="13rem" className="object-cover" />
-          <ImagePlayButton className={`absolute ${styles.play}`} />
+          {comingSoon ? (
+            <ComingSoonTag className={`absolute ${styles.soon}`} />
+          ) : (
+            <ImagePlayButton className={`absolute ${styles.play}`} />
+          )}
         </span>
       </span>
       <span className={`flex items-baseline gap-1.5 ${styles.caption}`}>

@@ -1,0 +1,18 @@
+/* The tag's own look only; the parent places it. Matches the ▶ PLAY chip,
+   in gold so it reads as status rather than an action. */
+.coming-soon-tag {
+  height: 22px;
+  padding: 0 calc(var(--spacing) * 2);
+  border: 1px solid
+    color-mix(in srgb, var(--palette-spotlight-gold) 70%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--palette-spotlight-page) 88%,
+    transparent
+  );
+  backdrop-filter: blur(6px);
+  color: var(--palette-spotlight-gold);
+  font: 700 var(--text-2xs) / 1 var(--font-sans);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}

@@ -55,6 +55,7 @@ export function SportShelf({ sport, games, onViewAll }: SportShelfProps) {
               cover={game.cover}
               sportLabel={sport.label}
               href={game.href}
+              comingSoon={game.comingSoon}
             />
           </li>
         ))}

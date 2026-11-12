@@ -47,6 +47,12 @@
   opacity: 1;
 }
 
+/* "Coming soon" tag, top-left inside the image, always visible. */
+.soon {
+  left: calc(var(--spacing) * 2);
+  top: calc(var(--spacing) * 2);
+}
+
 .caption {
   margin-top: calc(var(--spacing) * 2.5);
 }

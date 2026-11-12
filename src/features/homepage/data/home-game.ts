@@ -17,4 +17,6 @@ export type HomeGame = {
   recent?: boolean;
   /** Launch URL; without one the game's cards and PLAY have no action yet. */
   href?: string;
+  /** Not playable yet: cards and the hero show a "Coming soon" tag. */
+  comingSoon?: boolean;
 };

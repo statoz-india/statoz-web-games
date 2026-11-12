@@ -47,9 +47,9 @@ export const COLORS = {
     lime: "#51ff94",
     racing: "#f42d29",
   },
-  // Open Golf lobby and game frame: the game's own arcade palette. The in-game
+  // Mini Golf lobby and game frame: the game's own arcade palette. The in-game
   // shell keeps a copy, since it runs in a sandboxed iframe.
-  openGolf: {
+  miniGolf: {
     night: "#04190f",
     deep: "#0b3b22",
     green: "#2f9e44",

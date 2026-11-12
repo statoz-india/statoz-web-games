@@ -3,6 +3,7 @@
 import { type ReactNode, useRef, useState } from "react";
 
 import { PlayButton } from "@/src/lib/components/buttons/play-button";
+import { ComingSoonTag } from "@/src/lib/components/coming-soon-tag";
 import { PauseIcon } from "@/src/lib/icons/pause.icon";
 import { PlayIcon } from "@/src/lib/icons/play.icon";
 import { COVER_SELECTOR } from "@/src/utils/cover-focus";
@@ -90,6 +91,7 @@ export function HomeSpotlight({ games, children }: HomeSpotlightProps) {
             <p className={`items-center gap-2 ${styles.eyebrow}`}>
               <span className={`size-[5px] ${styles["live-dot"]}`} />
               YOUR NEXT GREAT GAME
+              {game.comingSoon && <ComingSoonTag />}
             </p>
             <h1 className={styles.title}>{game.title}</h1>
             <p className={styles.description}>{game.subtitle}</p>

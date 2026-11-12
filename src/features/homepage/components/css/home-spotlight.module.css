@@ -342,6 +342,12 @@
   opacity: 1;
 }
 
+/* "Coming soon" tag, top-left inside the image, always visible. */
+.cover-soon {
+  left: calc(var(--spacing) * 2);
+  top: calc(var(--spacing) * 2);
+}
+
 .cover-caption {
   gap: calc(var(--spacing) * 1.5);
   margin-top: calc(var(--spacing) * 2.5);

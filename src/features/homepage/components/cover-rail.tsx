@@ -7,6 +7,7 @@ import { type PointerEvent, type RefObject, useRef } from "react";
 import { ClockIcon } from "@/src/lib/icons/clock.icon";
 import { GridViewIcon } from "@/src/lib/icons/gridView.icon";
 import { ImagePlayButton } from "@/src/lib/components/buttons/image-play-button";
+import { ComingSoonTag } from "@/src/lib/components/coming-soon-tag";
 import { moveCoverFocus } from "@/src/utils/cover-focus";
 
 import type { HomeGame } from "../data/home-game";
@@ -78,7 +79,9 @@ function CoverCard({ game, active, onActivate }: CoverCardProps) {
   const shared = {
     "data-game-cover": game.id,
     "data-active": active || undefined,
-    "aria-label": `Play ${game.title}`,
+    "aria-label": game.comingSoon
+      ? `${game.title}, coming soon`
+      : `Play ${game.title}`,
     onFocus: onActivate,
     onPointerEnter: (event: PointerEvent<HTMLElement>) => {
       if (event.pointerType === "mouse") onActivate();
@@ -131,7 +134,11 @@ function CoverCardBody({ game }: { game: HomeGame }) {
             sizes="13rem"
             className="object-cover"
           />
-          <ImagePlayButton className={`absolute ${styles["cover-play"]}`} />
+          {game.comingSoon ? (
+            <ComingSoonTag className={`absolute ${styles["cover-soon"]}`} />
+          ) : (
+            <ImagePlayButton className={`absolute ${styles["cover-play"]}`} />
+          )}
         </span>
         <span
           aria-hidden="true"

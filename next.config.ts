@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // Games run in a sandboxed srcdoc iframe, so their origin is opaque and the
+  // shared engine they import is cross-origin. Module imports always use CORS.
+  async headers() {
+    return [
+      {
+        source: "/games/cricketer/game-runtime/:path*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
