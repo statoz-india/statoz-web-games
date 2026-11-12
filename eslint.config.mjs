@@ -16,6 +16,7 @@ const eslintConfig = defineConfig([
     "src/games/mini-golf/bundle/engine/**",
     // Published game bundle and its shared engine: minified build output.
     "src/games/cricketer/bundle/**",
+    "src/games/formula/bundle/**",
   ]),
 ]);
 
