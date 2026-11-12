@@ -10,7 +10,11 @@ import { CloseIcon } from "@/src/lib/icons/close.icon";
 import { GridViewIcon } from "@/src/lib/icons/gridView.icon";
 import { moveCoverFocus } from "@/src/utils/cover-focus";
 
-import { LIBRARY_SPORTS, listLibraryGames } from "../data/list-library-games";
+import {
+  LIBRARY_SPORTS,
+  type LibraryEntry,
+  listLibraryGames,
+} from "../data/list-library-games";
 import styles from "./css/game-library.module.css";
 
 const ALL = "all";
@@ -49,7 +53,27 @@ export function GameLibrary({ recentIds = [] }: GameLibraryProps) {
         ?.id ?? null,
   );
   const entries = listLibraryGames(sport, search);
+  const live = entries.filter(({ game }) => !game.comingSoon);
+  const comingSoon = entries.filter(({ game }) => game.comingSoon);
   const recent = new Set(recentIds);
+
+  const grid = (list: readonly LibraryEntry[]) => (
+    <ul className={`grid list-none ${styles.grid}`}>
+      {list.map(({ game, sport: gameSport }) => (
+        <li key={game.id} className="relative isolate min-w-0">
+          <GameCoverCard
+            id={game.id}
+            title={game.title}
+            cover={game.cover}
+            sportLabel={gameSport.label}
+            href={game.href}
+            comingSoon={game.comingSoon}
+            recent={recent.has(game.id)}
+          />
+        </li>
+      ))}
+    </ul>
+  );
   const sportLabel = LIBRARY_SPORTS.find(
     (option) => option.id === sport,
   )?.label;
@@ -134,25 +158,28 @@ export function GameLibrary({ recentIds = [] }: GameLibraryProps) {
           </span>
         </div>
 
-        <div className={styles.results}>
+        {/* One key handler, so arrows run on from live games into Coming Soon. */}
+        <div onKeyDown={moveCoverFocus} className={styles.results}>
           {entries.length ? (
-            <ul
-              onKeyDown={moveCoverFocus}
-              className={`grid list-none ${styles.grid}`}
-            >
-              {entries.map(({ game, sport: gameSport }) => (
-                <li key={game.id} className="relative isolate min-w-0">
-                  <GameCoverCard
-                    id={game.id}
-                    title={game.title}
-                    cover={game.cover}
-                    sportLabel={gameSport.label}
-                    href={game.href}
-                    recent={recent.has(game.id)}
-                  />
-                </li>
-              ))}
-            </ul>
+            <>
+              {live.length > 0 && grid(live)}
+              {comingSoon.length > 0 && (
+                <section
+                  aria-labelledby="library-coming-soon"
+                  className={styles["soon-section"]}
+                >
+                  <header
+                    className={`flex items-center gap-3 ${styles["soon-head"]}`}
+                  >
+                    <h2 id="library-coming-soon">Coming Soon</h2>
+                    <span className={styles["soon-count"]}>
+                      {comingSoon.length}
+                    </span>
+                  </header>
+                  {grid(comingSoon)}
+                </section>
+              )}
+            </>
           ) : (
             <div
               className={`grid justify-items-center content-center text-center ${styles.empty}`}

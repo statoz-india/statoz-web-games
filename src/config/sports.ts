@@ -17,6 +17,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     spotlight: spotlight("penalty-cup"),
     position: "65% 50%",
     video: gameplay("penalty-cup"),
+    href: "/game/penalty-cup",
+    comingSoon: true,
   },
   {
     id: "hoop-legacy",
@@ -27,6 +29,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     spotlight: spotlight("hoop-legacy"),
     position: "65% 45%",
     video: gameplay("hoop-legacy"),
+    href: "/game/hoop-legacy",
+    comingSoon: true,
   },
   {
     id: "formula",
@@ -37,6 +41,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     spotlight: spotlight("portfolio-formula"),
     position: "65% 60%",
     video: gameplay("portfolio-formula"),
+    href: "/game/formula",
+    comingSoon: true,
   },
   {
     id: "cricketer",
@@ -67,6 +73,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("fot-duel"),
     position: "80% 45%",
     video: gameplay("pitch-duel"),
+    href: "/game/fot-duel",
+    comingSoon: true,
   },
   {
     id: "football-chess",
@@ -76,6 +84,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("football-chess"),
     position: "70% 60%",
     video: gameplay("football-chess"),
+    href: "/game/football-chess",
+    comingSoon: true,
   },
   {
     id: "rally-dash",
@@ -85,6 +95,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("grand-prix-dash"),
     position: "75% 50%",
     video: gameplay("grand-prix-dash"),
+    href: "/game/rally-dash",
+    comingSoon: true,
   },
   {
     id: "pitch-rush",
@@ -94,6 +106,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("pitch-rush"),
     position: "75% 50%",
     video: gameplay("pitch-rush"),
+    href: "/game/pitch-rush",
+    comingSoon: true,
   },
   {
     id: "yorker",
@@ -103,6 +117,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("yorker"),
     position: "75% 50%",
     video: gameplay("yorker"),
+    href: "/game/yorker",
+    comingSoon: true,
   },
   {
     id: "rim-rush",
@@ -112,6 +128,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("rim-rush"),
     position: "75% 50%",
     video: gameplay("rim-rush"),
+    href: "/game/rim-rush",
+    comingSoon: true,
   },
   {
     id: "vibe-basketball",
@@ -121,6 +139,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("vibe-basketball"),
     position: "75% 50%",
     video: gameplay("vibe-basketball"),
+    href: "/game/vibe-basketball",
+    comingSoon: true,
   },
   {
     id: "racer",
@@ -130,6 +150,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("f1-racing"),
     position: "75% 55%",
     video: gameplay("f1-racing"),
+    href: "/game/racer",
+    comingSoon: true,
   },
   {
     id: "longbow",
@@ -139,6 +161,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("longbow"),
     position: "75% 50%",
     video: gameplay("longbow"),
+    href: "/game/longbow",
+    comingSoon: true,
   },
   {
     id: "holdover",
@@ -148,6 +172,8 @@ export const HOME_GAMES: readonly HomeGame[] = [
     cover: cover("holdover"),
     position: "75% 50%",
     video: gameplay("holdover"),
+    href: "/game/holdover",
+    comingSoon: true,
   },
 ];
 
