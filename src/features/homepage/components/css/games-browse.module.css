@@ -38,73 +38,6 @@
   border-bottom: 1px solid var(--palette-spotlight-border-subtle);
 }
 
-/* ---------- Filter chips ---------- */
-.chips {
-  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 4);
-  scroll-padding-inline: calc(var(--spacing) * 4);
-  scrollbar-width: none;
-}
-
-.chips::-webkit-scrollbar {
-  display: none;
-}
-
-.chip {
-  --chip-accent: var(--palette-spotlight-cyan);
-  --chip-edge: var(--palette-spotlight-border-muted);
-  --chip-fill: var(--palette-spotlight-artwork);
-  padding: 0 calc(var(--spacing) * 4);
-  cursor: pointer;
-  color: var(--palette-spotlight-text-muted);
-  font: 900 0.6875rem / 1 var(--font-display);
-  letter-spacing: 0.07em;
-  transition: color 200ms ease;
-}
-
-/* Two clipped layers make a 1px outline that follows the cut corners (a
-   border would be cropped). */
-.chip::before,
-.chip::after {
-  position: absolute;
-  content: "";
-  clip-path: var(--shape-clip-field);
-  transition: background-color 200ms ease;
-}
-
-.chip::before {
-  z-index: -2;
-  inset: calc(var(--spacing) * 1.5) 0;
-  background: var(--chip-edge);
-}
-
-.chip::after {
-  z-index: -1;
-  inset: calc(var(--spacing) * 1.5 + 1px) 1px;
-  background: var(--chip-fill);
-}
-
-.chip[data-active] {
-  --chip-edge: var(--chip-accent);
-  --chip-fill: color-mix(
-    in srgb,
-    var(--chip-accent) 14%,
-    var(--palette-spotlight-artwork)
-  );
-  color: var(--chip-accent);
-}
-
-.chip:focus-visible {
-  outline-color: var(--chip-accent);
-  outline-offset: -3px;
-}
-
-@media (hover: hover) {
-  .chip:not([data-active]):hover {
-    --chip-edge: var(--palette-spotlight-border-strong);
-    color: var(--palette-spotlight-text-subtle);
-  }
-}
-
 /* ---------- Sport shelves ---------- */
 .sport-bar {
   background: var(--shelf-accent);
@@ -138,64 +71,6 @@
   scroll-snap-align: start;
 }
 
-/* ---------- Cover card ---------- */
-.cover-card {
-  cursor: pointer;
-  color: var(--palette-spotlight-text);
-  outline-offset: 3px;
-  transition: transform 160ms ease-out;
-}
-
-.cover-frame {
-  padding: 1px;
-  background: var(--palette-spotlight-border-default);
-  clip-path: var(--shape-clip-spotlight);
-  transition:
-    background 160ms,
-    filter 160ms;
-}
-
-.cover-image {
-  aspect-ratio: 3 / 2;
-  clip-path: var(--shape-clip-spotlight);
-  background: var(--palette-spotlight-cover);
-}
-
-.cover-card:hover {
-  transform: translateY(-4px);
-}
-
-.cover-card:hover .cover-frame,
-.cover-card:focus-visible .cover-frame {
-  background: var(--palette-spotlight-cyan);
-}
-
-/* Placement and visibility of the ▶ PLAY chip (ImagePlayButton). */
-.cover-play {
-  right: calc(var(--spacing) * 2);
-  bottom: calc(var(--spacing) * 2);
-  opacity: 0;
-  transition: opacity 160ms;
-}
-
-.cover-card:hover .cover-play,
-.cover-card:focus-visible .cover-play {
-  opacity: 1;
-}
-
-.cover-caption {
-  margin-top: calc(var(--spacing) * 2.5);
-}
-
-.cover-title {
-  font: 600 var(--text-sm) / 1.5 var(--font-sans);
-}
-
-.cover-sport {
-  color: var(--palette-spotlight-text-muted);
-  font: 500 var(--text-xs) / 1.5 var(--font-sans);
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
   .catalog-count {
@@ -220,19 +95,5 @@
 
   .cover-rail {
     padding-block: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
-  }
-
-  .cover-caption {
-    margin-top: calc(var(--spacing) * 1.5);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cover-card {
-    transition: none;
-  }
-
-  .cover-card:hover {
-    transform: none;
   }
 }
