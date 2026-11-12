@@ -47,16 +47,17 @@ export const HOME_GAMES: readonly HomeGame[] = [
     spotlight: spotlight("cricketer"),
     position: "65% 50%",
     video: gameplay("cricketer"),
+    href: "/game/cricketer",
   },
   {
-    id: "open-golf",
-    title: "OPEN GOLF",
+    id: "mini-golf",
+    title: "MINI GOLF",
     subtitle: "ORIGINAL COURSES. ONE PERFECT PUTT.",
     sport: "Golf",
-    cover: cover("open-golf"),
+    cover: cover("mini-golf"),
     position: "75% 55%",
-    video: gameplay("open-golf"),
-    href: "/game/open-golf",
+    video: gameplay("mini-golf"),
+    href: "/game/mini-golf",
   },
   {
     id: "fot-duel",
@@ -180,7 +181,7 @@ export const BROWSE_SPORTS: readonly BrowseSport[] = [
     id: "golf",
     label: "Golf",
     accent: "var(--palette-spotlight-lime)",
-    gameIds: ["open-golf"],
+    gameIds: ["mini-golf"],
   },
   {
     id: "archery",
@@ -192,7 +193,7 @@ export const BROWSE_SPORTS: readonly BrowseSport[] = [
 
 // Library "All Games" order: featured first, then every sport in turn.
 export const LIBRARY_ORDER: readonly string[] = [
-  "open-golf",
+  "mini-golf",
   "fot-duel",
   "football-chess",
   "rally-dash",
