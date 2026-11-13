@@ -30,6 +30,14 @@ const nextConfig: NextConfig = {
         source: "/games/penalty-cup/game-runtime/:path*",
         headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
       },
+      {
+        source: "/games/hoop-legacy/game-runtime/:path*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+      },
+      {
+        source: "/games/hoop-legacy/assets/:path*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+      },
     ];
   },
 };
