@@ -93,7 +93,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("grand-prix-dash"),
     href: "/game/rally-dash",
-    comingSoon: true,
   },
   {
     id: "pitch-rush",
