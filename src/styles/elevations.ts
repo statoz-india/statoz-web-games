@@ -10,6 +10,8 @@ export const ELEVATIONS = {
     behind: "-1",
     // Page-level sticky elements should stay below the navbar.
     nav: "30",
+    // Above the full-screen game frame (50), so the choice can be made mid-game.
+    consent: "60",
     skipLink: "100",
   },
   blur: {
