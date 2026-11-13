@@ -84,6 +84,7 @@
   --shadow-button-hover: var(--elevation-shadow-button-hover);
   --blur-glass: var(--elevation-blur-glass);
   --z-index-nav: var(--elevation-layer-nav);
+  --z-index-consent: var(--elevation-layer-consent);
   --z-index-skip-link: var(--elevation-layer-skip-link);
 }
 

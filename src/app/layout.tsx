@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import { Analytics } from "@/src/lib/analytics/analytics";
 import { COLOR_VARIABLES } from "@/src/styles/colors";
 import { ELEVATION_VARIABLES } from "@/src/styles/elevations";
 import { GRADIENT_VARIABLES } from "@/src/styles/gradients";
@@ -45,6 +46,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       }}
     >
       <body className="min-h-full flex flex-col bg-page text-fg">
+        {/* Before children, so window.gtag is defined before any page effect runs. */}
+        <Analytics />
         {children}
       </body>
     </html>

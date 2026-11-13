@@ -10,9 +10,10 @@ export function FormulaGame({ account = null }: { account?: string | null }) {
   // Stable, so the frame's effect does not tear down and reload the bundle.
   const exit = useCallback(() => router.push("/"), [router]);
 
-  // The bundle was published as "portfolio-formula" and signs every message with that id.
+  // The bundle was published as "portfolio-formula" and signs every message with that id;
+  // analytics reports the catalogue id.
   return (
-    <GameFrame gameId="portfolio-formula" title="Formula" src="/games/formula/index.html"
+    <GameFrame gameId="portfolio-formula" analyticsId="formula" title="Formula" src="/games/formula/index.html"
       account={account} onExit={exit} />
   );
 }
