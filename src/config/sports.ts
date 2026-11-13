@@ -114,7 +114,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("yorker"),
     href: "/game/yorker",
-    comingSoon: true,
   },
   {
     id: "rim-rush",
