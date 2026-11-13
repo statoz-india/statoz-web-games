@@ -1,0 +1,1871 @@
+{
+  "version": 2,
+  "generator": "tools/hoop-legacy-athletes",
+  "bones": [
+    "hips",
+    "spine",
+    "chest",
+    "neck",
+    "head",
+    "upperArmL",
+    "forearmL",
+    "handL",
+    "upperArmR",
+    "forearmR",
+    "handR",
+    "thighL",
+    "shinL",
+    "footL",
+    "thighR",
+    "shinR",
+    "footR",
+    "clavicleL",
+    "clavicleR"
+  ],
+  "levels": {
+    "lod1": {
+      "bytes": 2754692,
+      "assets": {
+        "body": {
+          "slot": "body",
+          "variant": null,
+          "license": "CC0-1.0 (derived from MakeHuman CC0 assets)",
+          "glb": {
+            "file": "lod1/body.940660d5a8d7.glb",
+            "bytes": 175284,
+            "sha256": "940660d5a8d71c59e237cd48509c5ba5fb8b3fb958fc09ebf88446b6b1dda0f4"
+          },
+          "triangles": 10762,
+          "vertices": 6128,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "body",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular"
+              ]
+            }
+          ],
+          "extras": {
+            "headPivot": [
+              0,
+              0.8750000000000001,
+              0
+            ],
+            "footCutY": 0.05
+          }
+        },
+        "eyes": {
+          "slot": "eyes",
+          "variant": null,
+          "license": "CC0-1.0 (fitted MakeHuman system asset)",
+          "glb": {
+            "file": "lod1/eyes.7e94563bbaee.glb",
+            "bytes": 37012,
+            "sha256": "7e94563bbaee3bcd5fc3299d1f7800c91468d3eb8737383be6ef92f6bb965c67"
+          },
+          "triangles": 2040,
+          "vertices": 1076,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "eyes",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {}
+        },
+        "faceCards": {
+          "slot": "faceCards",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/faceCards.197ae4765ef5.glb",
+            "bytes": 25532,
+            "sha256": "197ae4765ef588b1e0604cd3115b18a75e83a2f0021dbb5f054889e84633c624"
+          },
+          "triangles": 560,
+          "vertices": 376,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "faceCards",
+              "morphs": [
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_chin_back",
+                "face_chin_forward",
+                "face_chin_long",
+                "face_chin_wide",
+                "face_ears_big",
+                "face_ears_out",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_set_wide",
+                "face_eyes_tilt",
+                "face_head_long",
+                "face_head_narrow",
+                "face_head_short",
+                "face_head_wide",
+                "face_jaw_narrow",
+                "face_jaw_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_mouth_wide",
+                "face_nose_flare",
+                "face_nose_hump",
+                "face_nose_long",
+                "face_nose_narrow",
+                "face_nose_tip_up",
+                "face_nose_wide"
+              ]
+            }
+          ],
+          "extras": {}
+        },
+        "gear": {
+          "slot": "gear",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/gear.dc0dc6125017.glb",
+            "bytes": 8408,
+            "sha256": "dc0dc6125017af1cc7770a1855bef0ac55a6aaf9bd5cb453debf082ed98e1782"
+          },
+          "triangles": 640,
+          "vertices": 458,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "gear",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-afro": {
+          "slot": "hair",
+          "variant": "afro",
+          "license": "CC0-1.0 (fitted MakeHuman afro01 hair cards)",
+          "glb": {
+            "file": "lod1/hair-afro.eceeb6861628.glb",
+            "bytes": 71216,
+            "sha256": "eceeb68616287c2e1f01abb7ab6f940e11d999f947067c66985c601ebf3093e4"
+          },
+          "triangles": 2192,
+          "vertices": 2276,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-afro",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {
+            "source": "mhsys/hair/afro01",
+            "alphaTest": 0.35
+          }
+        },
+        "hair-braids": {
+          "slot": "hair",
+          "variant": "braids",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/hair-braids.5c1fce461e18.glb",
+            "bytes": 99224,
+            "sha256": "5c1fce461e18073a8d2b74c6c8dfcddc1be8fb81d5dc0f12b8807ace2f197f28"
+          },
+          "triangles": 15840,
+          "vertices": 7986,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-braids",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-bun": {
+          "slot": "hair",
+          "variant": "bun",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/hair-bun.fb03380c16d9.glb",
+            "bytes": 33016,
+            "sha256": "fb03380c16d901741adb1ac892702eca0037b7a345ec982f102fceaad35ff69f"
+          },
+          "triangles": 4504,
+          "vertices": 2344,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-bun",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-buzz": {
+          "slot": "hair",
+          "variant": "buzz",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/hair-buzz.b1d906010e71.glb",
+            "bytes": 8836,
+            "sha256": "b1d906010e71cf8b32da1c1691336871c69c70044b9e94eaa9ccba9ebfc108cc"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-buzz",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-fade": {
+          "slot": "hair",
+          "variant": "fade",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/hair-fade.d1e6727cfdca.glb",
+            "bytes": 8836,
+            "sha256": "d1e6727cfdca11d2ce50cfa4586a15004933f412de4d0d08d4892609a876aa9a"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-fade",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-hightop": {
+          "slot": "hair",
+          "variant": "hightop",
+          "license": "CC0-1.0 (fitted MakeHuman afro01 hair cards)",
+          "glb": {
+            "file": "lod1/hair-hightop.e979ce800b7e.glb",
+            "bytes": 71192,
+            "sha256": "e979ce800b7e11d370449dcb70009b9d33b683e79b430622ce8076e9a133a5ce"
+          },
+          "triangles": 2192,
+          "vertices": 2276,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-hightop",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {
+            "source": "mhsys/hair/afro01",
+            "alphaTest": 0.35
+          }
+        },
+        "hair-locs": {
+          "slot": "hair",
+          "variant": "locs",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/hair-locs.2ed15d062907.glb",
+            "bytes": 83184,
+            "sha256": "2ed15d0629070255a29beedc61f6cbd4bd810eb02a28587880d3a8ad770c446f"
+          },
+          "triangles": 13440,
+          "vertices": 6840,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-locs",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-twists": {
+          "slot": "hair",
+          "variant": "twists",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/hair-twists.fcaa78a7fadf.glb",
+            "bytes": 117788,
+            "sha256": "fcaa78a7fadf229e019658ceb994e6466fbcc790f4eaf610147ea5f6629f73c4"
+          },
+          "triangles": 19264,
+          "vertices": 9804,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-twists",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-waves": {
+          "slot": "hair",
+          "variant": "waves",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/hair-waves.dec3418f4079.glb",
+            "bytes": 8864,
+            "sha256": "dec3418f407902f2bbb19d4ea625d2074d8f6c89bc228d3766619cf7b4bd483a"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-waves",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "head": {
+          "slot": "head",
+          "variant": null,
+          "license": "CC0-1.0 (derived from MakeHuman CC0 assets)",
+          "glb": {
+            "file": "lod1/head.56eec50cecd9.glb",
+            "bytes": 236932,
+            "sha256": "56eec50cecd99b0027f2b7b512b1c67b028ce71b9928e59e67c4a7cda2d4fdcb"
+          },
+          "triangles": 8604,
+          "vertices": 4519,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "head",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular",
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out",
+                "head_scale"
+              ]
+            }
+          ],
+          "extras": {
+            "headPivot": [
+              0,
+              0.8750000000000001,
+              0
+            ],
+            "footCutY": 0.05
+          }
+        },
+        "shoes": {
+          "slot": "shoes",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod1/shoes.4b36de03b5f2.glb",
+            "bytes": 27592,
+            "sha256": "4b36de03b5f2aba59ba6f294b2b0d43385a8a574835263535886b0b5970e8763"
+          },
+          "triangles": 3396,
+          "vertices": 2022,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "shoes",
+              "morphs": []
+            }
+          ],
+          "extras": {
+            "soleY": -0.039,
+            "footwear": "original mid-top, layered sole, heel counter, tongue, laces and unbranded side panels"
+          }
+        },
+        "uniform": {
+          "slot": "uniform",
+          "variant": null,
+          "license": "CC0-1.0 (original tailored basketball uniform)",
+          "glb": {
+            "file": "lod1/uniform.31ec1305d0e4.glb",
+            "bytes": 114200,
+            "sha256": "31ec1305d0e46569fe976c934c849663eec3984ae656619e848dd6dd224b4fc6"
+          },
+          "triangles": 9532,
+          "vertices": 5096,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "surface",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular"
+              ]
+            }
+          ],
+          "extras": {
+            "printUV": "legacy-world-height-wrap",
+            "binding": "raised neck, armhole, waist and cuff piping",
+            "wrinkles": "authored rest drape, not runtime cloth simulation"
+          }
+        }
+      },
+      "textures": {
+        "body-normal": {
+          "file": "shared/body-normal-1024.081c54c3afb8.webp",
+          "bytes": 433588,
+          "sha256": "081c54c3afb88270a59502db6770c045dfa7a965b8f25ca2d866c08f0d7af77d",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "body-orm": {
+          "file": "shared/body-orm-1024.441e9f41802c.webp",
+          "bytes": 243998,
+          "sha256": "441e9f41802c4c148e4faa9f4e12adf2fdeb7a09a07ad5f0e7a9d8392a18a8b4",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "body-detail": {
+          "file": "shared/body-detail-1024.1f9883c4642b.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "head-normal": {
+          "file": "shared/head-normal-1024.4950269bd43c.webp",
+          "bytes": 507968,
+          "sha256": "4950269bd43c7b6843a5290b74344ff5131569d6c50992e00282b79a7b5d8ecc",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "head-orm": {
+          "file": "shared/head-orm-1024.10fde11e3c10.webp",
+          "bytes": 275696,
+          "sha256": "10fde11e3c10fcf56266bf89c82bcd7f6d40031494c14d571cf4a07a38e73315",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "head-detail": {
+          "file": "shared/head-detail-1024.710966c3ed8e.webp",
+          "bytes": 5550,
+          "sha256": "710966c3ed8e1461438febe62cc84c57806a83461355aea5063fe2f5b76d289b",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "eye": {
+          "file": "shared/eye.b3d0899a567c.webp",
+          "bytes": 39380,
+          "sha256": "b3d0899a567cddcaed6b731472fd7e2f58934ca8474dc1c4d675af1a5c8a87d1",
+          "width": 256,
+          "height": 256,
+          "srgb": true,
+          "gpuBytes": 349526
+        },
+        "brow": {
+          "file": "shared/brow.59a72eecf366.webp",
+          "bytes": 18074,
+          "sha256": "59a72eecf3665cebaf12262dcd0268bfeb15d38bbdae36a0e1cc02a0b1159cb1",
+          "width": 256,
+          "height": 256,
+          "srgb": true,
+          "gpuBytes": 349526
+        },
+        "lash": {
+          "file": "shared/lash.7c781de1c2d9.webp",
+          "bytes": 23000,
+          "sha256": "7c781de1c2d9ecb2e35162fad9633625e79984738e6c0e8b642ea71a1c5fd031",
+          "width": 256,
+          "height": 256,
+          "srgb": true,
+          "gpuBytes": 349526
+        },
+        "hair-afro": {
+          "file": "shared/hair-afro.79f6e887007c.webp",
+          "bytes": 80238,
+          "sha256": "79f6e887007cb973695e97cbebf9f28c6a2e1b727113f5a1b4140640ad4672bb",
+          "width": 256,
+          "height": 256,
+          "srgb": true,
+          "gpuBytes": 349526
+        }
+      }
+    },
+    "lod0": {
+      "bytes": 5165076,
+      "assets": {
+        "body": {
+          "slot": "body",
+          "variant": null,
+          "license": "CC0-1.0 (derived from MakeHuman CC0 assets)",
+          "glb": {
+            "file": "lod0/body.940660d5a8d7.glb",
+            "bytes": 175284,
+            "sha256": "940660d5a8d71c59e237cd48509c5ba5fb8b3fb958fc09ebf88446b6b1dda0f4"
+          },
+          "triangles": 10762,
+          "vertices": 6128,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "body",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular"
+              ]
+            }
+          ],
+          "extras": {
+            "headPivot": [
+              0,
+              0.8750000000000001,
+              0
+            ],
+            "footCutY": 0.05
+          }
+        },
+        "eyes": {
+          "slot": "eyes",
+          "variant": null,
+          "license": "CC0-1.0 (fitted MakeHuman system asset)",
+          "glb": {
+            "file": "lod0/eyes.7e94563bbaee.glb",
+            "bytes": 37012,
+            "sha256": "7e94563bbaee3bcd5fc3299d1f7800c91468d3eb8737383be6ef92f6bb965c67"
+          },
+          "triangles": 2040,
+          "vertices": 1076,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "eyes",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {}
+        },
+        "faceCards": {
+          "slot": "faceCards",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/faceCards.197ae4765ef5.glb",
+            "bytes": 25532,
+            "sha256": "197ae4765ef588b1e0604cd3115b18a75e83a2f0021dbb5f054889e84633c624"
+          },
+          "triangles": 560,
+          "vertices": 376,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "faceCards",
+              "morphs": [
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_chin_back",
+                "face_chin_forward",
+                "face_chin_long",
+                "face_chin_wide",
+                "face_ears_big",
+                "face_ears_out",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_set_wide",
+                "face_eyes_tilt",
+                "face_head_long",
+                "face_head_narrow",
+                "face_head_short",
+                "face_head_wide",
+                "face_jaw_narrow",
+                "face_jaw_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_mouth_wide",
+                "face_nose_flare",
+                "face_nose_hump",
+                "face_nose_long",
+                "face_nose_narrow",
+                "face_nose_tip_up",
+                "face_nose_wide"
+              ]
+            }
+          ],
+          "extras": {}
+        },
+        "gear": {
+          "slot": "gear",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/gear.dc0dc6125017.glb",
+            "bytes": 8408,
+            "sha256": "dc0dc6125017af1cc7770a1855bef0ac55a6aaf9bd5cb453debf082ed98e1782"
+          },
+          "triangles": 640,
+          "vertices": 458,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "gear",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-afro": {
+          "slot": "hair",
+          "variant": "afro",
+          "license": "CC0-1.0 (fitted MakeHuman afro01 hair cards)",
+          "glb": {
+            "file": "lod0/hair-afro.eceeb6861628.glb",
+            "bytes": 71216,
+            "sha256": "eceeb68616287c2e1f01abb7ab6f940e11d999f947067c66985c601ebf3093e4"
+          },
+          "triangles": 2192,
+          "vertices": 2276,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-afro",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {
+            "source": "mhsys/hair/afro01",
+            "alphaTest": 0.35
+          }
+        },
+        "hair-braids": {
+          "slot": "hair",
+          "variant": "braids",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/hair-braids.5c1fce461e18.glb",
+            "bytes": 99224,
+            "sha256": "5c1fce461e18073a8d2b74c6c8dfcddc1be8fb81d5dc0f12b8807ace2f197f28"
+          },
+          "triangles": 15840,
+          "vertices": 7986,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-braids",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-bun": {
+          "slot": "hair",
+          "variant": "bun",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/hair-bun.fb03380c16d9.glb",
+            "bytes": 33016,
+            "sha256": "fb03380c16d901741adb1ac892702eca0037b7a345ec982f102fceaad35ff69f"
+          },
+          "triangles": 4504,
+          "vertices": 2344,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-bun",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-buzz": {
+          "slot": "hair",
+          "variant": "buzz",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/hair-buzz.b1d906010e71.glb",
+            "bytes": 8836,
+            "sha256": "b1d906010e71cf8b32da1c1691336871c69c70044b9e94eaa9ccba9ebfc108cc"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-buzz",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-fade": {
+          "slot": "hair",
+          "variant": "fade",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/hair-fade.d1e6727cfdca.glb",
+            "bytes": 8836,
+            "sha256": "d1e6727cfdca11d2ce50cfa4586a15004933f412de4d0d08d4892609a876aa9a"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-fade",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-hightop": {
+          "slot": "hair",
+          "variant": "hightop",
+          "license": "CC0-1.0 (fitted MakeHuman afro01 hair cards)",
+          "glb": {
+            "file": "lod0/hair-hightop.e979ce800b7e.glb",
+            "bytes": 71192,
+            "sha256": "e979ce800b7e11d370449dcb70009b9d33b683e79b430622ce8076e9a133a5ce"
+          },
+          "triangles": 2192,
+          "vertices": 2276,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-hightop",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {
+            "source": "mhsys/hair/afro01",
+            "alphaTest": 0.35
+          }
+        },
+        "hair-locs": {
+          "slot": "hair",
+          "variant": "locs",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/hair-locs.2ed15d062907.glb",
+            "bytes": 83184,
+            "sha256": "2ed15d0629070255a29beedc61f6cbd4bd810eb02a28587880d3a8ad770c446f"
+          },
+          "triangles": 13440,
+          "vertices": 6840,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-locs",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-twists": {
+          "slot": "hair",
+          "variant": "twists",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/hair-twists.fcaa78a7fadf.glb",
+            "bytes": 117788,
+            "sha256": "fcaa78a7fadf229e019658ceb994e6466fbcc790f4eaf610147ea5f6629f73c4"
+          },
+          "triangles": 19264,
+          "vertices": 9804,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-twists",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-waves": {
+          "slot": "hair",
+          "variant": "waves",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/hair-waves.dec3418f4079.glb",
+            "bytes": 8864,
+            "sha256": "dec3418f407902f2bbb19d4ea625d2074d8f6c89bc228d3766619cf7b4bd483a"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-waves",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "head": {
+          "slot": "head",
+          "variant": null,
+          "license": "CC0-1.0 (derived from MakeHuman CC0 assets)",
+          "glb": {
+            "file": "lod0/head.56eec50cecd9.glb",
+            "bytes": 236932,
+            "sha256": "56eec50cecd99b0027f2b7b512b1c67b028ce71b9928e59e67c4a7cda2d4fdcb"
+          },
+          "triangles": 8604,
+          "vertices": 4519,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "head",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular",
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out",
+                "head_scale"
+              ]
+            }
+          ],
+          "extras": {
+            "headPivot": [
+              0,
+              0.8750000000000001,
+              0
+            ],
+            "footCutY": 0.05
+          }
+        },
+        "shoes": {
+          "slot": "shoes",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "lod0/shoes.4b36de03b5f2.glb",
+            "bytes": 27592,
+            "sha256": "4b36de03b5f2aba59ba6f294b2b0d43385a8a574835263535886b0b5970e8763"
+          },
+          "triangles": 3396,
+          "vertices": 2022,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "shoes",
+              "morphs": []
+            }
+          ],
+          "extras": {
+            "soleY": -0.039,
+            "footwear": "original mid-top, layered sole, heel counter, tongue, laces and unbranded side panels"
+          }
+        },
+        "uniform": {
+          "slot": "uniform",
+          "variant": null,
+          "license": "CC0-1.0 (original tailored basketball uniform)",
+          "glb": {
+            "file": "lod0/uniform.31ec1305d0e4.glb",
+            "bytes": 114200,
+            "sha256": "31ec1305d0e46569fe976c934c849663eec3984ae656619e848dd6dd224b4fc6"
+          },
+          "triangles": 9532,
+          "vertices": 5096,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "surface",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular"
+              ]
+            }
+          ],
+          "extras": {
+            "printUV": "legacy-world-height-wrap",
+            "binding": "raised neck, armhole, waist and cuff piping",
+            "wrinkles": "authored rest drape, not runtime cloth simulation"
+          }
+        }
+      },
+      "textures": {
+        "body-normal": {
+          "file": "shared/body-normal-2048.388ef3b04aed.webp",
+          "bytes": 1340348,
+          "sha256": "388ef3b04aed36e3f64b312411008141d47ede1c0093f242502382b84b231954",
+          "width": 2048,
+          "height": 2048,
+          "srgb": false,
+          "gpuBytes": 22369622
+        },
+        "body-orm": {
+          "file": "shared/body-orm-1024.6dda2a9f4be6.webp",
+          "bytes": 294092,
+          "sha256": "6dda2a9f4be62e4cab4b5889dce53d08f4e600b1ee41e792a94236413517be28",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "body-detail": {
+          "file": "shared/body-detail-1024.1f9883c4642b.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "head-normal": {
+          "file": "shared/head-normal-2048.328f803101d2.webp",
+          "bytes": 1522918,
+          "sha256": "328f803101d2cf76a5d95938bfd5be1097e70c040ad37bde1d98044fcac04451",
+          "width": 2048,
+          "height": 2048,
+          "srgb": false,
+          "gpuBytes": 22369622
+        },
+        "head-orm": {
+          "file": "shared/head-orm-1024.b1e5dc7739f1.webp",
+          "bytes": 339418,
+          "sha256": "b1e5dc7739f19fe70103ac5c895418f84478feada8e1a2c01d7d0585fd72f253",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "head-detail": {
+          "file": "shared/head-detail-2048.df7809419656.webp",
+          "bytes": 20204,
+          "sha256": "df78094196567d092d561e3eacbacfc78da15d067547cd7ba8dda562a3238bff",
+          "width": 2048,
+          "height": 2048,
+          "srgb": false,
+          "gpuBytes": 22369622
+        },
+        "eye": {
+          "file": "shared/eye.0ec54bc929b2.webp",
+          "bytes": 135912,
+          "sha256": "0ec54bc929b2ded0f1b7968437d51d5b8a522a812f14d5988dcc28ff9edc8bdf",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        },
+        "brow": {
+          "file": "shared/brow.83229a59a805.webp",
+          "bytes": 60768,
+          "sha256": "83229a59a8059205a532d48133fe80daec42e77b3ab626f0edb7418395b2946e",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        },
+        "lash": {
+          "file": "shared/lash.3440ecfd39ec.webp",
+          "bytes": 26294,
+          "sha256": "3440ecfd39ecda7776b1209568507e8d6abb428f44348f437b47de0171096a02",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        },
+        "hair-afro": {
+          "file": "shared/hair-afro.ca7e6626bf93.webp",
+          "bytes": 297922,
+          "sha256": "ca7e6626bf93083781b9970679beb965ba94bade965439c3bc0d497dd6cbe99c",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        }
+      }
+    },
+    "hero": {
+      "bytes": 6178270,
+      "assets": {
+        "body": {
+          "slot": "body",
+          "variant": null,
+          "license": "CC0-1.0 (derived from MakeHuman CC0 assets)",
+          "glb": {
+            "file": "hero/body.07ad55f25f3f.glb",
+            "bytes": 553124,
+            "sha256": "07ad55f25f3fe2c2353b20ef6fac67786a0838101590e726af60a5d8e19a7734"
+          },
+          "triangles": 42746,
+          "vertices": 22861,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "body",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular"
+              ]
+            }
+          ],
+          "extras": {
+            "headPivot": [
+              0,
+              0.8750000000000001,
+              0
+            ],
+            "footCutY": 0.05
+          }
+        },
+        "eyes": {
+          "slot": "eyes",
+          "variant": null,
+          "license": "CC0-1.0 (fitted MakeHuman system asset)",
+          "glb": {
+            "file": "hero/eyes.7e94563bbaee.glb",
+            "bytes": 37012,
+            "sha256": "7e94563bbaee3bcd5fc3299d1f7800c91468d3eb8737383be6ef92f6bb965c67"
+          },
+          "triangles": 2040,
+          "vertices": 1076,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "eyes",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {}
+        },
+        "faceCards": {
+          "slot": "faceCards",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/faceCards.197ae4765ef5.glb",
+            "bytes": 25532,
+            "sha256": "197ae4765ef588b1e0604cd3115b18a75e83a2f0021dbb5f054889e84633c624"
+          },
+          "triangles": 560,
+          "vertices": 376,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "faceCards",
+              "morphs": [
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_chin_back",
+                "face_chin_forward",
+                "face_chin_long",
+                "face_chin_wide",
+                "face_ears_big",
+                "face_ears_out",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_set_wide",
+                "face_eyes_tilt",
+                "face_head_long",
+                "face_head_narrow",
+                "face_head_short",
+                "face_head_wide",
+                "face_jaw_narrow",
+                "face_jaw_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_mouth_wide",
+                "face_nose_flare",
+                "face_nose_hump",
+                "face_nose_long",
+                "face_nose_narrow",
+                "face_nose_tip_up",
+                "face_nose_wide"
+              ]
+            }
+          ],
+          "extras": {}
+        },
+        "gear": {
+          "slot": "gear",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/gear.dc0dc6125017.glb",
+            "bytes": 8408,
+            "sha256": "dc0dc6125017af1cc7770a1855bef0ac55a6aaf9bd5cb453debf082ed98e1782"
+          },
+          "triangles": 640,
+          "vertices": 458,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "gear",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-afro": {
+          "slot": "hair",
+          "variant": "afro",
+          "license": "CC0-1.0 (fitted MakeHuman afro01 hair cards)",
+          "glb": {
+            "file": "hero/hair-afro.eceeb6861628.glb",
+            "bytes": 71216,
+            "sha256": "eceeb68616287c2e1f01abb7ab6f940e11d999f947067c66985c601ebf3093e4"
+          },
+          "triangles": 2192,
+          "vertices": 2276,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-afro",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {
+            "source": "mhsys/hair/afro01",
+            "alphaTest": 0.35
+          }
+        },
+        "hair-braids": {
+          "slot": "hair",
+          "variant": "braids",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/hair-braids.a84510759632.glb",
+            "bytes": 131352,
+            "sha256": "a84510759632086d093bce65a057080a5626d8f65ccb4d3b86be4cdabcf62992"
+          },
+          "triangles": 21384,
+          "vertices": 10758,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-braids",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-bun": {
+          "slot": "hair",
+          "variant": "bun",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/hair-bun.fb03380c16d9.glb",
+            "bytes": 33016,
+            "sha256": "fb03380c16d901741adb1ac892702eca0037b7a345ec982f102fceaad35ff69f"
+          },
+          "triangles": 4504,
+          "vertices": 2344,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-bun",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-buzz": {
+          "slot": "hair",
+          "variant": "buzz",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/hair-buzz.b1d906010e71.glb",
+            "bytes": 8836,
+            "sha256": "b1d906010e71cf8b32da1c1691336871c69c70044b9e94eaa9ccba9ebfc108cc"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-buzz",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-fade": {
+          "slot": "hair",
+          "variant": "fade",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/hair-fade.d1e6727cfdca.glb",
+            "bytes": 8836,
+            "sha256": "d1e6727cfdca11d2ce50cfa4586a15004933f412de4d0d08d4892609a876aa9a"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-fade",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-hightop": {
+          "slot": "hair",
+          "variant": "hightop",
+          "license": "CC0-1.0 (fitted MakeHuman afro01 hair cards)",
+          "glb": {
+            "file": "hero/hair-hightop.e979ce800b7e.glb",
+            "bytes": 71192,
+            "sha256": "e979ce800b7e11d370449dcb70009b9d33b683e79b430622ce8076e9a133a5ce"
+          },
+          "triangles": 2192,
+          "vertices": 2276,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-hightop",
+              "morphs": [
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out"
+              ]
+            }
+          ],
+          "extras": {
+            "source": "mhsys/hair/afro01",
+            "alphaTest": 0.35
+          }
+        },
+        "hair-locs": {
+          "slot": "hair",
+          "variant": "locs",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/hair-locs.905f1f2b46db.glb",
+            "bytes": 115568,
+            "sha256": "905f1f2b46db884a780372cd677aa16a311693332e3e156c8fe783d171779505"
+          },
+          "triangles": 19200,
+          "vertices": 9720,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-locs",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-twists": {
+          "slot": "hair",
+          "variant": "twists",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/hair-twists.20ddeea50ff3.glb",
+            "bytes": 164100,
+            "sha256": "20ddeea50ff3b204ab8d72006fe601c21ede37116372bad2019bfb32f0e34e09"
+          },
+          "triangles": 27520,
+          "vertices": 13932,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-twists",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "hair-waves": {
+          "slot": "hair",
+          "variant": "waves",
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/hair-waves.dec3418f4079.glb",
+            "bytes": 8864,
+            "sha256": "dec3418f407902f2bbb19d4ea625d2074d8f6c89bc228d3766619cf7b4bd483a"
+          },
+          "triangles": 616,
+          "vertices": 364,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "hair-waves",
+              "morphs": []
+            }
+          ],
+          "extras": {}
+        },
+        "head": {
+          "slot": "head",
+          "variant": null,
+          "license": "CC0-1.0 (derived from MakeHuman CC0 assets)",
+          "glb": {
+            "file": "hero/head.aa8c092b25b0.glb",
+            "bytes": 701188,
+            "sha256": "aa8c092b25b07d13b9b4621a61477d39f768653b22d309ab5a06b8da8386438d"
+          },
+          "triangles": 34416,
+          "vertices": 17640,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "head",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular",
+                "face_head_wide",
+                "face_head_narrow",
+                "face_head_long",
+                "face_head_short",
+                "face_jaw_wide",
+                "face_jaw_narrow",
+                "face_chin_wide",
+                "face_chin_forward",
+                "face_chin_back",
+                "face_chin_long",
+                "face_cheekbones",
+                "face_cheeks_full",
+                "face_cheeks_hollow",
+                "face_nose_wide",
+                "face_nose_narrow",
+                "face_nose_long",
+                "face_nose_hump",
+                "face_nose_flare",
+                "face_nose_tip_up",
+                "face_mouth_wide",
+                "face_lips_full",
+                "face_lips_thin",
+                "face_eyes_big",
+                "face_eyes_narrow",
+                "face_eyes_tilt",
+                "face_eyes_set_wide",
+                "face_brow_low",
+                "face_brow_ridge",
+                "face_ears_big",
+                "face_ears_out",
+                "head_scale"
+              ]
+            }
+          ],
+          "extras": {
+            "headPivot": [
+              0,
+              0.8750000000000001,
+              0
+            ],
+            "footCutY": 0.05
+          }
+        },
+        "shoes": {
+          "slot": "shoes",
+          "variant": null,
+          "license": "CC0-1.0 (original Hoop Legacy toolchain geometry)",
+          "glb": {
+            "file": "hero/shoes.e0e7ca49f4d5.glb",
+            "bytes": 38052,
+            "sha256": "e0e7ca49f4d55a31ef2ffdfbbc2f41b1c2a82734535d1e82232503bc8f00ac98"
+          },
+          "triangles": 4916,
+          "vertices": 2918,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "shoes",
+              "morphs": []
+            }
+          ],
+          "extras": {
+            "soleY": -0.039,
+            "footwear": "original mid-top, layered sole, heel counter, tongue, laces and unbranded side panels"
+          }
+        },
+        "uniform": {
+          "slot": "uniform",
+          "variant": null,
+          "license": "CC0-1.0 (original tailored basketball uniform)",
+          "glb": {
+            "file": "hero/uniform.1b763c792a6e.glb",
+            "bytes": 219116,
+            "sha256": "1b763c792a6e4e1fb45c1afb32a904c87c6eedd39bd8932f14cdc06e17995215"
+          },
+          "triangles": 20860,
+          "vertices": 10900,
+          "drawCalls": 1,
+          "meshes": [
+            {
+              "name": "surface",
+              "morphs": [
+                "build_lean",
+                "build_heavy",
+                "build_muscular"
+              ]
+            }
+          ],
+          "extras": {
+            "printUV": "legacy-world-height-wrap",
+            "binding": "raised neck, armhole, waist and cuff piping",
+            "wrinkles": "authored rest drape, not runtime cloth simulation"
+          }
+        }
+      },
+      "textures": {
+        "body-normal": {
+          "file": "shared/body-normal-2048.4f3c8ebb9f9d.webp",
+          "bytes": 1358496,
+          "sha256": "4f3c8ebb9f9d8160ba5cae4530297137d6780af11d77f7fd053f6f9c7b10947c",
+          "width": 2048,
+          "height": 2048,
+          "srgb": false,
+          "gpuBytes": 22369622
+        },
+        "body-orm": {
+          "file": "shared/body-orm-1024.6dda2a9f4be6.webp",
+          "bytes": 294092,
+          "sha256": "6dda2a9f4be62e4cab4b5889dce53d08f4e600b1ee41e792a94236413517be28",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "body-detail": {
+          "file": "shared/body-detail-1024.1f9883c4642b.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "head-normal": {
+          "file": "shared/head-normal-2048.f5e1960f114e.webp",
+          "bytes": 1449668,
+          "sha256": "f5e1960f114e22489f542588c6a75e081f63ad63fe93a1bcec2ea0e5e50a56a0",
+          "width": 2048,
+          "height": 2048,
+          "srgb": false,
+          "gpuBytes": 22369622
+        },
+        "head-orm": {
+          "file": "shared/head-orm-1024.b1e5dc7739f1.webp",
+          "bytes": 339418,
+          "sha256": "b1e5dc7739f19fe70103ac5c895418f84478feada8e1a2c01d7d0585fd72f253",
+          "width": 1024,
+          "height": 1024,
+          "srgb": false,
+          "gpuBytes": 5592406
+        },
+        "head-detail": {
+          "file": "shared/head-detail-2048.df7809419656.webp",
+          "bytes": 20204,
+          "sha256": "df78094196567d092d561e3eacbacfc78da15d067547cd7ba8dda562a3238bff",
+          "width": 2048,
+          "height": 2048,
+          "srgb": false,
+          "gpuBytes": 22369622
+        },
+        "eye": {
+          "file": "shared/eye.0ec54bc929b2.webp",
+          "bytes": 135912,
+          "sha256": "0ec54bc929b2ded0f1b7968437d51d5b8a522a812f14d5988dcc28ff9edc8bdf",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        },
+        "brow": {
+          "file": "shared/brow.83229a59a805.webp",
+          "bytes": 60768,
+          "sha256": "83229a59a8059205a532d48133fe80daec42e77b3ab626f0edb7418395b2946e",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        },
+        "lash": {
+          "file": "shared/lash.3440ecfd39ec.webp",
+          "bytes": 26294,
+          "sha256": "3440ecfd39ecda7776b1209568507e8d6abb428f44348f437b47de0171096a02",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        },
+        "hair-afro": {
+          "file": "shared/hair-afro.ca7e6626bf93.webp",
+          "bytes": 297922,
+          "sha256": "ca7e6626bf93083781b9970679beb965ba94bade965439c3bc0d497dd6cbe99c",
+          "width": 512,
+          "height": 512,
+          "srgb": true,
+          "gpuBytes": 1398102
+        }
+      }
+    }
+  },
+  "license": {
+    "file": "LICENSES.txt",
+    "provenance": "PROVENANCE.json"
+  },
+  "technical": {
+    "units": "normalized height",
+    "up": "Y",
+    "forward": "+Z",
+    "soleY": -0.039,
+    "textures": "lossless WebP; sRGB only for colour maps"
+  }
+}
