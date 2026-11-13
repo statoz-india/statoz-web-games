@@ -159,7 +159,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("longbow"),
     href: "/game/longbow",
-    comingSoon: true,
   },
   {
     id: "holdover",

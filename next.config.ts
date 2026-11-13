@@ -38,6 +38,10 @@ const nextConfig: NextConfig = {
         source: "/games/hoop-legacy/assets/:path*",
         headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
       },
+      {
+        source: "/games/longbow/game-runtime/:path*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+      },
     ];
   },
 };
