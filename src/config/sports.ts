@@ -82,7 +82,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "70% 60%",
     video: gameplay("football-chess"),
     href: "/game/football-chess",
-    comingSoon: true,
   },
   {
     id: "rally-dash",
@@ -103,7 +102,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("pitch-rush"),
     href: "/game/pitch-rush",
-    comingSoon: true,
   },
   {
     id: "yorker",
