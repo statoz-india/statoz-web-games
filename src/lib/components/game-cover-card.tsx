@@ -19,6 +19,7 @@ type GameCoverCardProps = {
   recent?: boolean;
   /** Not playable yet: a "Coming soon" tag replaces the PLAY chip. */
   comingSoon?: boolean;
+  onClick?: () => void;
 };
 
 /**
@@ -33,10 +34,12 @@ export function GameCoverCard({
   href,
   recent = false,
   comingSoon = false,
+  onClick,
 }: GameCoverCardProps) {
   const shared = {
     "data-game-cover": id,
     "aria-label": comingSoon ? `${title}, coming soon` : `Play ${title}`,
+    onClick,
     className: `block w-full min-w-0 text-left ${styles.card}`,
   };
   const body = (

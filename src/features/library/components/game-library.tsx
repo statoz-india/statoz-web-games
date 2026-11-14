@@ -1,8 +1,10 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import { trackGameSelect } from "@/src/lib/analytics/game-select";
+import { track } from "@/src/lib/analytics/track";
 import { FilterChips } from "@/src/lib/components/filter-chips";
 import { GameCoverCard } from "@/src/lib/components/game-cover-card";
 import { SearchField } from "@/src/lib/components/search-field";
@@ -18,6 +20,8 @@ import {
 import styles from "./css/game-library.module.css";
 
 const ALL = "all";
+// A search is reported once typing has paused this long.
+const SEARCH_SETTLE_MS = 800;
 const CHIP_OPTIONS = [
   { id: ALL, label: "All Games" },
   ...LIBRARY_SPORTS.map(({ id, label }) => ({ id, label })),
@@ -56,6 +60,8 @@ export function GameLibrary({ recentIds = [] }: GameLibraryProps) {
   const live = entries.filter(({ game }) => !game.comingSoon);
   const comingSoon = entries.filter(({ game }) => game.comingSoon);
   const recent = new Set(recentIds);
+  // A ?q= the page opened with is not a search the visitor made here.
+  const lastSearch = useRef(search.trim());
 
   const grid = (list: readonly LibraryEntry[]) => (
     <ul className={`grid list-none ${styles.grid}`}>
@@ -69,6 +75,9 @@ export function GameLibrary({ recentIds = [] }: GameLibraryProps) {
             href={game.href}
             comingSoon={game.comingSoon}
             recent={recent.has(game.id)}
+            onClick={() =>
+              trackGameSelect(game, "library", { recent: recent.has(game.id) })
+            }
           />
         </li>
       ))}
@@ -82,15 +91,39 @@ export function GameLibrary({ recentIds = [] }: GameLibraryProps) {
     setSearch(value);
     writeParam("q", value);
   };
-  const changeSport = (id: string) => {
+  const applySport = (id: string) => {
     const next = id === ALL ? null : id;
     setSport(next);
     writeParam("listSport", next ?? ALL);
+    return next;
   };
+  const changeSport = (id: string) => {
+    const next = applySport(id);
+    track("web_game_browse_filter", {
+      sport: id,
+      location: "library",
+      results_count: listLibraryGames(next, search).length,
+    });
+  };
+  // One event for the reset, not a filter change as well.
   const clearAll = () => {
     changeSearch("");
-    changeSport(ALL);
+    applySport(ALL);
+    track("web_game_library_clear_filters");
   };
+
+  // The search text is never sent: it can hold personal data. Only the count is.
+  useEffect(() => {
+    const term = search.trim();
+    if (!term || term === lastSearch.current) return;
+    const timer = window.setTimeout(() => {
+      lastSearch.current = term;
+      const count = listLibraryGames(sport, term).length;
+      track("search", { results_count: count });
+      if (count === 0) track("web_game_search_no_results", { sport: sport ?? ALL });
+    }, SEARCH_SETTLE_MS);
+    return () => window.clearTimeout(timer);
+  }, [search, sport]);
 
   // Escape leaves the library; the search field handles its own Escape first.
   useEffect(() => {
@@ -101,6 +134,7 @@ export function GameLibrary({ recentIds = [] }: GameLibraryProps) {
         !document.querySelector("dialog:modal")
       ) {
         event.preventDefault();
+        track("web_game_library_close", { method: "escape" });
         router.push("/");
       }
     };

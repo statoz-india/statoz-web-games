@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { resultParams } from "@/src/lib/analytics/game-results";
 import { track } from "@/src/lib/analytics/track";
 import styles from "./css/game-frame.module.css";
@@ -39,7 +39,8 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
   // A bundle can ask to be reloaded with a new query string (mode, quality, rematch).
   const [reloads, setReloads] = useState(0);
   const query = useRef("");
-  const exit = useRef(onExit); exit.current = onExit;
+  // Always the latest onExit, without making the frame's effect reload the game when it changes.
+  const exit = useEffectEvent(onExit);
   // Analytics state the overlay buttons need from the current session.
   const endSession = useRef<(method: ExitMethod) => void>(() => {});
   const lastError = useRef("runtime");
@@ -99,7 +100,7 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
         session.results++;
         track("web_game_result", { game_id: analyticsId, ...resultParams(analyticsId, m.payload) });
       }
-      if (m.type === "exit") { endSession.current("in_game"); exit.current(); }
+      if (m.type === "exit") { endSession.current("in_game"); exit(); }
       if (m.type === "error") { fail("runtime"); setError("The game could not continue. Try loading it again."); }
       if (m.type === "save" && m.payload?.schemaVersion === 1 && JSON.stringify(m.payload).length < 600000) {
         // "<game-id>-save": progress hooks on the host listen for their own game.

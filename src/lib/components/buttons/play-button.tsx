@@ -7,14 +7,16 @@ import styles from "./css/play-button.module.css";
 
 type PlayButtonProps = Omit<
   ComponentProps<"button">,
-  "children" | "className" | "type"
+  "children" | "className" | "type" | "onClick"
 > & {
   /** Renders a link to this URL instead of a button. */
   href?: string;
+  /** Runs for the link and the button alike. */
+  onClick?: () => void;
 };
 
 /** Chamfered glass PLAY plate: ▶ icon, Orbitron label and slanted bars. */
-export function PlayButton({ href, ...props }: PlayButtonProps) {
+export function PlayButton({ href, onClick, ...props }: PlayButtonProps) {
   const className = `relative inline-flex items-center justify-center gap-3 ${styles["play-button"]}`;
   const body = (
     <>
@@ -35,11 +37,11 @@ export function PlayButton({ href, ...props }: PlayButtonProps) {
   );
 
   return href ? (
-    <Link href={href} aria-label={props["aria-label"]} className={className}>
+    <Link href={href} aria-label={props["aria-label"]} onClick={onClick} className={className}>
       {body}
     </Link>
   ) : (
-    <button type="button" {...props} className={className}>
+    <button type="button" {...props} onClick={onClick} className={className}>
       {body}
     </button>
   );

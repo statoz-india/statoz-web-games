@@ -70,6 +70,10 @@ const nextConfig: NextConfig = {
         source: "/games/holdover/game-runtime/:path*",
         headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
       },
+      {
+        source: "/games/pitch-rush/game-runtime/:path*",
+        headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+      },
       // A folder release: its module script, font, models and textures all load with CORS.
       {
         source: "/games/vibe-basketball/:path*",

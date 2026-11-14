@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { type PointerEvent, type RefObject, useRef } from "react";
 
+import { trackGameSelect } from "@/src/lib/analytics/game-select";
 import { ClockIcon } from "@/src/lib/icons/clock.icon";
 import { GridViewIcon } from "@/src/lib/icons/gridView.icon";
 import { ImagePlayButton } from "@/src/lib/components/buttons/image-play-button";
@@ -113,6 +114,7 @@ function CoverCard({ game, active, onActivate }: CoverCardProps) {
             DRAG_TOLERANCE
         )
           event.preventDefault();
+        else trackGameSelect(game, "cover_rail");
       }}
     >
       {body}

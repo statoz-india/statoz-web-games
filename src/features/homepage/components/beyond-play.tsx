@@ -1,6 +1,6 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { TrackedLink } from "@/src/lib/analytics/tracked-link";
 import { ChestIcon } from "@/src/lib/icons/chest.icon";
 import { CollectionsBookmarkIcon } from "@/src/lib/icons/collectionsBookmark.icon";
 import { GridViewIcon } from "@/src/lib/icons/gridView.icon";
@@ -15,9 +15,11 @@ type ShortcutProps = {
   title: string;
   text: string;
   href?: string;
+  /** GA `destination` for a shortcut with a link. */
+  destination?: string;
 };
 
-function Shortcut({ icon, title, text, href }: ShortcutProps) {
+function Shortcut({ icon, title, text, href, destination }: ShortcutProps) {
   const body = (
     <>
       <span className={`flex-none ${styles.icon}`}>{icon}</span>
@@ -34,9 +36,15 @@ function Shortcut({ icon, title, text, href }: ShortcutProps) {
   );
 
   return href ? (
-    <Link href={href} prefetch={false} className={SHORTCUT_CLASS}>
+    <TrackedLink
+      href={href}
+      prefetch={false}
+      event="web_game_shortcut_click"
+      params={destination ? { destination } : undefined}
+      className={SHORTCUT_CLASS}
+    >
       {body}
-    </Link>
+    </TrackedLink>
   ) : (
     <button type="button" className={SHORTCUT_CLASS}>
       {body}
@@ -62,12 +70,14 @@ export function BeyondPlay() {
             title="Game Library"
             text="Your entire arcade, one place."
             href="/library"
+            destination="library"
           />
           <Shortcut
             icon={<PodiumIcon />}
             title="Leaderboard"
             text="See where you stand."
             href="/leaderboard"
+            destination="leaderboard"
           />
           <Shortcut
             icon={<CollectionsBookmarkIcon />}
@@ -79,6 +89,7 @@ export function BeyondPlay() {
             title="StatOz Shop"
             text="Find your next signature look."
             href="/shop"
+            destination="shop"
           />
         </div>
       </section>

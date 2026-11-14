@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { NAV_DESTINATIONS, type QueryReader } from "@/src/config/navigation";
+import { track } from "@/src/lib/analytics/track";
 import { NAV_ICONS } from "@/src/lib/ui/navbar/nav-icons";
 
 import styles from "./css/navbar.module.css";
@@ -34,6 +35,9 @@ export function PrimaryNav({ pathname, query }: PrimaryNavProps) {
             aria-keyshortcuts={shortcut}
             aria-current={
               destination.match(pathname, query) ? "page" : undefined
+            }
+            onClick={() =>
+              track("web_game_nav_click", { destination: destination.id, method: "click" })
             }
             className={`relative isolate inline-flex min-h-touch min-w-touch items-center justify-center gap-2 text-sm font-semibold whitespace-nowrap no-underline ${styles.command}`}
           >
