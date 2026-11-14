@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import { NAV_DESTINATIONS } from "@/src/config/navigation";
+import { track } from "@/src/lib/analytics/track";
 
 const TYPING_TARGETS = "input, textarea, select, [contenteditable='true']";
 
@@ -38,6 +39,7 @@ export function useNavShortcuts() {
       if (!destination) return;
 
       event.preventDefault();
+      track("web_game_nav_click", { destination: destination.id, method: "keyboard" });
       router.push(destination.href);
     }
 

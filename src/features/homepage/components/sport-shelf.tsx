@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 
+import { trackGameSelect } from "@/src/lib/analytics/game-select";
 import { GameCoverCard } from "@/src/lib/components/game-cover-card";
 import { moveCoverFocus } from "@/src/utils/cover-focus";
 
@@ -56,6 +57,7 @@ export function SportShelf({ sport, games, onViewAll }: SportShelfProps) {
               sportLabel={sport.label}
               href={game.href}
               comingSoon={game.comingSoon}
+              onClick={() => trackGameSelect(game, "sport_shelf")}
             />
           </li>
         ))}

@@ -111,9 +111,9 @@ gtag("consent", "update", { analytics_storage: "granted" }); // or "denied"
 |---|---|
 | Production-only loading, consent defaults, consent banner | Done |
 | Page view tracking | Done (still in the old direct-GA4 format) |
-| Gameplay events in `GameFrame` (section 5 of `docs/ga-events.md`) | Done (still in the old direct-GA4 format) |
+| Gameplay events in `GameFrame` (section 5 of `docs/ga-events.md`), with result fields for all 7 games that send results | Done (still in the old direct-GA4 format) |
+| Home, navigation, library and coming-soon events (`docs/ga-events.md` sections 1–4) | Done (still in the old direct-GA4 format) |
 | **Switch to GTM only** (section 5 below) | **Not done.** Required before go-live. |
-| Home, navigation, library and coming-soon events (`docs/ga-events.md` sections 1–4) | Not done |
 
 ## 5. Switching the code to GTM only (required before go-live)
 
@@ -158,10 +158,10 @@ The exception on the second trigger is required. Without it, every page view wou
 | Shared | `params.game_id`, `params.sport`, `params.location`, `params.coming_soon` |
 | Navigation, home, library | `params.destination`, `params.method`, `params.content_type`, `params.recent`, `params.paused`, `params.results_count` |
 | Gameplay | `params.attempt`, `params.load_ms`, `params.play_seconds`, `params.reached_ready`, `params.reason` |
-| Game results | `params.mode`, `params.outcome`, `params.goals_for`, `params.goals_against`, `params.score`, `params.target`, `params.won`, `params.challenge_id`, `params.circuit`, `params.position`, `params.laps` |
+| Game results | `params.mode`, `params.outcome`, `params.goals_for`, `params.goals_against`, `params.score`, `params.target`, `params.won`, `params.challenge_id`, `params.circuit`, `params.position`, `params.laps`, `params.rival_score`, `params.stars`, `params.runs`, `params.wickets`, `params.balls`, `params.rival`, `params.court`, `params.cup`, `params.round`, `params.tied`, `params.difficulty`, `params.stage_id` |
 | Consent | `params.analytics` |
 
-That is 30 variables. When a new parameter is added to `docs/ga-events.md`, add its variable here and a row in the `GA4 – All web_game events` tag.
+That is 42 variables. When a new parameter is added to `docs/ga-events.md`, add its variable here and a row in the `GA4 – All web_game events` tag.
 
 ### 6.4 Container settings
 
@@ -180,7 +180,7 @@ Nothing reaches GA4 from GTM until a version is published.
 
 In **Admin → Custom definitions**, create one per parameter, all **Event** scope. GA only fills a definition from the day it is created, so create them before go-live.
 
-**Custom dimensions:** `game_id`, `sport`, `location`, `coming_soon`, `destination`, `method`, `content_type`, `recent`, `paused`, `reached_ready`, `reason`, `mode`, `outcome`, `won`, `challenge_id`, `circuit`, `analytics`
+**Custom dimensions:** `game_id`, `sport`, `location`, `coming_soon`, `destination`, `method`, `content_type`, `recent`, `paused`, `reached_ready`, `reason`, `mode`, `outcome`, `won`, `tied`, `challenge_id`, `circuit`, `difficulty`, `stage_id`, `rival`, `court`, `cup`, `analytics`
 
 **Custom metrics:**
 
@@ -188,7 +188,9 @@ In **Admin → Custom definitions**, create one per parameter, all **Event** sco
 |---|---|
 | `load_ms` | Milliseconds |
 | `play_seconds` | Seconds |
-| `results_count`, `attempt`, `goals_for`, `goals_against`, `score`, `target`, `position`, `laps` | Standard |
+| `results_count`, `attempt`, `goals_for`, `goals_against`, `score`, `rival_score`, `target`, `position`, `laps`, `stars`, `runs`, `wickets`, `balls`, `round` | Standard |
+
+That is 23 dimensions and 16 metrics, inside GA4's limit of 50 of each.
 
 ### 7.2 Stream settings
 

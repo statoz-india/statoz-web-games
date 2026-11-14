@@ -11,7 +11,8 @@ The rollout plan, consent setup and the `track()` helper are in `impl/google-ana
 - **GA's recommended events keep their standard names**: `page_view`, `search` and `select_content`. Prefixing them would turn them into custom events and empty GA's built-in page and search reports.
 - **Never send personal data or free text.** No email, name, raw game payloads, session IDs or search text, unless the owner approves it.
 - **Keep values low-cardinality.** Game IDs, sport IDs and modes are fine. Timestamps and generated IDs are not.
-- **`game_id` is always the catalogue ID** from `HOME_GAMES` in `src/config/sports.ts` (`penalty-cup`, `formula` and so on). Formula's bundle uses `portfolio-formula` as its frame `gameId`, so map it back to `formula` before sending.
+- **`game_id` is always the catalogue ID** from `HOME_GAMES` in `src/config/sports.ts` (`penalty-cup`, `formula` and so on). Three bundles sign their messages with another id: Formula (`portfolio-formula`), Rally Dash (`grand-prix-dash`) and Racer (`f1-racing`). Their components pass the catalogue id to `GameFrame` as `analyticsId`.
+- **`sport` is the browse sport id** from `BROWSE_SPORTS`, looked up by `sportOf()` in `src/lib/analytics/game-select.ts`, not the card's display label (Basketball games show "Basket").
 
 ## Shared parameters
 
@@ -61,10 +62,10 @@ Not tracked on purpose:
 | Event | Fires when | File | Parameters |
 |---|---|---|---|
 | `select_content` | A game card is clicked | `src/features/library/components/game-library.tsx` (on the `GameCoverCard` link) | `content_type: "game"`, `game_id`, `sport`, `coming_soon`, `recent` (boolean), `location: "library"` |
-| `search` | The search text settles: debounced about 800 ms, not empty, and different from the last one sent | `game-library.tsx` (`changeSearch`) | `results_count`; `search_term` **only if approved** (see the open decision at the end) |
+| `search` | The search text settles: debounced 800 ms, not empty, and different from the last one sent | `game-library.tsx` (search effect) | `results_count` only (see the decision at the end) |
 | `web_game_search_no_results` | A settled search returns no games | `game-library.tsx` | `sport` (current filter or `all`) |
 | `web_game_browse_filter` | A sport chip is chosen | `game-library.tsx` (`changeSport`) | `sport` (`all` or a sport ID), `location: "library"`, `results_count` |
-| `web_game_library_clear_filters` | "Clear search and filters" in the empty state | `game-library.tsx` (`clearAll`) | none |
+| `web_game_library_clear_filters` | "Clear search and filters" in the empty state. It does not also send `web_game_browse_filter`. | `game-library.tsx` (`clearAll`) | none |
 | `web_game_library_close` | Escape leaves the library | `game-library.tsx` (Escape handler) | `method: "escape"` |
 
 ## 4. Coming soon
@@ -76,7 +77,9 @@ Not tracked on purpose:
 
 `web_game_coming_soon_view` measures demand for unreleased games. Use it to decide which game to port next.
 
-`coming-soon.tsx` is a server component. Send the event from a small client child, for example `<TrackOnMount event="web_game_coming_soon_view" … />`.
+`coming-soon.tsx` and `not-found.tsx` are server components. They send view events with `<TrackOnMount>` (`src/lib/analytics/track-on-mount.tsx`) and link clicks with `<TrackedLink>` (`src/lib/analytics/tracked-link.tsx`). The "More from StatOz" shortcuts use `<TrackedLink>` too.
+
+In development, React mounts every component twice, so view events and `web_game_open` show twice there. Production sends each once.
 
 ## 5. Gameplay
 
@@ -99,15 +102,21 @@ Not tracked: `save` messages. Games send them on every progress change, which wo
 
 Read the payload as `unknown` and narrow each field. Send only these fields; never the raw payload. Its `id` contains the session ID.
 
-| Game | Sends `ready` | Sends `result` | Fields to send |
-|---|---|---|---|
-| `penalty-cup` | yes | yes | `mode` (`cup`, `random`), `outcome` (`win`, `loss`, `draw`; cup results send the cup status, e.g. `champion`), `goals_for`, `goals_against` (from `score: [player, opponent]`) |
-| `cricketer` | yes | yes | `challenge_id` (from `challengeId`), `score`, `target`, `won` |
-| `formula` (bundle: `portfolio-formula`) | yes | yes | `mode`, `circuit`, `position`, `laps`. Skip `time` and `bestLap`: they are near-unique values. |
-| `hoop-legacy` | yes | **no** | none |
-| `mini-golf` | yes | **no** | none |
+Every game sends `ready`. Seven of the 14 also send `result`:
 
-For Hoop Legacy and Mini Golf, `web_game_ready`, `web_game_exit` and `play_seconds` are the only measures of play. Adding a `result` event to those games would mean rebuilding their bundles in the source repo.
+| Game | Fields to send | Left out |
+|---|---|---|
+| `penalty-cup` | `mode` (`cup`, `random`), `outcome` (`win`, `loss`, `draw`; cup results send the cup status, e.g. `champion`), `goals_for`, `goals_against` (from `score: [player, opponent]`) | `team` |
+| `cricketer` | `challenge_id` (from `challengeId`), `score`, `target`, `won` | `balls` |
+| `formula` (bundle: `portfolio-formula`) | `mode`, `circuit`, `position`, `laps` | `time`, `bestLap` (near-unique), `carId`, `careerEventId` |
+| `longbow` | `mode`, `challenge_id` (career level, or the rival in a match), `score`, `rival_score` (matches only), `stars`, `won` | none |
+| `yorker` | `challenge_id`, `won`, `stars`, `runs`, `wickets`, `balls` | none |
+| `rim-rush` | `mode`, `rival`, `court`, `cup`, `round`, `score`, `rival_score`, `won`, `tied` | `coins` (a reward, not a measure of the match) |
+| `racer` (bundle: `f1-racing`) | `mode` (`career`, `quick-race`), `circuit`, `difficulty`, `position`, `laps`, `stage_id` and `stars` (career only) | `time` (near-unique), `contacts`, `overtakes` |
+
+Every payload's `id` is always left out.
+
+These seven send **no** `result`: `hoop-legacy`, `mini-golf`, `rally-dash`, `holdover`, `pitch-rush`, `vibe-basketball`, `football-chess`. For them, `web_game_ready`, `web_game_exit` and `play_seconds` are the only measures of play. Adding results would mean rebuilding their bundles in the source repo.
 
 The allowlist lives in `src/lib/analytics/game-results.ts`. A game with no entry there sends `web_game_result` with `game_id` only.
 
@@ -123,9 +132,11 @@ This event only fires after consent is granted, so declines are never recorded. 
 
 ## 7. GA Admin setup for these events
 
-**Custom dimensions (event scope):** `game_id`, `sport`, `location`, `destination`, `method`, `content_type`, `mode`, `outcome`, `circuit`, `challenge_id`, `reason`, `coming_soon`, `reached_ready`, `recent`, `paused`
+**Custom dimensions (event scope):** `game_id`, `sport`, `location`, `destination`, `method`, `content_type`, `mode`, `outcome`, `won`, `tied`, `circuit`, `challenge_id`, `difficulty`, `stage_id`, `rival`, `court`, `cup`, `reason`, `coming_soon`, `reached_ready`, `recent`, `paused`, `analytics`
 
-**Custom metrics:** `load_ms` (milliseconds), `play_seconds` (seconds), `score`, `goals_for`, `goals_against`, `position`, `target`, `laps`, `results_count`, `attempt`
+**Custom metrics:** `load_ms` (milliseconds), `play_seconds` (seconds), `score`, `rival_score`, `goals_for`, `goals_against`, `position`, `target`, `laps`, `stars`, `runs`, `wickets`, `balls`, `round`, `results_count`, `attempt`
+
+The same lists, with the GTM variables each one needs, are in `docs/ga-gtm-impl.md` sections 6.3 and 7.1.
 
 **Key events:** `web_game_ready`, `web_game_result`
 
@@ -145,6 +156,6 @@ Register dimensions as early as possible: GA only fills them from the day they a
 
 That is **22 distinct events now**, plus 1 if a consent banner is built and 3 more later. `select_content` and `web_game_browse_filter` each fire from several places and are told apart by `location`.
 
-## Open decision
+## Decided
 
-**Library search text.** Send `search_term` to GA, or only `results_count`? Search text can contain personal data. Recommendation: `results_count` only.
+**Library search text is never sent.** `search` carries `results_count` only, because search text can contain personal data. A `?q=` the library opens with is not counted as a search; only text typed on the page is.

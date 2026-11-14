@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { IMAGES } from "@/src/config/image";
+import { track } from "@/src/lib/analytics/track";
 
 import styles from "./css/navbar.module.css";
 
@@ -10,6 +11,7 @@ export function BrandLink() {
     <Link
       href="/"
       aria-label="StatOz home"
+      onClick={() => track("web_game_nav_click", { destination: "games", method: "logo" })}
       className="inline-flex min-h-touch min-w-touch items-center gap-2.5 justify-self-start rounded-sm text-fg no-underline focus-visible:outline-(length:--shape-stroke-regular) focus-visible:outline-offset-(--shape-focus-offset-default) focus-visible:outline-cyan"
     >
       <Image

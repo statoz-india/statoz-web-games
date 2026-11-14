@@ -2,6 +2,8 @@
 
 import { type ReactNode, useRef, useState } from "react";
 
+import { trackGameSelect } from "@/src/lib/analytics/game-select";
+import { track } from "@/src/lib/analytics/track";
 import { PlayButton } from "@/src/lib/components/buttons/play-button";
 import { ComingSoonTag } from "@/src/lib/components/coming-soon-tag";
 import { PauseIcon } from "@/src/lib/icons/pause.icon";
@@ -79,7 +81,10 @@ export function HomeSpotlight({ games, children }: HomeSpotlightProps) {
             paused ? "Play background motion" : "Pause background motion"
           }
           aria-pressed={paused}
-          onClick={() => setPaused((value) => !value)}
+          onClick={() => {
+            setPaused(!paused);
+            track("web_game_spotlight_motion_toggle", { paused: !paused });
+          }}
           className={`absolute z-3 grid size-touch place-items-center ${styles["motion-control"]}`}
         >
           {paused ? <PlayIcon /> : <PauseIcon />}
@@ -97,7 +102,11 @@ export function HomeSpotlight({ games, children }: HomeSpotlightProps) {
             <p className={styles.description}>{game.subtitle}</p>
             <div className={`flex items-center ${styles["hero-actions"]}`}>
               {/* Games without a route have no action yet. */}
-              <PlayButton href={game.href} aria-label={`Play ${game.title}`} />
+              <PlayButton
+                href={game.href}
+                aria-label={`Play ${game.title}`}
+                onClick={() => trackGameSelect(game, "spotlight_hero")}
+              />
               <button
                 type="button"
                 className={`min-h-touch ${styles["hero-browse"]}`}

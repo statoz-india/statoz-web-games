@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { track } from "@/src/lib/analytics/track";
 import { FilterChips } from "@/src/lib/components/filter-chips";
 
 import type { BrowseSport } from "../data/browse-sport";
@@ -61,7 +62,10 @@ export function GamesBrowse({ sports, games, onViewAll }: GamesBrowseProps) {
             label="Browse games by sport"
             options={options}
             selected={selected}
-            onSelect={setSelected}
+            onSelect={(id) => {
+              setSelected(id);
+              track("web_game_browse_filter", { sport: id, location: "home_browse" });
+            }}
           />
         </section>
 

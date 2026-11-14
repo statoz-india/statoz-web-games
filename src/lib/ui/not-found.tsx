@@ -1,8 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { CSSProperties } from "react";
 
 import { IMAGES } from "@/src/config/image";
+import { TrackOnMount } from "@/src/lib/analytics/track-on-mount";
+import { TrackedLink } from "@/src/lib/analytics/tracked-link";
 
 import styles from "./css/not-found.module.css";
 
@@ -13,6 +14,7 @@ const DIGIT_CLASS = `font-display text-giant leading-none font-black text-fg ${s
 export function AppNotFound() {
   return (
     <main className="relative isolate flex min-h-dvh flex-1 flex-col items-center justify-center gap-6 overflow-hidden bg-(image:--gradient-app) px-4 py-6 text-center text-fg">
+      <TrackOnMount event="web_game_not_found_view" />
       <div className={styles.spotlight} aria-hidden="true" />
 
       <div
@@ -50,12 +52,13 @@ export function AppNotFound() {
       </p>
 
       {/* next/link adds the basePath; hard-coding it would break on GitHub Pages. */}
-      <Link
+      <TrackedLink
         href="/"
+        event="web_game_not_found_home_click"
         className="inline-flex h-touch items-center justify-center rounded-lg bg-cyan px-6 font-display text-xs font-bold tracking-button text-page no-underline shadow-button transition hover:shadow-button-hover focus-visible:outline-(length:--shape-stroke-regular) focus-visible:outline-offset-(--shape-focus-offset-wide) focus-visible:outline-fg active:translate-y-px motion-reduce:transition-none"
       >
         BACK TO LOBBY
-      </Link>
+      </TrackedLink>
     </main>
   );
 }
