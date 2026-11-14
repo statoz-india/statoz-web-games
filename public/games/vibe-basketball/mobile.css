@@ -1,0 +1,61 @@
+/* Game-owned responsive presentation. No host theme tokens. */
+html,body{overscroll-behavior:none}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible{outline:3px solid #ffad61;outline-offset:3px}
+#vibe-toolbar{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;gap:8px;padding:8px;z-index:70;pointer-events:none;background:linear-gradient(#080c13b0,transparent);font:12px 'Segoe UI',Arial,sans-serif}
+#vibe-toolbar>div{display:flex;gap:6px}#vibe-toolbar button,#vibe-pause button{pointer-events:auto;min-height:44px;min-width:44px;padding:9px 13px;border:1px solid #ffffff40;border-radius:8px;background:#121a25eb;color:#f5f1e9;cursor:pointer;font:inherit}
+#vibe-toolbar button[aria-pressed=true],#vibe-pause button[aria-pressed=true]{border-color:#ff9a3c;color:#ffb36c}.vibe-back-arrow{font-size:20px}.vibe-pause-icon{display:none}
+#vibe-touch[hidden],#vibe-pause[hidden]{display:none!important}
+#vibe-touch{position:fixed;inset:0;pointer-events:none;z-index:55;touch-action:none;font:11px 'Segoe UI',Arial,sans-serif}
+#vibe-touch button,#vibe-joystick{pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#vibe-touch button{min-width:44px;min-height:44px;color:#fff4e7;border:1px solid #ffffff65;background:#17202be8;border-radius:12px;font:700 11px 'Segoe UI',Arial,sans-serif;box-shadow:0 2px 8px #0004}
+#vibe-touch button.held{background:#df8338;color:#140c07;border-color:#ffc991}
+#vibe-joystick{position:absolute;left:20px;bottom:20px;width:112px;height:112px;border:1px solid #ffffff60;border-radius:50%;background:#111a277d;display:grid;place-items:center}
+#vibe-joystick span{position:absolute;top:9px;opacity:.7;font-size:8px;letter-spacing:.12em}#vibe-joystick i{width:42px;height:42px;border-radius:50%;background:#f3b06cdd;border:2px solid #f9d6b2;pointer-events:none}
+.vibe-actions{position:absolute;right:16px;bottom:18px;display:grid;grid-template-columns:48px 48px 80px;grid-template-rows:48px 48px;gap:6px;align-items:center}
+#vibe-shoot{grid-column:3;grid-row:1/3;border-radius:50%!important;width:80px;height:80px;background:#b66c30ed!important;font-size:13px!important;color:#fff8eb!important}#vibe-shoot b{font:inherit}#vibe-shoot span{display:block;margin-top:5px;font-size:8px;font-weight:400}
+[data-vibe-role=offense] .vibe-defense,[data-vibe-role=defense] .vibe-offense{display:none!important}
+.vibe-actions [data-key=ShiftLeft]{grid-column:1;grid-row:1}.vibe-actions [data-skill]{grid-column:2;grid-row:1}.vibe-actions [data-key=KeyK]{grid-column:1;grid-row:2}.vibe-actions [data-key=ControlLeft]{grid-column:2;grid-row:1}.vibe-actions [data-key=KeyE]{grid-column:1;grid-row:2}
+[data-vibe-mode=three-point] #vibe-joystick,[data-vibe-mode=three-point] .vibe-extra{display:none!important}[data-vibe-mode=three-point] .vibe-actions{display:block}
+#vibe-pause{position:fixed;inset:0;display:grid;place-items:center;z-index:100;background:#05070de8;padding:20px;overflow:auto;font-family:'Segoe UI',Arial,sans-serif;overscroll-behavior:contain}#vibe-pause>div{display:grid;gap:10px;width:min(380px,100%);max-height:100%;overflow:auto;padding:4px}#vibe-pause h2{font-size:28px;font-style:italic}#vibe-pause p{font-size:13px;line-height:1.5;color:#c4c7cc}#vibe-pause [data-command=resume]{background:#ce8745;color:#110c08;border-color:#e5a66a;font-weight:700}.vibe-pause-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}#vibe-pause .vibe-pause-tools button{padding:8px 5px;font-size:12px}
+#scoreboard{top:64px}#contest-hud{top:54px}#mode-menu,#how-to-play,.contest-dialog{padding-top:72px;padding-bottom:20px;overflow:auto;overscroll-behavior:contain}.dialog-panel,.how-to-shell{max-height:100%;overflow:auto}
+[data-vibe-touch=true] #controls-help,[data-vibe-touch=true] #context-controls{display:none!important}
+.vibe-touch-guide{font:13px/1.6 'Segoe UI',Arial,sans-serif;color:#f4c99f;margin-top:18px;padding-top:14px;border-top:1px solid #ffffff30}
+
+/* Compact HUD for phones and short landscape screens. Utility settings live in Pause. */
+@media(max-width:1024px),(max-height:600px){
+ #vibe-toolbar{padding:8px;background:none}#vibe-toolbar button{padding:0;width:44px;height:44px;background:#0b111bc9;border-color:#ffffff30;border-radius:50%}
+ #vibe-toolbar [data-command=menu],#vibe-toolbar [data-command=camera],#vibe-toolbar [data-command=touch],.vibe-back-label,.vibe-pause-label{display:none}.vibe-pause-icon{display:inline;font-size:18px;letter-spacing:2px}
+ #contest-hud{inset:0;top:0;left:0;right:0}
+ .contest-topline{top:8px;left:50%;width:min(350px,calc(100% - 124px));min-width:0;height:44px;grid-template-columns:minmax(0,1.55fr) .7fr .85fr;border-top-width:1px;border-radius:9px;background:#09111be8;box-shadow:0 2px 8px #0004}
+ .contest-topline>div{min-width:0;padding:5px 9px;gap:4px}.contest-topline>div:first-child{justify-content:center;gap:1px}.contest-topline span{font-size:8px;letter-spacing:.1em;white-space:nowrap}.contest-topline strong{font-size:14px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}.contest-clock span,.contest-score span{display:none}.contest-clock strong,.contest-score strong{font-size:21px}.contest-clock strong::after{content:'s';font-size:10px;margin-left:2px}.contest-score small{font-size:9px}
+ #scoreboard{top:8px;left:50%;width:min(350px,calc(100% - 124px));height:44px;max-width:none;padding:4px 7px;gap:0;border-radius:9px;box-shadow:0 2px 8px #0004;transform:translateX(-50%)}
+ .team{flex:1;min-width:0;gap:5px!important;padding:0 5px!important;justify-content:center}.team .tname{font-size:8px;letter-spacing:.04em;min-width:0;overflow:hidden;text-overflow:ellipsis}.team .tscore{font-size:22px;min-width:20px}.team .poss{display:none}#score-mid{padding:0 8px}#target-score{font-size:7px;letter-spacing:.05em}#shot-clock{font-size:15px;line-height:17px}
+ #contest-standings{display:none}.contest-progress{left:14px;bottom:14px;width:min(320px,calc(100% - 158px));padding:8px 10px;border-left-width:2px;background:#0a1420d9;border-radius:7px}.contest-progress>div:first-child{margin-bottom:6px;gap:8px}.contest-progress span{font-size:10px;letter-spacing:.08em}.contest-progress small{font-size:8px;letter-spacing:.04em;white-space:nowrap}#contest-attempts{gap:3px}.attempt-pip{height:4px}
+ #contest-skip-live{right:16px;bottom:112px;top:auto;min-height:44px;max-width:180px;padding:8px 12px;font-size:9px}
+ [data-vibe-touch=true] #shot-meter{position:fixed;left:auto!important;top:auto!important;right:110px;bottom:24px;width:12px;height:84px;transform:none;z-index:56}
+ [data-vibe-touch=true][data-vibe-mode="1v1"] #shot-meter{right:18px;bottom:132px;height:72px}
+ [data-vibe-touch=true] #shot-feedback{left:auto!important;top:auto!important;right:14px;bottom:124px;max-width:220px;transform:none;text-align:right;font-size:16px}
+ [data-vibe-touch=true][data-vibe-mode="1v1"] #shot-feedback{bottom:212px}#shot-feedback strong{font-size:16px}#shot-feedback small{font-size:9px}
+ #possession-task{top:62px;left:50%;transform:translateX(-50%);font-size:8px;max-width:70%;padding:5px 8px}#center-msg{font-size:26px;max-width:70vw}#center-msg small{font-size:11px}
+ .contest-dialog,.contest-dialog.setup{padding:64px 16px 16px;align-items:center}.dialog-panel{padding:20px;max-width:100%}.dialog-panel h2{font-size:28px}.setup-copy{flex-wrap:wrap;gap:10px}.setup-copy h2{white-space:normal;font-size:26px}.dialog-actions{flex-wrap:wrap}.dialog-actions button{min-width:0;min-height:44px;flex:1 1 140px}#money-rack-options button{min-height:44px}#how-to-play{padding:64px 16px 16px}#how-to-back{min-height:44px}
+}
+
+@media(max-width:600px) and (orientation:portrait){
+ #mode-menu{display:none;position:absolute;justify-content:flex-start;flex-direction:column;align-items:stretch;gap:22px;padding:78px 20px 24px}#mode-menu.show{display:flex}.menu-brand{position:static;max-width:100%}.menu-brand h1{font-size:clamp(44px,16vw,76px)}.menu-brand p,.menu-controls{display:none}.mode-cards{width:100%;margin-top:0;gap:10px}.mode-card{min-height:80px;padding:12px;gap:10px;grid-template-columns:38px 1fr auto}.mode-card:hover,.mode-card:focus-visible,.mode-card.selected{transform:none}
+ /* A dedicated bottom control dock keeps both thumbs outside the portrait court. */
+ [data-vibe-touch=true][data-vibe-mode="1v1"] #app{position:fixed;inset:0 0 144px;height:auto;background:#05070c}
+ [data-vibe-touch=true][data-vibe-mode="1v1"] body{background:linear-gradient(#080c13,#101a25)}
+ #vibe-joystick{left:14px;bottom:18px;width:100px;height:100px}.vibe-actions{right:12px;bottom:16px;grid-template-columns:44px 44px 72px;grid-template-rows:44px 44px;gap:5px}#vibe-shoot{width:72px;height:72px;font-size:12px!important}#vibe-shoot span{font-size:7px}.vibe-actions button{font-size:10px!important}
+ [data-vibe-touch=true][data-vibe-mode="1v1"] #shot-meter{right:15px;bottom:156px;height:72px}[data-vibe-touch=true][data-vibe-mode="1v1"] #shot-feedback{bottom:238px}
+ .contest-topline{width:calc(100% - 120px)}.contest-topline>div{padding:5px}.contest-topline strong{font-size:12px}.contest-clock strong,.contest-score strong{font-size:19px}.contest-score small{font-size:8px}
+ .team .tname{display:none}.team .tscore{font-size:22px}.contest-progress{width:calc(100% - 144px);left:12px;bottom:20px;padding:8px}.contest-progress span{font-size:9px}.contest-progress small{font-size:7px}.contest-progress>div:first-child{gap:4px;flex-wrap:wrap}#contest-attempts{gap:2px}
+ .dialog-panel{width:100%;padding:16px}.setup-copy{display:block}.setup-copy .dialog-kicker{margin-bottom:10px}.setup-copy p{margin-top:10px;line-height:1.5}#character-select-options{grid-template-columns:repeat(2,1fr)}#character-select-options .player-card{padding:8px;gap:4px;grid-template-columns:22px 1fr auto}#character-select-options .player-card strong{font-size:14px}#character-select-options .player-card>span{min-width:0}#player-count-options{gap:5px}#player-count-options button{min-height:60px;padding:8px 4px}.how-to-shell{padding:18px}.how-to-modes{grid-template-columns:1fr}
+}
+@media(max-height:600px) and (orientation:landscape){
+ #mode-menu{padding:66px 24px 18px;align-items:center;gap:24px}.menu-brand{position:static;flex:1}.menu-brand h1{font-size:50px}.mode-cards{width:48%;margin:0;gap:6px}.mode-card{min-height:62px;padding:8px 12px;gap:8px}.mode-card small,.menu-controls,.menu-brand p{display:none}
+ #vibe-joystick{left:18px;bottom:16px;width:96px;height:96px}.vibe-actions{bottom:14px}#center-msg{font-size:24px}.contest-dialog,.contest-dialog.setup{align-items:flex-start}.dialog-panel,.how-to-shell{max-height:none}.how-to-shell{padding:18px}#how-to-play{align-items:flex-start}#character-select-options .player-card{min-height:64px}
+}
+
+/* Avoid continuously compositing backdrop blur over a moving WebGL canvas on phones. */
+[data-vibe-graphics=performance] #scoreboard,[data-vibe-graphics=performance] .contest-topline,[data-vibe-graphics=performance] .contest-progress,[data-vibe-graphics=performance] #contest-standings,[data-vibe-graphics=performance] .contest-dialog,[data-vibe-graphics=performance] #possession-task{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+.vibe-graphics-note{font:11px/1.4 "Segoe UI",Arial,sans-serif;color:#bec3cc;margin-top:-5px;text-align:center}

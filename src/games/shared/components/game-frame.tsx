@@ -36,15 +36,23 @@ function roots(src: string) {
 export function GameFrame({ gameId, title, src, account, launch, onExit, analyticsId = gameId }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [ready, setReady] = useState(false), [error, setError] = useState(""), [notice, setNotice] = useState(""), [attempt, setAttempt] = useState(0);
+  // A bundle can ask to be reloaded with a new query string (mode, quality, rematch).
+  const [reloads, setReloads] = useState(0);
+  const query = useRef("");
   const exit = useRef(onExit); exit.current = onExit;
   // Analytics state the overlay buttons need from the current session.
   const endSession = useRef<(method: ExitMethod) => void>(() => {});
   const lastError = useRef("runtime");
   const retrying = useRef(false);
+  // A bundle-requested reload continues the same analytics session.
+  const restarting = useRef(false);
+  const visit = useRef({ openedAt: 0, readyAt: null as number | null, results: 0, ended: false });
 
   useEffect(() => {
     let active = true;
     const element = frame.current, sessionId = crypto.randomUUID();
+    const resumed = restarting.current;
+    restarting.current = false;
     const key = `games.bundle.${gameId}.${encodeURIComponent(account || "guest")}`;
     let save: { schemaVersion: number; stores: Record<string, string>; resultIds: string[] } = { schemaVersion: 1, stores: {}, resultIds: [] };
     let invalid = false;
@@ -53,20 +61,22 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
       if (old?.schemaVersion === 1) save = old; else if (old !== null) invalid = true;
     } catch { invalid = true; }
 
-    const openedAt = performance.now();
-    let readyAt: number | null = null, results = 0, ended = false;
-    track("web_game_open", { game_id: analyticsId, attempt });
+    const session = visit.current;
+    if (!resumed) {
+      Object.assign(session, { openedAt: performance.now(), readyAt: null, results: 0, ended: false });
+      track("web_game_open", { game_id: analyticsId, attempt });
+    }
     const fail = (reason: string) => {
       lastError.current = reason;
       track("web_game_error", { game_id: analyticsId, reason });
     };
     // Exactly once per session, however the player leaves.
     endSession.current = (method) => {
-      if (ended) return;
-      ended = true;
+      if (session.ended) return;
+      session.ended = true;
       track("web_game_exit", {
-        game_id: analyticsId, method, reached_ready: readyAt !== null, results_count: results,
-        play_seconds: readyAt === null ? 0 : Math.round((performance.now() - readyAt) / 1000),
+        game_id: analyticsId, method, reached_ready: session.readyAt !== null, results_count: session.results,
+        play_seconds: session.readyAt === null ? 0 : Math.round((performance.now() - session.readyAt) / 1000),
       });
     };
 
@@ -75,13 +85,18 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
       if (!active || event.source !== element?.contentWindow || event.origin !== "null" || m?.protocolVersion !== 1 || m.gameId !== gameId || m.sessionId !== sessionId) return;
       if (m.type === "ready") {
         setReady(true);
-        if (readyAt === null) {
-          readyAt = performance.now();
-          track("web_game_ready", { game_id: analyticsId, load_ms: Math.round(readyAt - openedAt) });
+        if (session.readyAt === null) {
+          session.readyAt = performance.now();
+          track("web_game_ready", { game_id: analyticsId, load_ms: Math.round(session.readyAt - session.openedAt) });
         }
       }
+      if (m.type === "restart" && typeof m.payload?.search === "string" && m.payload.search.length < 1024) {
+        query.current = m.payload.search;
+        restarting.current = true;
+        setReloads(n => n + 1);
+      }
       if (m.type === "result") {
-        results++;
+        session.results++;
         track("web_game_result", { game_id: analyticsId, ...resultParams(analyticsId, m.payload) });
       }
       if (m.type === "exit") { endSession.current("in_game"); exit.current(); }
@@ -100,7 +115,7 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
       if (invalid) { fail("save_incompatible"); setError("Saved progress needs a compatible game version. It has been preserved."); return; }
       const { entryRoot, artifactRoot } = roots(src);
       element.srcdoc = frameDocument(html, {
-        ...save, sessionId, origin: location.origin,
+        ...save, sessionId, origin: location.origin, query: query.current,
         entryRoot, artifactRoot, assetRoot: entryRoot,
         ...(launch ? { launch } : {}),
       });
@@ -115,14 +130,14 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
     return () => {
       window.removeEventListener("pagehide", leave);
       // A retry starts a new attempt of the same visit, not an exit.
-      if (!retrying.current) endSession.current("unmount");
+      if (!retrying.current && !restarting.current) endSession.current("unmount");
       retrying.current = false;
       active = false; abort.abort(); post("dispose");
       window.removeEventListener("message", receive);
       document.removeEventListener("visibilitychange", visibility);
       if (element) element.srcdoc = "";
     };
-  }, [gameId, analyticsId, src, account, attempt, launch]);
+  }, [gameId, analyticsId, src, account, attempt, launch, reloads]);
 
   const retry = () => {
     retrying.current = true;

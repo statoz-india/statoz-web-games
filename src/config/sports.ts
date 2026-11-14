@@ -93,7 +93,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("grand-prix-dash"),
     href: "/game/rally-dash",
-    comingSoon: true,
   },
   {
     id: "pitch-rush",
@@ -115,7 +114,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("yorker"),
     href: "/game/yorker",
-    comingSoon: true,
   },
   {
     id: "rim-rush",
@@ -126,7 +124,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("rim-rush"),
     href: "/game/rim-rush",
-    comingSoon: true,
   },
   {
     id: "vibe-basketball",
@@ -137,7 +134,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("vibe-basketball"),
     href: "/game/vibe-basketball",
-    comingSoon: true,
   },
   {
     id: "racer",
@@ -148,7 +144,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 55%",
     video: gameplay("f1-racing"),
     href: "/game/racer",
-    comingSoon: true,
   },
   {
     id: "longbow",
@@ -159,7 +154,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("longbow"),
     href: "/game/longbow",
-    comingSoon: true,
   },
   {
     id: "holdover",
@@ -170,7 +164,6 @@ export const HOME_GAMES: readonly HomeGame[] = [
     position: "75% 50%",
     video: gameplay("holdover"),
     href: "/game/holdover",
-    comingSoon: true,
   },
 ];
 

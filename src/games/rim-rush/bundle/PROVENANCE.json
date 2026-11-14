@@ -1,0 +1,249 @@
+{
+ "game": "rim-rush",
+ "version": 1,
+ "policy": "Only CC0 assets, each checked on its original source page. Nothing is fetched at runtime; every file below is served locally from this folder.",
+ "original": [
+  "Game design, rules, scoring, rivals, cups, locker items and simulation (src/features/games/rim-rush).",
+  "Players: chunky stylised athletes built from Three.js primitives (lathe torso, capsules, spheres) with an inverted-hull ink outline, painted tank-top jerseys, and two-bone IK posing; no external character models.",
+  "Ball, rim, net, backboards, stanchions, end nets, instanced 3D crowds (shader-animated), layered city skyline, clouds, gym bleachers and scoreboard, boardwalk props, arena bowl and LED ribbon, palms, lighthouse and skies (procedural Three.js geometry and canvas textures).",
+  "Shot and jump whooshes, power-up chimes, crowd murmur and win/loss stings (WebAudio synthesis).",
+  "Interface, layout and copy.",
+  "cover.png: rendered from the game itself (Night Arena), no external artwork."
+ ],
+ "models": [],
+ "textures": [
+  {
+   "file": "textures/arena-floor-color.jpg",
+   "title": "Wood Floor 064 (Color)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=WoodFloor064",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "fe4c1cb49fd4329f35c728d811ca0e081447a52f47d786fd8e8ff01ffad88672",
+   "bytes": 22875,
+   "adaptations": "Color map from the 1K-JPG pack, resized to 512 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/boardwalk-color.jpg",
+   "title": "Planks 021 (Color)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Planks021",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "8bcaea939874e3affa185ddfe41ff23657b58c415e987e95748d31479451fba9",
+   "bytes": 36055,
+   "adaptations": "Color map from the 1K-JPG pack, resized to 512 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/boardwalk-normal.jpg",
+   "title": "Planks 021 (Normal)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Planks021",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "f39209ff23584b46a7295817388de3a1e96a0589dff3dfc755f365b62c372b41",
+   "bytes": 7479,
+   "adaptations": "NormalGL map from the 1K-JPG pack, resized to 256 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/concrete-color.jpg",
+   "title": "Concrete 034 (Color)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Concrete034",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "f68bc38b91bedd5d78dacb2cc8573da14ceb07991e7c32a83b08f2c583848727",
+   "bytes": 17464,
+   "adaptations": "Color map from the 1K-JPG pack, resized to 512 px and re-encoded as JPEG; tinted at runtime."
+  },
+  {
+   "file": "textures/concrete-normal.jpg",
+   "title": "Concrete 034 (Normal)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Concrete034",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "72ffa697a34d272674ac724e8c8f3657b25e70c3f0c15fdf0ecda63dc8af62d5",
+   "bytes": 8655,
+   "adaptations": "NormalGL map from the 1K-JPG pack, resized to 256 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/gym-brick-color.jpg",
+   "title": "Bricks 101 (Color)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Bricks101",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "db1a776d6567a213c4720552dc9f576fbc55cb6df10ae48ed66198272f1dd9ab",
+   "bytes": 47105,
+   "adaptations": "Color map from the 1K-JPG pack, resized to 512 px and re-encoded as JPEG; tinted at runtime."
+  },
+  {
+   "file": "textures/gym-brick-normal.jpg",
+   "title": "Bricks 101 (Normal)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Bricks101",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "9cdf87dc4d975696372cd47e864aacf8bb713eb7d3198c20e9a4461924b77521",
+   "bytes": 10103,
+   "adaptations": "NormalGL map from the 1K-JPG pack, resized to 256 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/gym-floor-color.jpg",
+   "title": "Wood Floor 051 (Color)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=WoodFloor051",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "e075237872a58894d0be9c8ea52698a7189e7dea842edf12508c97ff0dbf0849",
+   "bytes": 26421,
+   "adaptations": "Color map from the 1K-JPG pack, resized to 512 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/rooftop-color.jpg",
+   "title": "Asphalt 031 (Color)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Asphalt031",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "3c7247af9ff893258c3222934401280f4cd25a8a0480f15511eb639a21ec562e",
+   "bytes": 59092,
+   "adaptations": "Color map from the 1K-JPG pack, resized to 512 px and re-encoded as JPEG; tinted at runtime."
+  },
+  {
+   "file": "textures/rooftop-normal.jpg",
+   "title": "Asphalt 031 (Normal)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Asphalt031",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "a006cbb2973a34928f2d800c6b4b01cce2d831acd84955468bd3cafa28556f4a",
+   "bytes": 3176,
+   "adaptations": "NormalGL map from the 1K-JPG pack, resized to 256 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/sand-color.jpg",
+   "title": "Ground 054 (Color)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Ground054",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "db678bdd39980418bc1e8a33aad34d0362d801624d080d828d1726cc821555fe",
+   "bytes": 24864,
+   "adaptations": "Color map from the 1K-JPG pack, resized to 512 px and re-encoded as JPEG."
+  },
+  {
+   "file": "textures/sand-normal.jpg",
+   "title": "Ground 054 (Normal)",
+   "author": "ambientCG (Lennart Demes)",
+   "source": "https://ambientcg.com/view?id=Ground054",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://docs.ambientcg.com/license/",
+   "sha256": "371b6fbdf08b9e699e1ebebecf48d0cbaee7324121eb8dccfa9b1468b3891401",
+   "bytes": 16925,
+   "adaptations": "NormalGL map from the 1K-JPG pack, resized to 256 px and re-encoded as JPEG."
+  }
+ ],
+ "audio": [
+  {
+   "file": "audio/backboard.mp3",
+   "title": "Basketball backboard.wav",
+   "author": "PerMagnusLindborg",
+   "source": "https://freesound.org/people/PerMagnusLindborg/sounds/324247/",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "sha256": "420db5da4808d2f6a8b0b60c2ca7f6b5559694e62ba02914749ffa02a0b1f1bd",
+   "bytes": 17664,
+   "adaptations": "Freesound high-quality MP3 preview, unchanged."
+  },
+  {
+   "file": "audio/ball-bounce.mp3",
+   "title": "Bouncing Basketball",
+   "author": "DigPro120",
+   "source": "https://freesound.org/people/DigPro120/sounds/859910/",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "sha256": "0f09ad05367a28b21dcade38cc192c9ca18e64fcb4db21d6de5e011c5b61d61b",
+   "bytes": 106609,
+   "adaptations": "Freesound high-quality MP3 preview, unchanged. Three bounces are played as separate slices."
+  },
+  {
+   "file": "audio/buzzer.mp3",
+   "title": "loud-buzzer.ogg",
+   "author": "talljosh",
+   "source": "https://freesound.org/people/talljosh/sounds/410725/",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "sha256": "e9282cec3405ccb22e2001d70dea6f33b89cb8902bba201bc6adab307cd841cf",
+   "bytes": 56562,
+   "adaptations": "Freesound high-quality MP3 preview, unchanged. Played for 1.3 s."
+  },
+  {
+   "file": "audio/crowd-cheer.mp3",
+   "title": "Crowd Cheer 5",
+   "author": "Krizin",
+   "source": "https://freesound.org/people/Krizin/sounds/651646/",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "sha256": "417e0bcc7d22a6e3c2906ad53df5b373fcd950920834950c1cfa586b16249e8d",
+   "bytes": 162000,
+   "adaptations": "Freesound high-quality MP3 preview, unchanged. Faded out after 4.2 s."
+  },
+  {
+   "file": "audio/net-swish.mp3",
+   "title": "Basketball Net Swish Sound",
+   "author": "Hann90",
+   "source": "https://freesound.org/people/Hann90/sounds/518048/",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "sha256": "51ac2dec09693da63c5eec6232b053a176e9664f1f5f72975e48b8618ccce71a",
+   "bytes": 70807,
+   "adaptations": "Freesound high-quality MP3 preview, unchanged. Two swishes are played as slices."
+  },
+  {
+   "file": "audio/rim-shot.mp3",
+   "title": "basketball.wav",
+   "author": "reedhos",
+   "source": "https://freesound.org/people/reedhos/sounds/244348/",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "sha256": "e3f625eb01b97f50b246f168fd9ac599e465786a8d2bb33058f956b331f51ec6",
+   "bytes": 172089,
+   "adaptations": "Freesound high-quality MP3 preview, unchanged. Individual hits are played as rim contacts."
+  },
+  {
+   "file": "audio/whistle.mp3",
+   "title": "Referee whistle blow, gymnasium.wav",
+   "author": "SpliceSound",
+   "source": "https://freesound.org/people/SpliceSound/sounds/218318/",
+   "license": "CC0-1.0",
+   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+   "sha256": "7392e39a07d47ffbbf174677e7b82ab91fe936dbcf17a9c8d947ca763d1ad0b3",
+   "bytes": 77328,
+   "adaptations": "Freesound high-quality MP3 preview, unchanged. Played for 0.75 s."
+  }
+ ],
+ "fonts": [
+  {
+   "file": "src/features/games/rim-rush/fonts/LilitaOne-Regular.ttf",
+   "title": "Lilita One",
+   "author": "Juan Montoreano",
+   "source": "https://github.com/google/fonts/tree/main/ofl/lilitaone",
+   "license": "OFL-1.1",
+   "licenseFile": "src/features/games/rim-rush/fonts/OFL-lilita-one.txt",
+   "note": "Unmodified; embedded in the bundle."
+  },
+  {
+   "file": "src/features/games/rim-rush/fonts/barlow-condensed.woff2",
+   "title": "Barlow Condensed Bold",
+   "author": "Jeremy Tribby",
+   "license": "OFL-1.1",
+   "licenseFile": "src/features/games/rim-rush/fonts/OFL-barlow-condensed.txt",
+   "note": "Same file Longbow ships; embedded in the bundle."
+  }
+ ],
+ "referencesOnly": [
+  "Genre conventions of one-on-one arcade basketball duel games (aim-and-release shots, contesting shots in the air, unlockable skins, tournaments). No code, art, names, levels or audio from any specific game were used."
+ ]
+}

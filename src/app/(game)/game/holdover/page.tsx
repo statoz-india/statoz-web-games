@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
-import { ComingSoon } from "@/src/games/shared/components/coming-soon";
+import { HoldoverGame } from "@/src/games/holdover/components/holdover-game";
 
 export const metadata: Metadata = {
   title: "Holdover · StatOz Games",
 };
 
+// Outside the (with-navbar) group: the game fills the screen and draws its own menus.
 export default function HoldoverPage() {
-  return <ComingSoon gameId="holdover" />;
+  return <HoldoverGame />;
 }

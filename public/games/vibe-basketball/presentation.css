@@ -1,0 +1,150 @@
+/* Independent blacktop/broadcast identity. No host tokens or remote resources. */
+@font-face{font-family:Vibe Court;src:url("./fonts/barlow-condensed-800.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
+:root{--court-ink:#111713;--court-paper:#ede9df;--court-orange:#eea164;--court-muted:#a7afa5;--court-rule:#b8c1af2e}
+html,body{background:var(--court-ink);color:var(--court-paper)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--court-paper);outline-offset:5px}
+#mode-menu{isolation:isolate;overflow:hidden;padding:0;background:linear-gradient(90deg,#111713 0%,#111713 39%,#11171300 60%);align-items:initial;justify-content:initial}
+#mode-menu::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:linear-gradient(0deg,#111713 1%,#11171300 30%,#11171300 85%,#111713 100%)}
+.lobby-brand{position:absolute;left:5.2%;top:11%;display:flex;align-items:center;gap:11px}
+.lobby-ball-mark{width:38px;height:38px;color:var(--court-orange)}
+.lobby-brand>div{display:flex;flex-direction:column}
+.lobby-brand strong{font:800 34px/.85 "Vibe Court",sans-serif;letter-spacing:.02em}
+.lobby-brand span{font:700 8px/1.2 "Segoe UI",Arial,sans-serif;letter-spacing:.21em;margin-top:7px}
+.lobby-edition{position:absolute;right:5.2%;top:12%;display:flex;flex-direction:column;gap:6px;text-align:right;font-size:9px;font-weight:700;letter-spacing:.16em;color:var(--court-muted)}
+.lobby-edition>span:first-child{color:var(--court-paper);font-size:11px;letter-spacing:.20em}
+.lobby-copy{position:absolute;left:5.2%;top:24%;width:49%;z-index:2;pointer-events:none}
+.lobby-eyebrow{font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--court-muted);margin-bottom:20px}
+.lobby-eyebrow i{display:inline-block;width:18px;height:2px;margin-right:9px;vertical-align:middle;background:var(--court-orange)}
+.lobby-copy h1{font:800 clamp(60px,7.1vw,114px)/.86 "Vibe Court","Arial Narrow",Arial,sans-serif;letter-spacing:-.015em;color:var(--court-paper)}
+.lobby-copy h1>span{color:var(--court-orange)}
+.lobby-description{font-size:13px;line-height:1.75;color:var(--court-muted);margin-top:23px;letter-spacing:.01em}
+.lobby-stage{position:absolute;left:44%;right:0;top:9%;bottom:11%;pointer-events:none;z-index:-2}
+.lobby-athlete{position:absolute;right:7%;bottom:18%;display:flex;flex-direction:column;text-align:right;gap:5px;pointer-events:none}
+.lobby-athlete>span{font-size:8px;letter-spacing:.19em;color:var(--court-muted)}
+.lobby-athlete>strong{font:800 36px/.95 "Vibe Court",sans-serif;letter-spacing:.02em}
+.lobby-athlete b{font-weight:800;color:var(--court-orange)}
+.lobby-athlete>small{font-size:9px;color:var(--court-muted);letter-spacing:.04em}
+#mode-menu .mode-cards{position:absolute;left:5.2%;bottom:14%;width:39%;max-width:530px;gap:0;margin:0}
+.lobby-mode-label{display:flex;justify-content:space-between;font-size:8px;letter-spacing:.18em;color:var(--court-muted);padding-bottom:13px}
+.lobby-mode-label>span{font-size:8px;letter-spacing:.1em;color:#7c877c}
+#mode-menu .mode-card{display:grid;grid-template-columns:26px minmax(0,1fr) 28px;gap:14px;min-height:85px;padding:14px 17px;border:0;border-top:1px solid var(--court-rule);border-radius:0;box-shadow:none;background:transparent;transform:none;transition:background .18s,color .18s}
+#mode-menu .mode-card::before{display:none}
+#mode-menu .mode-card.selected,#mode-menu .mode-card:hover{background:var(--court-paper);color:var(--court-ink)}
+#mode-menu .mode-card:focus-visible{outline:2px solid var(--court-orange);outline-offset:3px;z-index:1}
+#mode-menu .mode-number{font-size:10px;color:#aab2a7;font-weight:600}
+#mode-menu .mode-card.selected .mode-number,#mode-menu .mode-card:hover .mode-number{color:#657060}
+#mode-menu .mode-copy{gap:5px}
+#mode-menu .mode-copy strong{font:800 clamp(24px,2.35vw,36px)/1 "Vibe Court",sans-serif;letter-spacing:.01em;font-style:normal}
+#mode-menu .mode-copy small{font-size:8px;font-weight:600;letter-spacing:.09em;color:var(--court-muted)}
+#mode-menu .mode-card.selected .mode-copy small,#mode-menu .mode-card:hover .mode-copy small{color:#57604f}
+#mode-menu .mode-arrow{font:400 28px/1 Arial,sans-serif;color:var(--court-orange)}
+#mode-menu .mode-card.selected .mode-arrow,#mode-menu .mode-card:hover .mode-arrow{color:#30392e}
+#mode-menu .lobby-guide{grid-template-columns:22px 1fr 20px;min-height:55px;padding:12px 0 0;border-top:1px solid var(--court-rule);gap:10px;background:transparent!important;color:var(--court-muted)!important;font-size:8px;letter-spacing:.08em}
+.guide-icon{display:grid;place-items:center;border:1px solid #8c968369;width:18px;height:18px;border-radius:50%;font-size:10px}
+.lobby-guide strong{font-size:10px;letter-spacing:0;font-weight:600;color:var(--court-paper);margin-left:6px}
+.lobby-guide>span:last-child{font-size:17px;color:var(--court-paper)}
+.lobby-footer{position:absolute;left:5.2%;right:5.2%;bottom:4%;display:flex;justify-content:space-between;gap:15px;border-top:1px solid var(--court-rule);padding-top:18px;font-size:8px;letter-spacing:.13em;color:var(--court-muted)}
+.lobby-footer>span:first-child{color:var(--court-paper)}
+.lobby-footer i{display:inline-block;width:5px;height:5px;background:var(--court-orange);border-radius:50%;margin-left:7px;vertical-align:middle}
+[data-vibe-mode=menu] #vibe-toolbar{padding:20px 4.2%;background:none}
+[data-vibe-mode=menu] #vibe-toolbar button{background:transparent;border:0;border-radius:0;font-size:10px;font-weight:600;letter-spacing:.04em}
+[data-vibe-mode=menu] #vibe-toolbar [data-command=menu],[data-vibe-mode=menu] #vibe-toolbar [data-command=camera],[data-vibe-mode=menu] #vibe-toolbar [data-command=touch]{display:none}
+
+/* The court manual, contest setup and pause belong to the same broadcast package. */
+#how-to-play{background:#111713f5}
+.how-to-shell{background:#192019;border:1px solid var(--court-rule);border-top:3px solid var(--court-orange);border-radius:0;box-shadow:none}
+.menu-kicker,.dialog-kicker{color:var(--court-orange);letter-spacing:.16em}
+.how-to-header h2,.how-to-mode-title h3,.dialog-panel h2,#vibe-pause h2{font-family:"Vibe Court",Arial,sans-serif;font-weight:800;font-style:normal;letter-spacing:0}
+.how-to-header h2 em{font-style:normal;color:var(--court-orange)}
+.how-to-mode,.how-to-mode.contest{background:transparent;border-color:var(--court-rule);border-left-color:var(--court-orange);border-radius:0}
+.how-to-controls kbd:last-child,.how-to-scoring b,.how-to-tip strong,.how-to-tip b{color:var(--court-orange)}
+.how-to-scoring span{background:#b4c09c0a}
+#how-to-back{border-radius:0;border-color:var(--court-rule);color:var(--court-paper)}
+#how-to-back:hover,#how-to-back:focus-visible{border-color:var(--court-orange);background:#eea1640c}
+.contest-dialog{background:#111713c9;backdrop-filter:none}
+.dialog-panel{background:#192019f5;border:1px solid var(--court-rule);border-top:3px solid var(--court-orange);border-radius:0;box-shadow:0 12px 50px #0003}
+.dialog-panel h2{color:var(--court-paper)}
+.dialog-panel button,#player-count-options button{border-radius:2px;border-color:var(--court-rule)}
+#player-count-options button.selected,#money-rack-options button.selected,.dialog-actions .primary{background:var(--court-paper);border-color:var(--court-paper);color:var(--court-ink)}
+#player-count-options button.selected span{color:#57604f}
+#character-select-options .player-card{background:#11171382;border-radius:2px}
+#character-select-options .player-card i{font-family:"Vibe Court",Arial,sans-serif;font-size:28px;color:var(--character-color)}
+#scoreboard,.contest-topline{background:#111713ec;border-color:var(--court-rule);box-shadow:none;border-radius:3px}
+.team .tname,.contest-topline strong{color:var(--court-paper)}
+.team.home .tscore{color:var(--court-paper)}.team.away .tscore{color:var(--court-orange)}
+.team .tscore,.contest-clock strong,.contest-score strong{font-family:"Vibe Court",Arial,sans-serif;font-style:normal;font-weight:800}
+#shot-clock,.contest-topline span{color:var(--court-orange)}
+.contest-progress,#contest-standings{background:#111713eb;border-color:var(--court-rule);border-left-color:var(--court-orange);border-radius:2px}
+#contest-skip-live{background:#192019ed;border-color:var(--court-rule);border-radius:2px;color:var(--court-paper)}
+#vibe-pause{background:#111713f5}
+#vibe-pause>div{background:#192019;border:1px solid var(--court-rule);padding:26px;gap:12px}
+#vibe-pause h2{font-size:38px}
+#vibe-pause button{background:transparent;border-color:var(--court-rule);border-radius:2px}
+#vibe-pause [data-command=resume]{background:var(--court-paper);color:var(--court-ink);border-color:var(--court-paper)}
+#vibe-toolbar button{background:#111713db;border-color:var(--court-rule)}
+#vibe-touch button{background:#192019df;border-color:#eee8d95c;border-radius:6px;color:var(--court-paper)}
+#vibe-shoot{background:#a66332f5!important;border-color:#edbd8d!important}
+#vibe-joystick{background:#1117137d;border-color:#eee8d954}
+#vibe-joystick i{background:#ddaa77d9;border-color:#eee0cb}
+#vibe-touch button.held{background:var(--court-orange);color:var(--court-ink)}
+#loading{background:var(--court-ink);font-family:"Vibe Court",Arial,sans-serif;letter-spacing:.07em;color:var(--court-paper)}
+#center-msg,#shot-feedback{font-family:"Vibe Court",Arial,sans-serif;font-weight:800;font-style:normal}
+#center-msg small,#shot-feedback small{font-family:"Segoe UI",Arial,sans-serif}
+
+@media(min-width:1100px) and (max-height:760px){
+ .lobby-copy{top:23%}.lobby-copy h1{font-size:clamp(64px,7vw,98px)}.lobby-eyebrow{margin-bottom:14px}.lobby-description{margin-top:15px;font-size:12px}
+ #mode-menu .mode-cards{bottom:12%;width:40%}#mode-menu .mode-card{min-height:72px;padding:10px 15px}#mode-menu .lobby-guide{min-height:42px;padding-top:8px}.lobby-footer{bottom:3%;padding-top:13px}
+}
+@media(max-width:1024px),(max-height:600px){
+ [data-vibe-mode=menu] #vibe-toolbar{padding:10px 3%}
+ [data-vibe-mode=menu] #vibe-toolbar button{width:auto;height:44px;padding:0 8px}
+ [data-vibe-mode=menu] .vibe-back-label{display:inline}
+ .lobby-brand{top:14%;left:5%}.lobby-brand strong{font-size:28px}.lobby-brand span{font-size:7px;margin-top:5px}.lobby-ball-mark{width:32px;height:32px}
+ .lobby-edition{top:15%;font-size:7px;right:5%}.lobby-edition>span:first-child{font-size:9px}
+ .lobby-copy{top:29%;left:5%;width:49%}.lobby-copy h1{font-size:clamp(43px,7.8vw,83px)}.lobby-eyebrow{font-size:7px;margin-bottom:13px}.lobby-description{font-size:11px;margin-top:15px}
+ #mode-menu .mode-cards{left:5%;width:43%;bottom:13%}#mode-menu .mode-card{min-height:68px;padding:10px;gap:10px;grid-template-columns:20px 1fr 23px}
+ #mode-menu .mode-copy strong{font-size:27px}#mode-menu .mode-copy small{display:block;font-size:6px;letter-spacing:.05em}
+ #mode-menu .lobby-guide{min-height:44px;grid-template-columns:20px 1fr 18px;padding:8px 0 0;font-size:6px}.lobby-guide strong{font-size:9px;margin-left:3px}
+ .lobby-mode-label{font-size:7px;padding-bottom:10px}.lobby-athlete{right:6%;bottom:17%}.lobby-athlete>strong{font-size:29px}
+ .lobby-footer{font-size:7px;bottom:4%;padding-top:12px}
+}
+@media(max-height:600px) and (orientation:landscape){
+ .lobby-brand{top:17%;gap:8px}.lobby-ball-mark{width:27px;height:27px}.lobby-brand strong{font-size:24px}.lobby-brand span{font-size:6px;margin-top:3px}
+ .lobby-edition{top:18%;font-size:6px;gap:4px}.lobby-edition>span:first-child{font-size:8px}
+ .lobby-copy{top:29%;width:47%}.lobby-copy h1{font-size:clamp(36px,5.8vw,42px)}.lobby-eyebrow,.lobby-description{display:none}
+ #mode-menu .mode-cards{bottom:13%;width:43%;max-width:none}.lobby-mode-label{display:none}
+ #mode-menu .mode-card{min-height:49px;padding:6px 9px;gap:8px}.mode-copy{gap:3px!important}#mode-menu .mode-copy strong{font-size:22px}#mode-menu .mode-copy small{font-size:6px}.mode-arrow{font-size:23px!important}
+ #mode-menu .lobby-guide{min-height:44px;padding-top:5px}.guide-icon{width:15px;height:15px}
+ .lobby-stage{top:11%;bottom:8%;left:45%}.lobby-athlete{bottom:16%;right:5%}.lobby-athlete>strong{font-size:25px}.lobby-athlete>span{font-size:6px}.lobby-athlete>small{font-size:7px}
+ .lobby-footer{font-size:6px;bottom:4%;padding-top:8px}.lobby-inputs{display:none}
+ #vibe-pause>div{padding:18px;gap:8px}
+}
+@media(max-height:340px) and (orientation:landscape){
+ .lobby-brand{top:15%}.lobby-copy{top:27%}.lobby-copy h1{font-size:32px}
+ #mode-menu .mode-cards{bottom:10%}#mode-menu .mode-card{min-height:44px}.lobby-footer{bottom:3%}
+}
+@media(max-width:600px) and (orientation:portrait){
+ #mode-menu{padding:0;display:none;background:linear-gradient(90deg,#111713 0%,#111713b0 30%,#11171300 70%)}#mode-menu.show{display:block}
+ #mode-menu::after{background:linear-gradient(0deg,#111713 0%,#111713 31%,#11171300 65%)}
+ .lobby-brand{top:10%;left:6%;gap:8px}.lobby-brand strong{font-size:29px}.lobby-ball-mark{width:30px;height:30px}.lobby-brand span{font-size:6px}
+ .lobby-edition{right:6%;top:11%;font-size:6px;gap:5px}.lobby-edition>span:first-child{font-size:8px}
+ .lobby-copy{left:6%;top:24%;width:50%}.lobby-copy h1{font-size:clamp(31px,9.7vw,48px);line-height:.92}.lobby-eyebrow{font-size:6px;line-height:1.5;max-width:135px;margin-bottom:12px;letter-spacing:.1em}.lobby-eyebrow i{width:12px;margin-right:5px}
+ .lobby-description{font-size:9px;line-height:1.6;margin-top:14px;max-width:135px}.lobby-description br{display:none}
+ .lobby-stage{left:36%;right:-20%;top:16%;bottom:36%}
+ .lobby-athlete{right:7%;bottom:39%;gap:4px}.lobby-athlete>span{font-size:6px}.lobby-athlete>strong{font-size:23px}.lobby-athlete>small{display:none}
+ #mode-menu .mode-cards{left:6%;width:88%;bottom:10%;max-width:none}
+ #mode-menu .mode-card{min-height:79px;padding:13px 14px;gap:12px;grid-template-columns:22px 1fr 25px}
+ #mode-menu .mode-copy strong{font-size:29px}#mode-menu .mode-copy small{font-size:7px;letter-spacing:.035em}
+ #mode-menu .lobby-guide{min-height:50px;grid-template-columns:20px 1fr 18px;padding-top:10px;font-size:7px}.lobby-guide strong{font-size:10px;margin-left:6px}
+ .lobby-mode-label{font-size:7px;padding-bottom:12px}
+ .lobby-footer{left:6%;right:6%;bottom:3%;font-size:6px;gap:8px;padding-top:13px}.lobby-inputs{display:none}
+ [data-vibe-mode=menu] #vibe-toolbar{padding:9px 3%}
+ .how-to-header{align-items:flex-start;gap:12px;flex-direction:column}.how-to-header p{text-align:left;max-width:none}
+ #vibe-pause>div{padding:22px}
+}
+@media(max-width:600px) and (max-height:690px) and (orientation:portrait){
+ .lobby-brand{top:11%}.lobby-edition{top:12%}.lobby-copy{top:25%}.lobby-description{display:none}
+ #mode-menu .mode-card{min-height:64px;padding:10px 12px}#mode-menu .mode-copy strong{font-size:25px}#mode-menu .mode-copy small{font-size:6px}
+ #mode-menu .lobby-guide{min-height:44px}.lobby-mode-label{padding-bottom:9px}.lobby-stage{top:16%;bottom:39%}.lobby-athlete{bottom:43%}
+}
+@media(prefers-reduced-motion:reduce){#mode-menu .mode-card{transition:none}}
