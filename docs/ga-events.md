@@ -92,7 +92,7 @@ All of these fire from **`src/games/shared/components/game-frame.tsx`** and nowh
 | `web_game_result` | The game sends `result` | `game_id`, plus **only** the allowlisted fields in the table below |
 | `web_game_exit` | The game sends `exit`, the player presses the overlay **Back** button, or `GameFrame` unmounts without either (browser back, closing the tab). Send it **once** per session. | `game_id`, `method` (`in_game`, `overlay_back`, `unmount`), `reached_ready` (boolean), `play_seconds` (from `ready` to exit; 0 if never ready), `results_count` |
 | `web_game_error` | The game sends `error`, the bundle fetch fails, or the saved progress is incompatible | `game_id`, `reason` (`runtime`, `bundle`, `save_incompatible`) |
-| `web_game_retry` | The overlay **Try again** button is pressed | `game_id`, `reason` (the last `web_game_error` reason) |
+| `web_game_retry` | The overlay **Try again** button is pressed, or **Start fresh** after an incompatible save (`reason: "save_incompatible"`) | `game_id`, `reason` (the last `web_game_error` reason) |
 | `web_game_save_failed` | `localStorage.setItem` throws ("Progress could not be saved on this device.") | `game_id` |
 | `web_game_pause` | The tab is hidden while a game is open (the existing `visibilitychange` handler) | `game_id` |
 

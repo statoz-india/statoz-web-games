@@ -12,11 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Emscripten output, built by src/games/mini-golf/scripts/rebuild-mini-golf-mobile.py.
-    "src/games/mini-golf/bundle/engine/**",
-    // Published game bundle and its shared engine: minified build output.
-    "src/games/cricketer/bundle/**",
-    "src/games/formula/bundle/**",
+    // Every game's published release and shared engine (minified build output), including
+    // Mini Golf's Emscripten engine, and the copies the build scripts write to public/.
+    "src/games/*/bundle/**",
+    "public/games/**",
   ]),
 ]);
 
