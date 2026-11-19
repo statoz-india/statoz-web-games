@@ -12,8 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Every game's published release and shared engine (minified build output), including
-    // Mini Golf's Emscripten engine, and the copies the build scripts write to public/.
     "src/games/*/bundle/**",
     "public/games/**",
   ]),

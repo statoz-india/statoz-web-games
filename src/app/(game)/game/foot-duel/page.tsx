@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   title: "FOT Duel · StatOz Games",
 };
 
-export default function FotDuelPage() {
-  return <ComingSoon gameId="fot-duel" />;
+export default function FootDuelPage() {
+  return <ComingSoon gameId="foot-duel" />;
 }
