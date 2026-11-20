@@ -10,6 +10,12 @@ type Props = {
   launch?: Record<string, unknown>; onExit: () => void;
   /** Catalogue id for analytics, when the bundle signs its messages with another id. */
   analyticsId?: string;
+  /**
+   * The stores a player starts with when they have no save yet. Runs while the game loads;
+   * the result is saved before the game boots. A thrown Error's message is shown to the player.
+   * Must be stable (e.g. a module-level function), or the game reloads on every render.
+   */
+  prepare?: (signal: AbortSignal) => Promise<Record<string, string>>;
 };
 
 type ExitMethod = "in_game" | "overlay_back" | "unmount";
@@ -33,7 +39,7 @@ function roots(src: string) {
   return { entryRoot: new URL(".", entry).href, artifactRoot: new URL("../../", entry).href };
 }
 
-export function GameFrame({ gameId, title, src, account, launch, onExit, analyticsId = gameId }: Props) {
+export function GameFrame({ gameId, title, src, account, launch, onExit, analyticsId = gameId, prepare }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [ready, setReady] = useState(false), [error, setError] = useState(""), [notice, setNotice] = useState(""), [attempt, setAttempt] = useState(0);
   // Retrying can't fix an unreadable save, so that error offers "Start fresh" instead.
@@ -118,8 +124,18 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
     window.addEventListener("message", receive);
 
     const abort = new AbortController();
-    fetch(src, { signal: abort.signal }).then(r => { if (!r.ok) throw Error("The game files could not be loaded."); return r.text(); }).then(html => {
+    let reason = "bundle";
+    const files = fetch(src, { signal: abort.signal }).then(r => { if (!r.ok) throw Error("The game files could not be loaded."); return r.text(); });
+    const starting = stored === null && prepare
+      ? prepare(abort.signal).catch((e: unknown) => { reason = "prepare"; throw e; })
+      : null;
+    Promise.all([files, starting]).then(([html, stores]) => {
       if (!active || !element) return;
+      if (stores) {
+        save = { schemaVersion: 1, stores, resultIds: [] };
+        // Saved straight away, so a reload starts from the same stores instead of preparing new ones.
+        if (!storageBlocked) try { localStorage.setItem(saveKey, JSON.stringify(save)); } catch { /* the game's own saves report it */ }
+      }
       if (invalid) {
         fail("save_incompatible");
         setIncompatible(true);
@@ -136,7 +152,7 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
         entryRoot, artifactRoot, assetRoot: entryRoot,
         ...(launch ? { launch } : {}),
       });
-    }).catch(e => { if (active && e.name !== "AbortError") { fail("bundle"); setError(e.message); } });
+    }).catch(e => { if (active && e.name !== "AbortError") { fail(reason); setError(e.message); } });
 
     const post = (type: string) => element?.contentWindow?.postMessage({ protocolVersion: 1, gameId, sessionId, type }, "*");
     const visibility = () => { if (document.hidden) { post("pause"); track("web_game_pause", { game_id: analyticsId }); } };
@@ -154,7 +170,7 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
       document.removeEventListener("visibilitychange", visibility);
       if (element) element.srcdoc = "";
     };
-  }, [gameId, analyticsId, src, account, attempt, launch, reloads, saveKey]);
+  }, [gameId, analyticsId, src, account, attempt, launch, reloads, saveKey, prepare]);
 
   const retry = () => {
     retrying.current = true;
