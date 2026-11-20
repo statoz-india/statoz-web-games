@@ -63,15 +63,14 @@ export const HOME_GAMES: readonly HomeGame[] = [
     href: "/game/mini-golf",
   },
   {
-    id: "fot-duel",
+    id: "foot-duel",
     title: "FOT DUEL",
     subtitle: "ELEVEN A SIDE. WIN THE DUEL.",
     sport: "Football",
-    cover: cover("fot-duel"),
+    cover: cover("foot-duel"),
     position: "80% 45%",
     video: gameplay("pitch-duel"),
-    href: "/game/fot-duel",
-    comingSoon: true,
+    href: "/game/foot-duel",
   },
   {
     id: "football-chess",
@@ -171,7 +170,7 @@ export const BROWSE_SPORTS: readonly BrowseSport[] = [
     id: "football",
     label: "Football",
     accent: "var(--palette-spotlight-cyan)",
-    gameIds: ["penalty-cup", "pitch-rush", "fot-duel", "football-chess"],
+    gameIds: ["penalty-cup", "pitch-rush", "foot-duel", "football-chess"],
   },
   {
     id: "cricket",
@@ -208,7 +207,7 @@ export const BROWSE_SPORTS: readonly BrowseSport[] = [
 // Library "All Games" order: featured first, then every sport in turn.
 export const LIBRARY_ORDER: readonly string[] = [
   "mini-golf",
-  "fot-duel",
+  "foot-duel",
   "football-chess",
   "rally-dash",
   "penalty-cup",

@@ -10,6 +10,12 @@ type Props = {
   launch?: Record<string, unknown>; onExit: () => void;
   /** Catalogue id for analytics, when the bundle signs its messages with another id. */
   analyticsId?: string;
+  /**
+   * The stores a player starts with when they have no save yet. Runs while the game loads;
+   * the result is saved before the game boots. A thrown Error's message is shown to the player.
+   * Must be stable (e.g. a module-level function), or the game reloads on every render.
+   */
+  prepare?: (signal: AbortSignal) => Promise<Record<string, string>>;
 };
 
 type ExitMethod = "in_game" | "overlay_back" | "unmount";
@@ -33,9 +39,12 @@ function roots(src: string) {
   return { entryRoot: new URL(".", entry).href, artifactRoot: new URL("../../", entry).href };
 }
 
-export function GameFrame({ gameId, title, src, account, launch, onExit, analyticsId = gameId }: Props) {
+export function GameFrame({ gameId, title, src, account, launch, onExit, analyticsId = gameId, prepare }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [ready, setReady] = useState(false), [error, setError] = useState(""), [notice, setNotice] = useState(""), [attempt, setAttempt] = useState(0);
+  // Retrying can't fix an unreadable save, so that error offers "Start fresh" instead.
+  const [incompatible, setIncompatible] = useState(false);
+  const saveKey = `games.bundle.${gameId}.${encodeURIComponent(account || "guest")}`;
   // A bundle can ask to be reloaded with a new query string (mode, quality, rematch).
   const [reloads, setReloads] = useState(0);
   const query = useRef("");
@@ -54,11 +63,14 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
     const element = frame.current, sessionId = crypto.randomUUID();
     const resumed = restarting.current;
     restarting.current = false;
-    const key = `games.bundle.${gameId}.${encodeURIComponent(account || "guest")}`;
     let save: { schemaVersion: number; stores: Record<string, string>; resultIds: string[] } = { schemaVersion: 1, stores: {}, resultIds: [] };
-    let invalid = false;
+    let invalid = false, storageBlocked = false;
+    // Blocked storage (e.g. "Block all cookies") throws on access. The game still runs, unsaved;
+    // only a save that exists but can't be read is "incompatible".
+    let stored: string | null = null;
+    try { stored = localStorage.getItem(saveKey); } catch { storageBlocked = true; }
     try {
-      const old = JSON.parse(localStorage.getItem(key) || "null");
+      const old = JSON.parse(stored || "null");
       if (old?.schemaVersion === 1) save = old; else if (old !== null) invalid = true;
     } catch { invalid = true; }
 
@@ -102,25 +114,45 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
       }
       if (m.type === "exit") { endSession.current("in_game"); exit(); }
       if (m.type === "error") { fail("runtime"); setError("The game could not continue. Try loading it again."); }
-      if (m.type === "save" && m.payload?.schemaVersion === 1 && JSON.stringify(m.payload).length < 600000) {
+      // With storage blocked, every save would fail again; the notice was already shown once.
+      if (m.type === "save" && !storageBlocked && m.payload?.schemaVersion === 1 && JSON.stringify(m.payload).length < 600000) {
         // "<game-id>-save": progress hooks on the host listen for their own game.
-        try { localStorage.setItem(key, JSON.stringify(m.payload)); window.dispatchEvent(new Event(`${gameId}-save`)); }
+        try { localStorage.setItem(saveKey, JSON.stringify(m.payload)); window.dispatchEvent(new Event(`${gameId}-save`)); }
         catch { setNotice("Progress could not be saved on this device."); track("web_game_save_failed", { game_id: analyticsId }); }
       }
     };
     window.addEventListener("message", receive);
 
     const abort = new AbortController();
-    fetch(src, { signal: abort.signal }).then(r => { if (!r.ok) throw Error("The game files could not be loaded."); return r.text(); }).then(html => {
+    let reason = "bundle";
+    const files = fetch(src, { signal: abort.signal }).then(r => { if (!r.ok) throw Error("The game files could not be loaded."); return r.text(); });
+    const starting = stored === null && prepare
+      ? prepare(abort.signal).catch((e: unknown) => { reason = "prepare"; throw e; })
+      : null;
+    Promise.all([files, starting]).then(([html, stores]) => {
       if (!active || !element) return;
-      if (invalid) { fail("save_incompatible"); setError("Saved progress needs a compatible game version. It has been preserved."); return; }
+      if (stores) {
+        save = { schemaVersion: 1, stores, resultIds: [] };
+        // Saved straight away, so a reload starts from the same stores instead of preparing new ones.
+        if (!storageBlocked) try { localStorage.setItem(saveKey, JSON.stringify(save)); } catch { /* the game's own saves report it */ }
+      }
+      if (invalid) {
+        fail("save_incompatible");
+        setIncompatible(true);
+        setError("Your saved progress is from a version of this game that can't be loaded. Start fresh to play; your old save stays on this device.");
+        return;
+      }
+      if (storageBlocked) {
+        setNotice("Progress could not be saved on this device.");
+        track("web_game_save_failed", { game_id: analyticsId });
+      }
       const { entryRoot, artifactRoot } = roots(src);
       element.srcdoc = frameDocument(html, {
         ...save, sessionId, origin: location.origin, query: query.current,
         entryRoot, artifactRoot, assetRoot: entryRoot,
         ...(launch ? { launch } : {}),
       });
-    }).catch(e => { if (active && e.name !== "AbortError") { fail("bundle"); setError(e.message); } });
+    }).catch(e => { if (active && e.name !== "AbortError") { fail(reason); setError(e.message); } });
 
     const post = (type: string) => element?.contentWindow?.postMessage({ protocolVersion: 1, gameId, sessionId, type }, "*");
     const visibility = () => { if (document.hidden) { post("pause"); track("web_game_pause", { game_id: analyticsId }); } };
@@ -138,12 +170,25 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
       document.removeEventListener("visibilitychange", visibility);
       if (element) element.srcdoc = "";
     };
-  }, [gameId, analyticsId, src, account, attempt, launch, reloads]);
+  }, [gameId, analyticsId, src, account, attempt, launch, reloads, saveKey, prepare]);
 
   const retry = () => {
     retrying.current = true;
     track("web_game_retry", { game_id: analyticsId, reason: lastError.current });
-    setError(""); setReady(false); setAttempt(n => n + 1);
+    setError(""); setIncompatible(false); setReady(false); setAttempt(n => n + 1);
+  };
+  // Moves the unreadable save aside (never deletes it), then loads with an empty one.
+  const startFresh = () => {
+    try {
+      const old = localStorage.getItem(saveKey);
+      if (old !== null) localStorage.setItem(`${saveKey}.backup.${Date.now()}`, old);
+      localStorage.removeItem(saveKey);
+    } catch {
+      setError("Your old save couldn't be moved aside, so this game can't start fresh on this device.");
+      setIncompatible(false);
+      return;
+    }
+    retry();
   };
   const back = () => { endSession.current("overlay_back"); onExit(); };
 
@@ -155,7 +200,9 @@ export function GameFrame({ gameId, title, src, account, launch, onExit, analyti
           <h1>{title}</h1>
           <p>{error || "Opening your game…"}</p>
           <div className={styles.actions}>
-            {error && <button type="button" onClick={retry}>Try again</button>}
+            {error && (incompatible
+              ? <button type="button" onClick={startFresh}>Start fresh</button>
+              : <button type="button" onClick={retry}>Try again</button>)}
             <button type="button" onClick={back}>Back</button>
           </div>
         </div>
